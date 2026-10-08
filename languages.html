@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Языковое наследие — Многонациональная Россия</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #f6f1e8;
+      --surface: #fffaf2;
+      --ink: #29231e;
+      --muted: #75695e;
+      --red: #a42e2e;
+      --red-light: #c65342;
+      --gold: #c59a4a;
+      --line: #dfd2c1;
+      --green: #3f7a5c;
+      --blue: #3a5f8a;
+      --purple: #6b4f8a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171513;
+        --surface: #211e1a;
+        --ink: #f4eadc;
+        --muted: #b9aa99;
+        --line: #40382f;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    button { font: inherit; }
+
+    a { color: inherit; text-decoration: none; }
+
+    #app { min-height: 100vh; background: var(--bg); }
+
+    /* HEADER */
+
+    .top {
+      max-width: 1240px;
+      margin: auto;
+      padding: 20px 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand { display: flex; gap: 14px; align-items: center; }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #e9c56d 0 12%, #b4372f 13% 48%, #7d2224 49%);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 25%, transparent);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .mark::after {
+      content: "✦";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff7df;
+      font-size: 21px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand b { font-size: 15px; }
+
+    .back-link {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--ink);
+      font-weight: 650;
+      cursor: pointer;
+      transition: .2s;
+      display: inline-block;
+    }
+
+    .back-link:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+    /* HERO */
+
+    .hero-lang {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 28px 40px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-lang h1 {
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(38px, 5.5vw, 72px);
+      line-height: .96;
+      margin: 12px 0 20px;
+      letter-spacing: -.035em;
+    }
+
+    .hero-lang h1 span { color: var(--red); }
+
+    .hero-lang p {
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      transition: .2s;
+    }
+
+    .stat-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .stat-card .num {
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      max-width: 1240px;
+      margin: auto;
+      padding: 10px 28px 60px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 22px;
+      gap: 20px;
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 0;
+    }
+
+    /* FAMILIES GRID */
+
+    .families {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .family-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      cursor: pointer;
+      transition: .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .family-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent, var(--gold));
+      opacity: .8;
+    }
+
+    .family-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent, var(--gold));
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    .family-card .fam-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .family-card h3 { margin: 0 0 8px; font-size: 18px; }
+
+    .family-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+    .family-card .fam-count {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--accent, var(--gold));
+      font-weight: 700;
+    }
+
+    /* WORD OF THE DAY */
+
+    .word-day {
+      background: linear-gradient(135deg, #6d2226, #a83b32);
+      border-radius: 22px;
+      padding: 34px;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .word-day .eyebrow { color: #f5ddd2; }
+
+    .word-day .word {
+      font-family: Georgia, serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      margin: 8px 0 6px;
+    }
+
+    .word-day .translation {
+      font-size: 18px;
+      color: #f5ddd2;
+    }
+
+    .word-day .lang-name {
+      font-size: 13px;
+      color: #f5ddd2;
+      margin-top: 8px;
+      opacity: .8;
+    }
+
+    .word-day button {
+      border: 1px solid #ffffff44;
+      background: #ffffff1a;
+      color: white;
+      border-radius: 13px;
+      padding: 13px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .word-day button:hover { background: #ffffff33; }
+
+    /* ALPHABETS */
+
+    .alphabets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .alpha-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: .2s;
+    }
+
+    .alpha-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+
+    .alpha-card .letters {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: var(--red);
+      font-family: Georgia, serif;
+    }
+
+    .alpha-card h4 { margin: 0 0 4px; font-size: 15px; }
+
+    .alpha-card p { margin: 0; font-size: 12px; color: var(--muted); }
+
+    /* ENDANGERED */
+
+    .endangered {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .end-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--red);
+      border-radius: 14px;
+      padding: 20px;
+      transition: .2s;
+    }
+
+    .end-card:hover { transform: translateX(4px); border-color: var(--red); }
+
+    .end-card h4 { margin: 0 0 6px; font-size: 17px; }
+
+    .end-card .speakers {
+      font-size: 12px;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .end-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* PROJECTS */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .proj-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+
+    .proj-card .proj-icon { font-size: 26px; margin-bottom: 10px; }
+
+    .proj-card h3 { margin: 0 0 8px; font-size: 17px; }
+
+    .proj-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--line);
+      max-width: 1240px;
+      margin: auto;
+      padding: 24px 28px 45px;
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #0008;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal.open { display: flex; }
+
+    .dialog {
+      max-width: 520px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 30px 80px #0005;
+    }
+
+    .dialog h2 { margin: 0 0 10px; font-family: Georgia, serif; font-size: 24px; }
+
+    .dialog p { color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
+
+    .dialog .close {
+      display: block;
+      margin-left: auto;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 25px;
+      line-height: 1;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+
+    /* TOAST */
+
+    .toast-stack {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #2a2520;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px #0004;
+      animation: toastIn .2s ease-out;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      .hero-lang { grid-template-columns: 1fr; padding-top: 40px; gap: 30px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+      .word-day { grid-template-columns: 1fr; }
+      .footer { display: block; }
+      .footer span { display: block; margin-bottom: 8px; }
+      .top, .hero-lang, .section, .footer { padding-left: 18px; padding-right: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- HEADER -->
+
+  <header class="top">
+
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <div class="eyebrow">ФАДН России</div>
+        <b>Портал культурного и языкового наследия</b>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-link">← На главную</a>
+
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero-lang">
+
+      <div>
+        <div class="eyebrow">Языковое наследие</div>
+
+        <h1>
+          Языки<br>
+          <span>России</span>
+        </h1>
+
+        <p>
+          Россия — одна из самых многоязычных стран мира. На её территории
+          звучат сотни языков и диалектов: от государственного русского
+          до языков коренных малочисленных народов Севера, Сибири и
+          Дальнего Востока. Каждый язык — это живая память народа,
+          его история, культура и взгляд на мир.
+        </p>
+
+        <div class="actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="button" class="btn primary" data-toast="Начинаем путешествие по языкам России">
+            Изучать языки
+          </button>
+          <button type="button" class="btn" data-scroll="#families">
+            Языковые семьи →
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="num">277</div>
+          <div class="label">языков и диалектов используется в России</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">9</div>
+          <div class="label">языковых семей на территории страны</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">105</div>
+          <div class="label">языков в системе образования</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">155</div>
+          <div class="label">живых языков, включая жестовый</div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- WORD OF THE DAY -->
+
+    <section class="section">
+
+      <div class="word-day" id="wordDay">
+
+        <div>
+          <div class="eyebrow">Слово дня</div>
+          <div class="word" id="wordText">Ӟечбуресь</div>
+          <div class="translation" id="wordTranslation">Здравствуйте!</div>
+          <div class="lang-name" id="wordLang">Удмуртский язык</div>
+        </div>
+
+        <button type="button" id="nextWord">Другое слово →</button>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAMILIES -->
+
+    <section class="section" id="families">
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Классификация</div>
+          <h2>Языковые семьи</h2>
+          <p>Нажмите на карточку, чтобы узнать подробнее</p>
+        </div>
+      </div>
+
+      <div class="families">
+
+        <div class="family-card" style="--accent:#a42e2e" data-family="indo">
+          <div class="fam-icon">🌍</div>
+          <h3>Индоевропейская</h3>
+          <p>Самая крупная семья: русский, украинский, белорусский, осетинский, армянский и другие.</p>
+          <div class="fam-count">~87% населения</div>
+        </div>
+
+        <div class="family-card" style="--accent:#c59a4a" data-family="altaic">
+          <div class="fam-icon">🏔️</div>
+          <h3>Алтайская</h3>
+          <p>Тюркские, монгольские и тунгусо-маньчжурские языки: татарский, башкирский, якутский, бурятский.</p>
+          <div class="fam-count">Крупнейшая после индоевропейской</div>
+        </div>
+
+        <div class="family-card" style="--accent:#3f7a5c" data-family="uralic">
+          <div class="fam-icon">🌲</div>
+          <h3>Уральско-юкагирская</h3>
+          <p>Финно-угорские и самодийские языки: коми, марийский, мордовский, ненецкий, хантыйский.</p>
+          <div class="fam-count">Север и Поволжье</div>
+        </div>
+
+        <div class="family-card" style="--accent:#6b4f8a" data-family="caucasian">
+          <div class="fam-icon">🗻</div>
+          <h3>Северокавказская</h3>
+          <p>Абхазо-адыгские и нахско-дагестанские языки: чеченский, аварский, лезгинский, кабардинский.</p>
+          <div class="fam-count">Дагестан, Чечня, Кабардино-Балкария</div>
+        </div>
+
+        <div class="family-card" style="--accent:#3a5f8a" data-family="chukotka">
+          <div class="fam-icon">🐋</div>
+          <h3>Чукотско-камчатская</h3>
+          <p>Чукотский, корякский, ительменский — языки северо-востока России.</p>
+          <div class="fam-count">Чукотка, Камчатка</div>
+        </div>
+
+        <div class="family-card" style="--accent:#8a5f3a" data-family="other">
+          <div class="fam-icon">✦</div>
+          <h3>Другие семьи</h3>
+          <p>Енисейская (кетский), сино-тибетская, эскимосско-алеутская, картвельская.</p>
+          <div class="fam-count">Уникальные и малочисленные</div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ALPHABETS -->
+
+    <section class="section">
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Письменность</div>
+          <h2>Алфавиты народов России</h2>
+          <p>Более 70 языков имеют свою письменность</p>
+        </div>
+      </div>
+
+      <div class="alphabets">
+
+        <div class="alpha-card">
+          <div class="letters">А Б В Г Д</div>
+          <h4>Кириллица</h4>
+          <p>Русский, татарский, чувашский, якутский, бурятский и другие</p>
+        </div>
+
+        <div class="alpha-card">
+          <div class="letters">A B C D E</div>
+          <h4>Латиница</h4>
+          <p>Использовалась для некоторых языков в 1920–1930-е годы</p>
+        </div>
+
+        <div class="alpha-card">
+          <div class="letters">ا ب ت ث ج</div>
+          <h4>Арабская графика</h4>
+          <p>Историческое письмо татарского, башкирского, дагестанских языков</p>
+        </div>
+
+        <div class="alpha-card">
+          <div class="letters">Ӧ ӧ ӱ ӧ</div>
+          <h4>Марийская письменность</h4>
+          <p>Кириллица с дополнительными диакритическими знаками</p>
+        </div>
+
+        <div class="alpha-card">
+          <div class="letters">Ҥ ҥ Ө ө</div>
+          <h4>Якутский алфавит</h4>
+          <p>Кириллица с буквами для специфических звуков</p>
+        </div>
+
+        <div class="alpha-card">
+          <div class="letters">Ӏ Ӏу Ӏо</div>
+          <h4>Кавказские алфавиты</h4>
+          <p>Специальные знаки для абхазского, аварского, лезгинского</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ENDANGERED -->
+
+    <section class="section">
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Красная книга</div>
+          <h2>Исчезающие языки</h2>
+          <p>Языки, которым нужна поддержка и защита</p>
+        </div>
+      </div>
+
+      <div class="endangered">
+
+        <div class="end-card">
+          <h4>Кетский</h4>
+          <div class="speakers">~150 носителей</div>
+          <p>Единственный живой язык енисейской семьи. Берега Енисея, 39 букв в алфавите.</p>
+        </div>
+
+        <div class="end-card">
+          <h4>Вепсский</h4>
+          <div class="speakers">~3 600 носителей</div>
+          <p>Финно-угорский язык, распространён в Карелии, Ленинградской и Вологодской областях.</p>
+        </div>
+
+        <div class="end-card">
+          <h4>Телеутский</h4>
+          <div class="speakers">~2 000 носителей</div>
+          <p>Тюркский язык, распространён в Кемеровской области. Внесён в Красную книгу языков.</p>
+        </div>
+
+        <div class="end-card">
+          <h4>Коми-пермяцкий</h4>
+          <div class="speakers">~60 000 носителей</div>
+          <p>Финно-угорский язык Пермского края. Внесён в Красную книгу ЮНЕСКО.</p>
+        </div>
+
+        <div class="end-card">
+          <h4>Алеутский</h4>
+          <div class="speakers">~5 носителей</div>
+          <p>Эскимосско-алеутская семья. Командорские острова. Практически исчез.</p>
+        </div>
+
+        <div class="end-card">
+          <h4>Югский</h4>
+          <div class="speakers">~1–2 носителя</div>
+          <p>Енисейская семья. Считается «спящим» языком. Один из самых уязвимых в мире.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section class="section">
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Цифровое будущее</div>
+          <h2>Проекты и инициативы</h2>
+          <p>Как технологии помогают сохранять языковое наследие</p>
+        </div>
+      </div>
+
+      <div class="projects">
+
+        <div class="proj-card" data-toast="Открываем Яндекс Переводчик">
+          <div class="proj-icon">🌐</div>
+          <h3>Яндекс Переводчик</h3>
+          <p>Добавлены мансийский, абазинский и ногайский языки. Работа по созданию корпусов для 36 языков народов России.</p>
+        </div>
+
+        <div class="proj-card" data-toast="Открываем проект GigaChat">
+          <div class="proj-icon">🤖</div>
+          <h3>GigaChat и языки России</h3>
+          <p>Дом народов России и Сбер обучают нейросеть языкам народов страны для цифрового сохранения.</p>
+        </div>
+
+        <div class="proj-card" data-toast="Открываем Атлас РУДН">
+          <div class="proj-icon">🗺️</div>
+          <h3>Атлас языковых ситуаций</h3>
+          <p>Интерактивная карта от РУДН: 12 народов, 8 языковых семей, данные о географии и культуре.</p>
+        </div>
+
+        <div class="proj-card" data-toast="Открываем Красную книгу языков">
+          <div class="proj-icon">📕</div>
+          <h3>Красная книга языков</h3>
+          <p>Научный проект Института лингвистических исследований: описание исчезающих языков России.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+    <span>Многонациональная Россия — русская цивилизация</span>
+    <span>Раздел «Языковое наследие» · ФАДН России</span>
+  </footer>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="dialog">
+    <button type="button" class="close" data-close aria-label="Закрыть">×</button>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+
+<!-- TOAST STACK -->
+
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+
+<script>
+  (function () {
+    "use strict";
+
+    /* --------------------------------
+       СЛОВА ДНЯ
+    -------------------------------- */
+
+    const WORDS = [
+      { word: "Ӟечбуресь", translation: "Здравствуйте!", lang: "Удмуртский язык" },
+      { word: "Исәнмесез", translation: "Здравствуйте!", lang: "Татарский язык" },
+      { word: "Видза оланныд", translation: "Здравствуйте!", lang: "Коми язык" },
+      { word: "Салам лийже", translation: "Здравствуйте!", lang: "Марийский язык" },
+      { word: "Шумбрат", translation: "Здравствуйте!", lang: "Мокшанский язык" },
+      { word: "Нани торова", translation: "Здравствуйте!", lang: "Ненецкий язык" },
+      { word: "Байрай", translation: "Здравствуйте!", lang: "Осетинский язык" },
+      { word: "Ыра кун пултар", translation: "Добрый день", lang: "Чувашский язык" },
+      { word: "Еттык", translation: "Привет!", lang: "Чукотский язык" },
+      { word: "Дорообо", translation: "Здравствуйте!", lang: "Якутский язык" }
+    ];
+
+    let wordIndex = 0;
+
+    const wordText = document.getElementById("wordText");
+    const wordTranslation = document.getElementById("wordTranslation");
+    const wordLang = document.getElementById("wordLang");
+
+    function showNextWord() {
+      wordIndex = (wordIndex + 1) % WORDS.length;
+      const w = WORDS[wordIndex];
+
+      wordText.textContent = w.word;
+      wordTranslation.textContent = w.translation;
+      wordLang.textContent = w.lang;
+
+      wordText.style.opacity = "0";
+      wordTranslation.style.opacity = "0";
+      wordLang.style.opacity = "0";
+
+      setTimeout(() => {
+        wordText.style.opacity = "1";
+        wordTranslation.style.opacity = "1";
+        wordLang.style.opacity = "1";
+      }, 120);
+    }
+
+    document.getElementById("nextWord").addEventListener("click", showNextWord);
+
+    // автопереключение каждые 5 секунд
+    let autoTimer = setInterval(showNextWord, 5000);
+
+    document.getElementById("wordDay").addEventListener("mouseenter", () => {
+      clearInterval(autoTimer);
+    });
+
+    document.getElementById("wordDay").addEventListener("mouseleave", () => {
+      autoTimer = setInterval(showNextWord, 5000);
+    });
+
+
+    /* --------------------------------
+       МОДАЛКА (языковые семьи)
+    -------------------------------- */
+
+    const FAMILY_DATA = {
+      indo: {
+        title: "Индоевропейская семья",
+        text: "Самая крупная языковая семья России. Включает славянскую группу (русский, украинский, белорусский), иранскую (осетинский), армянскую и другие. На языках этой семьи говорит около 87% населения страны."
+      },
+      altaic: {
+        title: "Алтайская семья",
+        text: "Включает тюркские (татарский, башкирский, чувашский, якутский, тувинский, хакасский), монгольские (бурятский, калмыцкий) и тунгусо-маньчжурские (эвенкийский, эвенский) языки. Вторая по численности семья России."
+      },
+      uralic: {
+        title: "Уральско-юкагирская семья",
+        text: "Финно-угорские языки (коми, удмуртский, марийский, мордовский, карельский) и самодийские (ненецкий, селькупский, нганасанский). Распространены от Балтики до Таймыра."
+      },
+      caucasian: {
+        title: "Северокавказская семья",
+        text: "Абхазо-адыгские (кабардинский, адыгейский, абхазский) и нахско-дагестанские (чеченский, ингушский, аварский, лезгинский, даргинский) языки. Одна из самых сложных и разнообразных групп."
+      },
+      chukotka: {
+        title: "Чукотско-камчатская семья",
+        text: "Чукотский, корякский, ительменский, алюторский языки. Распространены на Чукотке и Камчатке. Отличаются уникальной фонетикой и грамматикой."
+      },
+      other: {
+        title: "Другие языковые семьи",
+        text: "Енисейская семья (кетский язык), сино-тибетская (китайский), эскимосско-алеутская (алеутский, эскимосский), картвельская (грузинский). Эти семьи представлены небольшим числом языков, но являются уникальным наследием."
+      }
+    };
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const toastStack = document.getElementById("toastStack");
+
+    let lastFocused = null;
+
+    function openModal(data) {
+      lastFocused = document.activeElement;
+      modalTitle.textContent = data.title;
+      modalText.textContent = data.text;
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+      modal.querySelector(".close").focus();
+    }
+
+    function closeModal() {
+      if (!modal.classList.contains("open")) return;
+      modal.classList.remove("open");
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal || e.target.closest("[data-close]")) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+
+    /* --------------------------------
+       ТОСТЫ
+    -------------------------------- */
+
+    function toast(message) {
+      const el = document.createElement("div");
+      el.className = "toast";
+      el.textContent = message;
+      toastStack.appendChild(el);
+      setTimeout(() => el.remove(), 1800);
+    }
+
+
+    /* --------------------------------
+       ДЕЛЕГИРОВАНИЕ СОБЫТИЙ
+    -------------------------------- */
+
+    document.addEventListener("click", (event) => {
+      // карточки языковых семей
+      const familyCard = event.target.closest("[data-family]");
+      if (familyCard) {
+        const data = FAMILY_DATA[familyCard.dataset.family];
+        if (data) openModal(data);
+        return;
+      }
+
+      // тосты
+      const toastTrigger = event.target.closest("[data-toast]");
+      if (toastTrigger) {
+        toast(toastTrigger.dataset.toast);
+        return;
+      }
+
+      // скролл
+      const scrollTrigger = event.target.closest("[data-scroll]");
+      if (scrollTrigger) {
+        const target = document.querySelector(scrollTrigger.dataset.scroll);
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+  })();
+</script>
+
+</body>
+</html>
