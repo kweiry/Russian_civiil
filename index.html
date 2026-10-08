@@ -29,39 +29,24 @@
       }
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        "Segoe UI",
-        sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--ink);
     }
 
-    body.modal-open {
-      overflow: hidden;
-    }
+    body.modal-open { overflow: hidden; }
 
-    button {
-      font: inherit;
-    }
+    button { font: inherit; }
 
-    #app {
-      min-height: 100vh;
-      background: var(--bg);
-    }
+    a { color: inherit; text-decoration: none; }
+
+    #app { min-height: 100vh; background: var(--bg); }
 
     /* HEADER */
 
@@ -69,49 +54,30 @@
       max-width: 1240px;
       margin: auto;
       padding: 20px 28px 0;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
     }
 
-    .brand {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
+    .brand { display: flex; gap: 14px; align-items: center; }
 
     .mark {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle at 50% 35%,
-          #e9c56d 0 12%,
-          #b4372f 13% 48%,
-          #7d2224 49%
-        );
-
-      box-shadow:
-        0 0 0 5px
-        color-mix(in srgb, var(--gold) 25%, transparent);
-
+      background: radial-gradient(circle at 50% 35%, #e9c56d 0 12%, #b4372f 13% 48%, #7d2224 49%);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 25%, transparent);
       position: relative;
       flex-shrink: 0;
     }
 
     .mark::after {
       content: "✦";
-
       position: absolute;
       inset: 0;
-
       display: grid;
       place-items: center;
-
       color: #fff7df;
       font-size: 21px;
     }
@@ -123,159 +89,93 @@
       color: var(--muted);
     }
 
-    .brand b {
-      font-size: 15px;
-    }
+    .brand b { font-size: 15px; }
 
     .account {
       border: 1px solid var(--line);
       background: var(--surface);
       border-radius: 999px;
-
       padding: 10px 16px;
-
       color: var(--ink);
       font-weight: 650;
-
       cursor: pointer;
       transition: .2s;
     }
 
-    .account:hover {
-      border-color: var(--gold);
-      transform: translateY(-1px);
-    }
+    .account:hover { border-color: var(--gold); transform: translateY(-1px); }
 
     /* HERO */
 
     .hero {
       max-width: 1240px;
       margin: 0 auto;
-
       padding: 72px 28px 54px;
-
       display: grid;
       grid-template-columns: 1.1fr .9fr;
-
       align-items: center;
       gap: 50px;
     }
 
     .hero h1 {
-      font-family:
-        "Palatino Linotype",
-        "Book Antiqua",
-        Georgia,
-        serif;
-
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
       font-weight: 700;
       font-size: clamp(42px, 6vw, 82px);
       line-height: .94;
-
       margin: 12px 0 24px;
-
       letter-spacing: -.035em;
     }
 
-    .hero h1 span {
-      color: var(--red);
-    }
+    .hero h1 span { color: var(--red); }
 
     .hero p {
       max-width: 650px;
-
       font-size: 18px;
       line-height: 1.65;
-
       color: var(--muted);
-
       margin: 0 0 28px;
     }
 
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
     .btn {
       border: 1px solid var(--line);
       border-radius: 13px;
-
       padding: 13px 18px;
-
       background: var(--surface);
       color: var(--ink);
-
       font-weight: 700;
-
       cursor: pointer;
       transition: .2s;
+      display: inline-block;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-    }
+    .btn:hover { transform: translateY(-2px); border-color: var(--gold); }
 
-    .btn.primary {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
+    .btn.primary { background: var(--red); border-color: var(--red); color: white; }
 
-    .btn.primary:hover {
-      background: var(--red-light);
-    }
+    .btn.primary:hover { background: var(--red-light); }
 
     /* MATRYOSHKA */
 
-    .visual {
-      min-height: 390px;
-
-      position: relative;
-
-      display: grid;
-      place-items: center;
-    }
+    .visual { min-height: 390px; position: relative; display: grid; place-items: center; }
 
     .halo {
       position: absolute;
-
       width: 350px;
       height: 350px;
-
       border-radius: 50%;
-
-      border: 1px solid
-        color-mix(in srgb, var(--gold) 55%, transparent);
-
+      border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
       box-shadow:
-        0 0 0 22px
-        color-mix(in srgb, var(--gold) 7%, transparent),
-
-        0 0 0 62px
-        color-mix(in srgb, var(--red) 4%, transparent);
+        0 0 0 22px color-mix(in srgb, var(--gold) 7%, transparent),
+        0 0 0 62px color-mix(in srgb, var(--red) 4%, transparent);
     }
 
     .doll {
       position: relative;
-
       width: 190px;
       height: 245px;
-
-      border-radius:
-        48% 48% 38% 38% /
-        30% 30% 65% 65%;
-
-      background:
-        linear-gradient(
-          90deg,
-          #8e2728,
-          #c34a3b 48%,
-          #8e2728
-        );
-
+      border-radius: 48% 48% 38% 38% / 30% 30% 65% 65%;
+      background: linear-gradient(90deg, #8e2728, #c34a3b 48%, #8e2728);
       box-shadow:
         inset 16px 0 30px #6d1e22aa,
         inset -16px 0 30px #ef8d6b55,
@@ -284,63 +184,38 @@
 
     .doll::before {
       content: "";
-
       position: absolute;
-
       width: 122px;
       height: 122px;
-
       top: -7px;
       left: 34px;
-
       border-radius: 50%;
-
       background: #e7c79e;
-
       border: 10px solid #b33832;
-
-      box-shadow:
-        inset 0 -10px 15px #b98d68;
+      box-shadow: inset 0 -10px 15px #b98d68;
     }
 
     .doll::after {
       content: "✦";
-
       position: absolute;
-
       top: 30px;
       left: 66px;
-
       color: #8d2829;
       font-size: 32px;
     }
 
     .pattern {
       position: absolute;
-
       bottom: 35px;
       left: 42px;
       right: 42px;
-
       height: 78px;
-
       border: 2px solid #e5bd63;
-
       border-radius: 60% 60% 25% 25%;
-
       opacity: .75;
     }
 
-    .orn {
-      position: absolute;
-
-      font-family: Georgia, serif;
-
-      color: var(--gold);
-
-      font-size: 42px;
-    }
-
+    .orn { position: absolute; font-family: Georgia, serif; color: var(--gold); font-size: 42px; }
     .o1 { top: 5%; left: 4%; }
     .o2 { right: 4%; bottom: 12%; }
     .o3 { right: 11%; top: 10%; font-size: 26px; }
@@ -350,7 +225,6 @@
     .section {
       max-width: 1240px;
       margin: auto;
-
       padding: 18px 28px 70px;
     }
 
@@ -358,149 +232,271 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-
       margin-bottom: 20px;
       gap: 20px;
     }
 
     .section h2 {
       font-family: Georgia, serif;
-
       font-size: 32px;
-
       margin: 0;
     }
 
-    .section-head span {
+    .section-head > div p {
       color: var(--muted);
       font-size: 14px;
+      margin: 4px 0 0;
     }
 
-    /* CARDS */
+    /* CAROUSEL */
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 15px;
+    .carousel-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .card {
-      background: var(--surface);
+    .carousel {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 6px 4px 18px;
+      flex: 1;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
 
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .carousel-btn {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       border: 1px solid var(--line);
-
-      border-radius: 18px;
-
-      padding: 23px;
-
-      min-height: 170px;
-
-      transition: .2s;
-
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1;
       cursor: pointer;
+      transition: .2s;
+      display: grid;
+      place-items: center;
+      padding: 0;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
+    .carousel-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: white;
+      transform: scale(1.05);
+    }
 
-      border-color:
-        color-mix(
-          in srgb,
-          var(--gold) 60%,
-          var(--line)
+    .carousel-btn:disabled {
+      opacity: .25;
+      cursor: default;
+    }
+
+    /* DIRECTION CARDS */
+
+    .dir-card {
+      flex: 0 0 clamp(260px, 78vw, 340px);
+      scroll-snap-align: start;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: .25s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: inherit;
+    }
+
+    .dir-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px rgba(0,0,0,.1);
+    }
+
+    .dir-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px transparent;
+      transition: .25s;
+    }
+
+    .dir-card:hover::after {
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .dir-art {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(
+          circle at 50% 100%,
+          color-mix(in srgb, var(--accent) 22%, transparent),
+          color-mix(in srgb, var(--accent) 6%, transparent) 70%
         );
     }
 
-    .icon {
-      font-size: 24px;
+    .dir-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          color-mix(in srgb, var(--accent) 6%, transparent) 0 1px,
+          transparent 1px 14px
+        );
+      opacity: .6;
     }
 
-    .card h3 {
-      margin: 15px 0 8px;
+    .dir-art svg {
+      width: 170px;
+      height: 130px;
+      position: relative;
+      z-index: 1;
+      transition: transform .3s;
+    }
 
+    .dir-card:hover .dir-art svg {
+      transform: scale(1.06);
+    }
+
+    .dir-body {
+      padding: 22px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dir-body h3 {
+      margin: 0 0 10px;
       font-size: 19px;
+      line-height: 1.25;
     }
 
-    .card p {
+    .dir-body p {
       margin: 0;
-
       color: var(--muted);
-
-      line-height: 1.5;
-
       font-size: 14px;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .dir-more {
+      margin-top: 16px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap .2s;
+    }
+
+    .dir-card:hover .dir-more { gap: 10px; }
+
+    /* DOTS */
+
+    .dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--line);
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      transition: .25s;
+    }
+
+    .dot:hover { background: var(--muted); }
+
+    .dot.active {
+      background: var(--red);
+      width: 26px;
+      border-radius: 4px;
     }
 
     /* NEWS */
 
     .news {
       display: grid;
-
       grid-template-columns: 1.3fr .7fr;
-
       gap: 15px;
     }
 
     .news .feature {
       min-height: 230px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #6d2226,
-          #a83b32
-        );
-
+      background: linear-gradient(135deg, #6d2226, #a83b32);
       color: white;
-
-      border: 0;
+      border-radius: 18px;
+      padding: 23px;
+      cursor: pointer;
+      transition: .2s;
     }
 
-    .news .feature p {
-      color: #f5ddd2;
-    }
+    .news .feature:hover { transform: translateY(-3px); }
+
+    .news .feature p { color: #f5ddd2; margin: 0; font-size: 14px; }
+
+    .news .feature h3 { margin: 55px 0 8px; font-size: 28px; }
 
     .tag {
       display: inline-block;
-
       padding: 5px 8px;
-
       border-radius: 999px;
-
       background: #ffffff22;
-
       font-size: 11px;
     }
 
-    .smallnews {
-      display: grid;
-      gap: 15px;
-    }
+    .smallnews { display: grid; gap: 15px; }
 
     .smallnews .card {
-      min-height: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 23px;
+      transition: .2s;
     }
+
+    .smallnews .card:hover { transform: translateY(-3px); border-color: var(--gold); }
+
+    .smallnews .card h3 { margin: 10px 0 8px; font-size: 17px; }
+
+    .smallnews .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
     /* FOOTER */
 
     .footer {
       border-top: 1px solid var(--line);
-
       max-width: 1240px;
-
       margin: auto;
-
       padding: 24px 28px 45px;
-
       color: var(--muted);
-
       font-size: 12px;
-
       display: flex;
-
       justify-content: space-between;
-
       gap: 20px;
     }
 
@@ -509,72 +505,41 @@
     .modal {
       position: fixed;
       inset: 0;
-
       background: #0008;
-
       display: none;
-
       align-items: center;
       justify-content: center;
-
       padding: 20px;
-
-      z-index: 4;
+      z-index: 10;
     }
 
-    .modal.open {
-      display: flex;
-    }
+    .modal.open { display: flex; }
 
     .dialog {
       max-width: 560px;
       width: 100%;
-
       background: var(--surface);
-
       border: 1px solid var(--line);
-
       border-radius: 20px;
-
       padding: 28px;
-
       box-shadow: 0 30px 80px #0005;
     }
 
-    .dialog h2 {
-      margin-top: 0;
+    .dialog h2 { margin: 0 0 10px; font-family: Georgia, serif; }
 
-      font-family: Georgia, serif;
-    }
+    .dialog p { color: var(--muted); line-height: 1.6; }
 
-    .dialog p {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .dialog-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
+    .dialog-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
 
     .close {
       display: block;
       margin-left: auto;
-
       border: 0;
-
       background: none;
-
       color: var(--muted);
-
       font-size: 25px;
-
       line-height: 1;
-
       padding: 0 4px;
-
       cursor: pointer;
     }
 
@@ -582,88 +547,50 @@
 
     .toast-stack {
       position: fixed;
-
       left: 50%;
       bottom: 28px;
-
       transform: translateX(-50%);
-
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
-
-      z-index: 8;
-
+      z-index: 20;
       pointer-events: none;
     }
 
     .toast {
       background: #2a2520;
       color: white;
-
       padding: 12px 17px;
-
       border-radius: 12px;
-
       box-shadow: 0 10px 30px #0004;
-
       animation: toastIn .2s ease-out;
+      max-width: 90vw;
     }
 
     @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* MOBILE */
 
     @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 45px;
-      }
+      .hero { grid-template-columns: 1fr; padding-top: 45px; }
+      .visual { min-height: 300px; }
+      .news { grid-template-columns: 1fr; }
+      .top, .hero, .section, .footer { padding-left: 18px; padding-right: 18px; }
+      .footer { display: block; }
+      .footer span { display: block; margin-bottom: 8px; }
 
-      .visual {
-        min-height: 300px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .news {
-        grid-template-columns: 1fr;
-      }
-
-      .top {
+      .carousel-wrap { gap: 0; }
+      .carousel-btn { display: none; }
+      .carousel {
+        margin: 0 -18px;
         padding-left: 18px;
         padding-right: 18px;
       }
-
-      .hero,
-      .section {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .footer {
-        padding-left: 18px;
-        padding-right: 18px;
-
-        display: block;
-      }
-
-      .footer span {
-        display: block;
-        margin-bottom: 8px;
-      }
+      .dir-card { flex-basis: 82vw; }
     }
   </style>
 </head>
@@ -678,18 +605,13 @@
 
     <div class="brand">
       <div class="mark" aria-hidden="true"></div>
-
       <div>
         <div class="eyebrow">ФАДН России</div>
         <b>Портал культурного и языкового наследия</b>
       </div>
     </div>
 
-    <button
-      type="button"
-      class="account"
-      data-modal="account"
-    >
+    <button type="button" class="account" data-modal="account">
       Личный кабинет
     </button>
 
@@ -703,7 +625,6 @@
     <section class="hero">
 
       <div>
-
         <div class="eyebrow">Многонациональная Россия</div>
 
         <h1>
@@ -719,124 +640,199 @@
         </p>
 
         <div class="actions">
-
-          <button
-            type="button"
-            class="btn primary"
-            data-modal="learn"
-          >
+          <button type="button" class="btn primary" data-modal="learn">
             Начать изучение
           </button>
 
-          <button
-            type="button"
-            class="btn"
-            data-scroll="#directions"
-          >
+          <button type="button" class="btn" data-scroll="#directions">
             Все направления →
           </button>
-
         </div>
-
       </div>
 
-
-      <!-- MATRYOSHKA -->
-
       <div class="visual" aria-hidden="true">
-
         <div class="halo"></div>
-
         <div class="orn o1">❧</div>
         <div class="orn o2">❧</div>
         <div class="orn o3">✦</div>
-
         <div class="doll">
           <div class="pattern"></div>
         </div>
-
       </div>
 
     </section>
 
 
-    <!-- DIRECTIONS -->
+    <!-- DIRECTIONS CAROUSEL -->
 
     <section class="section" id="directions">
 
       <div class="section-head">
-
         <div>
           <div class="eyebrow">Структура портала</div>
           <h2>Шесть направлений</h2>
+          <p>Листайте карточки и выбирайте раздел</p>
         </div>
+      </div>
+
+      <div class="carousel-wrap">
+
+        <button type="button" class="carousel-btn" data-dir="-1" aria-label="Назад">←</button>
+
+        <div class="carousel" id="directionsCarousel">
+
+          <!-- 1. Политические инициативы -->
+          <a class="dir-card" href="#" data-soon="Политические инициативы" style="--accent:#a42e2e">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <circle cx="100" cy="50" r="24" fill="currentColor" opacity="0.10"/>
+                <circle cx="100" cy="50" r="15" fill="currentColor" opacity="0.22"/>
+                <circle cx="100" cy="50" r="8" fill="currentColor"/>
+                <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.55">
+                  <line x1="100" y1="14" x2="100" y2="24"/>
+                  <line x1="100" y1="76" x2="100" y2="86"/>
+                  <line x1="64" y1="50" x2="74" y2="50"/>
+                  <line x1="126" y1="50" x2="136" y2="50"/>
+                  <line x1="74" y1="24" x2="82" y2="32"/>
+                  <line x1="118" y1="68" x2="126" y2="76"/>
+                  <line x1="74" y1="76" x2="82" y2="68"/>
+                  <line x1="118" y1="32" x2="126" y2="24"/>
+                </g>
+                <path d="M55 100 L100 82 L145 100 Z" fill="currentColor" opacity="0.7"/>
+                <rect x="55" y="100" width="90" height="4" fill="currentColor"/>
+                <rect x="62" y="104" width="6" height="20" fill="currentColor" opacity="0.5"/>
+                <rect x="80" y="104" width="6" height="20" fill="currentColor" opacity="0.5"/>
+                <rect x="97" y="104" width="6" height="20" fill="currentColor" opacity="0.5"/>
+                <rect x="114" y="104" width="6" height="20" fill="currentColor" opacity="0.5"/>
+                <rect x="132" y="104" width="6" height="20" fill="currentColor" opacity="0.5"/>
+                <rect x="48" y="124" width="104" height="4" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Политические инициативы</h3>
+              <p>Идеи, проекты и предложения по развитию государственной национальной политики.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+          <!-- 2. Стабильность и территория -->
+          <a class="dir-card" href="#" data-soon="Стабильность и территория" style="--accent:#c59a4a">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <path d="M100 18 L152 36 L152 78 C152 102 130 118 100 126 C70 118 48 102 48 78 L48 36 Z"
+                      fill="currentColor" opacity="0.12" stroke="currentColor" stroke-width="2"/>
+                <path d="M68 55 L90 47 L112 55 L128 52 L133 72 L120 90 L95 94 L72 86 L64 68 Z"
+                      fill="currentColor" opacity="0.35"/>
+                <circle cx="100" cy="70" r="4" fill="currentColor"/>
+                <circle cx="100" cy="70" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+                <line x1="62" y1="38" x2="72" y2="38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                <line x1="128" y1="38" x2="138" y2="38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Стабильность и территория</h3>
+              <p>Материалы о стратегической стабильности, территориальном суверенитете и единстве пространства.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+          <!-- 3. Языковое наследие — ведёт на languages.html -->
+          <a class="dir-card" href="languages.html" style="--accent:#3a5f8a">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <path d="M42 32 C42 26 47 22 53 22 L147 22 C153 22 158 26 158 32 L158 108 C158 114 153 118 147 118 L53 118 C47 118 42 114 42 108 Z"
+                      fill="currentColor" opacity="0.12" stroke="currentColor" stroke-width="2"/>
+                <g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35">
+                  <line x1="58" y1="46" x2="120" y2="46"/>
+                  <line x1="58" y1="60" x2="142" y2="60"/>
+                  <line x1="58" y1="74" x2="98" y2="74"/>
+                </g>
+                <text x="58" y="108" font-family="Georgia, serif" font-size="26" font-weight="700" fill="currentColor">Аа</text>
+                <text x="105" y="108" font-family="Georgia, serif" font-size="26" font-weight="700" fill="currentColor" opacity="0.65">Ӧӧ</text>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Языковое наследие</h3>
+              <p>Интерактивное изучение языков, словари, аудиоматериалы и истории языковых традиций.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+          <!-- 4. Центр живой истории -->
+          <a class="dir-card" href="#" data-soon="Центр живой истории" style="--accent:#8a5f3a">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <path d="M48 122 L48 55 C48 40 65 28 100 28 C135 28 152 40 152 55 L152 122"
+                      fill="currentColor" opacity="0.10" stroke="currentColor" stroke-width="2"/>
+                <path d="M68 122 L68 62 C68 52 80 46 100 46 C120 46 132 52 132 62 L132 122"
+                      fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+                <rect x="46" y="120" width="108" height="4" fill="currentColor"/>
+                <path d="M90 66 L110 66 L100 84 Z" fill="currentColor" opacity="0.75"/>
+                <path d="M90 104 L110 104 L100 86 Z" fill="currentColor" opacity="0.75"/>
+                <line x1="88" y1="64" x2="112" y2="64" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="88" y1="106" x2="112" y2="106" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Центр живой истории</h3>
+              <p>История через хроники, карты, предметы, рассказы людей и интерактивные маршруты.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+          <!-- 5. Ценностные ориентиры -->
+          <a class="dir-card" href="#" data-soon="Ценностные ориентиры" style="--accent:#6b4f8a">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <circle cx="100" cy="70" r="42" fill="currentColor" opacity="0.10"/>
+                <circle cx="100" cy="70" r="30" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                <circle cx="100" cy="70" r="42" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55"/>
+                <path d="M100 36 L108 64 L136 70 L108 76 L100 104 L92 76 L64 70 L92 64 Z"
+                      fill="currentColor" opacity="0.85"/>
+                <circle cx="100" cy="70" r="4" fill="var(--surface)"/>
+                <circle cx="100" cy="20" r="2" fill="currentColor" opacity="0.5"/>
+                <circle cx="100" cy="120" r="2" fill="currentColor" opacity="0.5"/>
+                <circle cx="50" cy="70" r="2" fill="currentColor" opacity="0.5"/>
+                <circle cx="150" cy="70" r="2" fill="currentColor" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Ценностные ориентиры</h3>
+              <p>Разговор о культурных смыслах, традициях, общественных ценностях и наследии поколений.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+          <!-- 6. Межконфессиональный диалог -->
+          <a class="dir-card" href="#" data-soon="Межконфессиональный диалог" style="--accent:#3f7a5c">
+            <div class="dir-art" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
+                <path d="M84 70 C84 54 100 44 100 26 C100 44 116 54 116 70 Z" fill="currentColor" opacity="0.6"/>
+                <rect x="92" y="70" width="16" height="42" fill="currentColor" opacity="0.4"/>
+                <line x1="100" y1="18" x2="100" y2="30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="94" y1="24" x2="106" y2="24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M52 78 C52 68 52 56 64 50 C76 56 76 68 76 78 Z" fill="currentColor" opacity="0.4"/>
+                <rect x="61" y="78" width="6" height="34" fill="currentColor" opacity="0.3"/>
+                <circle cx="64" cy="48" r="3" fill="currentColor" opacity="0.6"/>
+                <path d="M124 78 C124 62 132 50 138 44 C144 50 152 62 152 78 Z" fill="currentColor" opacity="0.4"/>
+                <rect x="135" y="78" width="6" height="34" fill="currentColor" opacity="0.3"/>
+                <rect x="38" y="112" width="124" height="4" fill="currentColor" opacity="0.7"/>
+              </svg>
+            </div>
+            <div class="dir-body">
+              <h3>Межконфессиональный диалог</h3>
+              <p>Знания о религиозных традициях России и культурах взаимного уважения и диалога.</p>
+              <span class="dir-more">Открыть раздел →</span>
+            </div>
+          </a>
+
+        </div>
+
+        <button type="button" class="carousel-btn" data-dir="1" aria-label="Вперёд">→</button>
 
       </div>
 
-
-      <div class="grid">
-
-        <div class="card" data-toast="Открываем политические инициативы">
-          <div class="icon" aria-hidden="true">◈</div>
-          <h3>Политические инициативы</h3>
-          <p>
-            Идеи, проекты и предложения по развитию
-            государственной национальной политики.
-          </p>
-        </div>
-
-
-        <div class="card" data-toast="Открываем раздел стратегической стабильности">
-          <div class="icon" aria-hidden="true">⌂</div>
-          <h3>Стабильность и территория</h3>
-          <p>
-            Материалы о стратегической стабильности,
-            территориальном суверенитете и единстве
-            пространства.
-          </p>
-        </div>
-
-
-        <div class="card" data-modal="languages">
-          <div class="icon" aria-hidden="true">АБ</div>
-          <h3>Языковое наследие</h3>
-          <p>
-            Интерактивное изучение языков, словари,
-            аудиоматериалы и истории языковых традиций.
-          </p>
-        </div>
-
-
-        <div class="card" data-modal="history">
-          <div class="icon" aria-hidden="true">⌛</div>
-          <h3>Центр живой истории</h3>
-          <p>
-            История через хроники, карты, предметы,
-            рассказы людей и интерактивные маршруты.
-          </p>
-        </div>
-
-
-        <div class="card" data-toast="Открываем ценностные ориентиры">
-          <div class="icon" aria-hidden="true">✦</div>
-          <h3>Ценностные ориентиры</h3>
-          <p>
-            Разговор о культурных смыслах, традициях,
-            общественных ценностях и наследии поколений.
-          </p>
-        </div>
-
-
-        <div class="card" data-toast="Открываем межконфессиональный диалог">
-          <div class="icon" aria-hidden="true">◉</div>
-          <h3>Межконфессиональный диалог</h3>
-          <p>
-            Знания о религиозных традициях России
-            и культурах взаимного уважения и диалога.
-          </p>
-        </div>
-
-      </div>
+      <div class="dots" id="dirDots" aria-label="Навигация по направлениям"></div>
 
     </section>
 
@@ -846,60 +842,36 @@
     <section class="section">
 
       <div class="section-head">
-
         <div>
           <div class="eyebrow">Пульс портала</div>
           <h2>Новости и события</h2>
         </div>
 
-        <button
-          type="button"
-          class="btn"
-          data-toast="Показываем все новости"
-        >
+        <button type="button" class="btn" data-toast="Показываем все новости">
           Все новости →
         </button>
-
       </div>
-
 
       <div class="news">
 
-        <div
-          class="card feature"
-          data-toast="Открываем материал Центра живой истории"
-        >
-
+        <div class="feature" data-toast="Открываем материал Центра живой истории">
           <span class="tag">Центр живой истории</span>
-
-          <h3 style="font-size:28px; margin-top:55px;">
-            Живая история: как говорить о прошлом
-            через людей, места и традиции
-          </h3>
-
-          <p>
-            Лонгриды, цифровые экспозиции
-            и новые образовательные маршруты.
-          </p>
-
+          <h3>Живая история: как говорить о прошлом через людей, места и традиции</h3>
+          <p>Лонгриды, цифровые экспозиции и новые образовательные маршруты.</p>
         </div>
 
-
         <div class="smallnews">
-
           <div class="card">
             <div class="eyebrow">Языковое наследие · сегодня</div>
             <h3>Новые уроки: язык как часть культурной памяти</h3>
             <p>Подборка материалов для самостоятельного изучения.</p>
           </div>
 
-
           <div class="card">
             <div class="eyebrow">Диалог · вчера</div>
             <h3>Календарь культурных и памятных дат</h3>
             <p>События народов России в одном месте.</p>
           </div>
-
         </div>
 
       </div>
@@ -908,8 +880,6 @@
 
   </main>
 
-
-  <!-- FOOTER -->
 
   <footer class="footer">
     <span>Многонациональная Россия — русская цивилизация</span>
@@ -921,34 +891,16 @@
 
 <!-- MODAL -->
 
-<div
-  class="modal"
-  id="modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="modalTitle"
-  hidden
->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
 
   <div class="dialog">
-
-    <button
-      type="button"
-      class="close"
-      data-close
-      aria-label="Закрыть"
-    >
-      ×
-    </button>
+    <button type="button" class="close" data-close aria-label="Закрыть">×</button>
 
     <div class="eyebrow">Многонациональная Россия</div>
-
     <h2 id="modalTitle"></h2>
-
     <p id="modalText"></p>
 
     <div class="dialog-actions" id="modalActions"></div>
-
   </div>
 
 </div>
@@ -964,7 +916,7 @@
     "use strict";
 
     /* --------------------------------
-       ДАННЫЕ МОДАЛОК
+       МОДАЛКИ
     -------------------------------- */
 
     const MODAL_DATA = {
@@ -976,7 +928,6 @@
           { label: "Регистрация" }
         ]
       },
-
       learn: {
         title: "Начать изучение",
         text: "Выберите свой маршрут: язык, история, культура или ценностные ориентиры.",
@@ -984,47 +935,17 @@
           { label: "Продолжить", primary: true },
           { label: "Позже" }
         ]
-      },
-
-      languages: {
-        title: "Языковое наследие",
-        text: "Выберите язык и начните с короткого интерактивного урока.",
-        actions: [
-          { label: "Выбрать язык", primary: true },
-          { label: "Каталог языков" }
-        ]
-      },
-
-      history: {
-        title: "Центр живой истории",
-        text: "Путешествуйте по эпохам через хроники, карты, предметы и человеческие истории.",
-        actions: [
-          { label: "Открыть карту", primary: true },
-          { label: "Все материалы" }
-        ]
       }
     };
 
-
-    /* --------------------------------
-       ЭЛЕМЕНТЫ
-    -------------------------------- */
-
-    const modal      = document.getElementById("modal");
+    const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modalTitle");
-    const modalText  = document.getElementById("modalText");
-    const modalActs  = document.getElementById("modalActions");
+    const modalText = document.getElementById("modalText");
+    const modalActs = document.getElementById("modalActions");
     const toastStack = document.getElementById("toastStack");
 
     let lastFocused = null;
-
-    const FOCUSABLE =
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-
-    /* --------------------------------
-       МОДАЛКА
-    -------------------------------- */
+    const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
     function openModal(type) {
       const data = MODAL_DATA[type];
@@ -1033,7 +954,7 @@
       lastFocused = document.activeElement;
 
       modalTitle.textContent = data.title;
-      modalText.textContent  = data.text;
+      modalText.textContent = data.text;
       modalActs.replaceChildren();
 
       data.actions.forEach(action => {
@@ -1041,12 +962,10 @@
         btn.type = "button";
         btn.className = "btn" + (action.primary ? " primary" : "");
         btn.textContent = action.label;
-
         btn.addEventListener("click", () => {
           toast(action.label);
           closeModal();
         });
-
         modalActs.appendChild(btn);
       });
 
@@ -1054,11 +973,9 @@
       modal.classList.add("open");
       document.body.classList.add("modal-open");
 
-      // фокус на первую фокусируемую кнопку внутри диалога
       const first = modal.querySelector(FOCUSABLE);
       if (first) first.focus();
     }
-
 
     function closeModal() {
       if (!modal.classList.contains("open")) return;
@@ -1067,23 +984,17 @@
       modal.hidden = true;
       document.body.classList.remove("modal-open");
 
-      if (lastFocused && typeof lastFocused.focus === "function") {
-        lastFocused.focus();
-      }
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
     }
 
-
-    // Клик по подложке
     modal.addEventListener("click", event => {
       if (event.target === modal) closeModal();
     });
 
-    // Кнопка «закрыть» (data-close)
     modal.addEventListener("click", event => {
       if (event.target.closest("[data-close]")) closeModal();
     });
 
-    // ESC + ловушка фокуса
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         closeModal();
@@ -1095,6 +1006,140 @@
         if (items.length === 0) return;
 
         const first = items[0];
-        const last  = items[items.length - 1];
+        const last = items[items.length - 1];
 
-        if (event.shiftKey && document.activeElement ===
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+
+    /* --------------------------------
+       ТОСТЫ
+    -------------------------------- */
+
+    function toast(message) {
+      const el = document.createElement("div");
+      el.className = "toast";
+      el.textContent = message;
+      toastStack.appendChild(el);
+      setTimeout(() => el.remove(), 1800);
+    }
+
+
+    /* --------------------------------
+       ДЕЛЕГИРОВАНИЕ КЛИКОВ
+    -------------------------------- */
+
+    document.addEventListener("click", event => {
+      // карточки "скоро появится"
+      const soonCard = event.target.closest("[data-soon]");
+      if (soonCard) {
+        event.preventDefault();
+        toast("Раздел «" + soonCard.dataset.soon + "» готовится к запуску");
+        return;
+      }
+
+      // модалки
+      const modalTrigger = event.target.closest("[data-modal]");
+      if (modalTrigger) {
+        openModal(modalTrigger.dataset.modal);
+        return;
+      }
+
+      // тосты
+      const toastTrigger = event.target.closest("[data-toast]");
+      if (toastTrigger) {
+        toast(toastTrigger.dataset.toast);
+        return;
+      }
+
+      // скролл к секции
+      const scrollTrigger = event.target.closest("[data-scroll]");
+      if (scrollTrigger) {
+        const target = document.querySelector(scrollTrigger.dataset.scroll);
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+
+    /* --------------------------------
+       КАРУСЕЛЬ НАПРАВЛЕНИЙ
+    -------------------------------- */
+
+    const carousel = document.getElementById("directionsCarousel");
+    const dotsWrap = document.getElementById("dirDots");
+    const prevBtn  = document.querySelector('[data-dir="-1"]');
+    const nextBtn  = document.querySelector('[data-dir="1"]');
+    const cards    = Array.from(carousel.querySelectorAll(".dir-card"));
+
+    // создаём точки
+    cards.forEach((card, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "dot";
+      dot.setAttribute("aria-label", "Направление " + (i + 1));
+      dot.addEventListener("click", () => {
+        carousel.scrollTo({
+          left: card.offsetLeft - carousel.offsetLeft,
+          behavior: "smooth"
+        });
+      });
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsWrap.querySelectorAll(".dot"));
+
+    function gap() {
+      const styles = getComputedStyle(carousel);
+      return parseFloat(styles.columnGap || styles.gap) || 18;
+    }
+
+    function scrollByCard(direction) {
+      const first = cards[0];
+      const step = first.offsetWidth + gap();
+      carousel.scrollBy({ left: direction * step, behavior: "smooth" });
+    }
+
+    prevBtn.addEventListener("click", () => scrollByCard(-1));
+    nextBtn.addEventListener("click", () => scrollByCard(1));
+
+    function updateCarouselState() {
+      // активная точка
+      const carRect = carousel.getBoundingClientRect();
+      let activeIndex = 0;
+      let minDist = Infinity;
+
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const dist = Math.abs(r.left - carRect.left);
+        if (dist < minDist) {
+          minDist = dist;
+          activeIndex = i;
+        }
+      });
+
+      dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+
+      // кнопки вкл/выкл
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      prevBtn.disabled = carousel.scrollLeft <= 4;
+      nextBtn.disabled = carousel.scrollLeft >= maxScroll - 4;
+    }
+
+    carousel.addEventListener("scroll", updateCarouselState, { passive: true });
+    window.addEventListener("resize", updateCarouselState);
+
+    // начальное состояние
+    updateCarouselState();
+
+  })();
+</script>
+
+</body>
+</html>
