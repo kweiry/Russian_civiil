@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Многонациональная Россия — русская цивилизация</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #f6f1e8;
+      --surface: #fffaf2;
+      --ink: #29231e;
+      --muted: #75695e;
+      --red: #a42e2e;
+      --red-light: #c65342;
+      --gold: #c59a4a;
+      --line: #dfd2c1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171513;
+        --surface: #211e1a;
+        --ink: #f4eadc;
+        --muted: #b9aa99;
+        --line: #40382f;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    #app {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    /* HEADER */
+
+    .top {
+      max-width: 1240px;
+      margin: auto;
+      padding: 20px 28px 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          #e9c56d 0 12%,
+          #b4372f 13% 48%,
+          #7d2224 49%
+        );
+
+      box-shadow:
+        0 0 0 5px
+        color-mix(in srgb, var(--gold) 25%, transparent);
+
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .mark::after {
+      content: "✦";
+
+      position: absolute;
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      color: #fff7df;
+      font-size: 21px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand b {
+      font-size: 15px;
+    }
+
+    .account {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+
+      padding: 10px 16px;
+
+      color: var(--ink);
+      font-weight: 650;
+
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .account:hover {
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+
+      padding: 72px 28px 54px;
+
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero h1 {
+      font-family:
+        "Palatino Linotype",
+        "Book Antiqua",
+        Georgia,
+        serif;
+
+      font-weight: 700;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: .94;
+
+      margin: 12px 0 24px;
+
+      letter-spacing: -.035em;
+    }
+
+    .hero h1 span {
+      color: var(--red);
+    }
+
+    .hero p {
+      max-width: 650px;
+
+      font-size: 18px;
+      line-height: 1.65;
+
+      color: var(--muted);
+
+      margin: 0 0 28px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+
+      padding: 13px 18px;
+
+      background: var(--surface);
+      color: var(--ink);
+
+      font-weight: 700;
+
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+
+    .btn.primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: var(--red-light);
+    }
+
+    /* MATRYOSHKA */
+
+    .visual {
+      min-height: 390px;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .halo {
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      border-radius: 50%;
+
+      border: 1px solid
+        color-mix(in srgb, var(--gold) 55%, transparent);
+
+      box-shadow:
+        0 0 0 22px
+        color-mix(in srgb, var(--gold) 7%, transparent),
+
+        0 0 0 62px
+        color-mix(in srgb, var(--red) 4%, transparent);
+    }
+
+    .doll {
+      position: relative;
+
+      width: 190px;
+      height: 245px;
+
+      border-radius:
+        48% 48% 38% 38% /
+        30% 30% 65% 65%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #8e2728,
+          #c34a3b 48%,
+          #8e2728
+        );
+
+      box-shadow:
+        inset 16px 0 30px #6d1e22aa,
+        inset -16px 0 30px #ef8d6b55,
+        0 25px 60px #4e281322;
+    }
+
+    .doll::before {
+      content: "";
+
+      position: absolute;
+
+      width: 122px;
+      height: 122px;
+
+      top: -7px;
+      left: 34px;
+
+      border-radius: 50%;
+
+      background: #e7c79e;
+
+      border: 10px solid #b33832;
+
+      box-shadow:
+        inset 0 -10px 15px #b98d68;
+    }
+
+    .doll::after {
+      content: "✦";
+
+      position: absolute;
+
+      top: 30px;
+      left: 66px;
+
+      color: #8d2829;
+      font-size: 32px;
+    }
+
+    .pattern {
+      position: absolute;
+
+      bottom: 35px;
+      left: 42px;
+      right: 42px;
+
+      height: 78px;
+
+      border: 2px solid #e5bd63;
+
+      border-radius: 60% 60% 25% 25%;
+
+      opacity: .75;
+    }
+
+    .orn {
+      position: absolute;
+
+      font-family: Georgia, serif;
+
+      color: var(--gold);
+
+      font-size: 42px;
+    }
+
+    .o1 { top: 5%; left: 4%; }
+    .o2 { right: 4%; bottom: 12%; }
+    .o3 { right: 11%; top: 10%; font-size: 26px; }
+
+    /* SECTIONS */
+
+    .section {
+      max-width: 1240px;
+      margin: auto;
+
+      padding: 18px 28px 70px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+
+      font-size: 32px;
+
+      margin: 0;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CARDS */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 15px;
+    }
+
+    .card {
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+
+      border-radius: 18px;
+
+      padding: 23px;
+
+      min-height: 170px;
+
+      transition: .2s;
+
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+
+      border-color:
+        color-mix(
+          in srgb,
+          var(--gold) 60%,
+          var(--line)
+        );
+    }
+
+    .icon {
+      font-size: 24px;
+    }
+
+    .card h3 {
+      margin: 15px 0 8px;
+
+      font-size: 19px;
+    }
+
+    .card p {
+      margin: 0;
+
+      color: var(--muted);
+
+      line-height: 1.5;
+
+      font-size: 14px;
+    }
+
+    /* NEWS */
+
+    .news {
+      display: grid;
+
+      grid-template-columns: 1.3fr .7fr;
+
+      gap: 15px;
+    }
+
+    .news .feature {
+      min-height: 230px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #6d2226,
+          #a83b32
+        );
+
+      color: white;
+
+      border: 0;
+    }
+
+    .news .feature p {
+      color: #f5ddd2;
+    }
+
+    .tag {
+      display: inline-block;
+
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      background: #ffffff22;
+
+      font-size: 11px;
+    }
+
+    .smallnews {
+      display: grid;
+      gap: 15px;
+    }
+
+    .smallnews .card {
+      min-height: 0;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--line);
+
+      max-width: 1240px;
+
+      margin: auto;
+
+      padding: 24px 28px 45px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+
+      background: #0008;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 4;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .dialog {
+      max-width: 560px;
+      width: 100%;
+
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+
+      border-radius: 20px;
+
+      padding: 28px;
+
+      box-shadow: 0 30px 80px #0005;
+    }
+
+    .dialog h2 {
+      margin-top: 0;
+
+      font-family: Georgia, serif;
+    }
+
+    .dialog p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .dialog-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .close {
+      display: block;
+      margin-left: auto;
+
+      border: 0;
+
+      background: none;
+
+      color: var(--muted);
+
+      font-size: 25px;
+
+      line-height: 1;
+
+      padding: 0 4px;
+
+      cursor: pointer;
+    }
+
+    /* TOASTS */
+
+    .toast-stack {
+      position: fixed;
+
+      left: 50%;
+      bottom: 28px;
+
+      transform: translateX(-50%);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+
+      z-index: 8;
+
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #2a2520;
+      color: white;
+
+      padding: 12px 17px;
+
+      border-radius: 12px;
+
+      box-shadow: 0 10px 30px #0004;
+
+      animation: toastIn .2s ease-out;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 45px;
+      }
+
+      .visual {
+        min-height: 300px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero,
+      .section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+
+        display: block;
+      }
+
+      .footer span {
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- HEADER -->
+
+  <header class="top">
+
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+
+      <div>
+        <div class="eyebrow">ФАДН России</div>
+        <b>Портал культурного и языкового наследия</b>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="account"
+      data-modal="account"
+    >
+      Личный кабинет
+    </button>
+
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div>
+
+        <div class="eyebrow">Многонациональная Россия</div>
+
+        <h1>
+          Русская<br>
+          <span>цивилизация</span>
+        </h1>
+
+        <p>
+          Единое цифровое пространство для изучения
+          истории, языков, культурных традиций и
+          ценностных ориентиров народов России —
+          современно, уважительно и живым языком.
+        </p>
+
+        <div class="actions">
+
+          <button
+            type="button"
+            class="btn primary"
+            data-modal="learn"
+          >
+            Начать изучение
+          </button>
+
+          <button
+            type="button"
+            class="btn"
+            data-scroll="#directions"
+          >
+            Все направления →
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- MATRYOSHKA -->
+
+      <div class="visual" aria-hidden="true">
+
+        <div class="halo"></div>
+
+        <div class="orn o1">❧</div>
+        <div class="orn o2">❧</div>
+        <div class="orn o3">✦</div>
+
+        <div class="doll">
+          <div class="pattern"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DIRECTIONS -->
+
+    <section class="section" id="directions">
+
+      <div class="section-head">
+
+        <div>
+          <div class="eyebrow">Структура портала</div>
+          <h2>Шесть направлений</h2>
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <div class="card" data-toast="Открываем политические инициативы">
+          <div class="icon" aria-hidden="true">◈</div>
+          <h3>Политические инициативы</h3>
+          <p>
+            Идеи, проекты и предложения по развитию
+            государственной национальной политики.
+          </p>
+        </div>
+
+
+        <div class="card" data-toast="Открываем раздел стратегической стабильности">
+          <div class="icon" aria-hidden="true">⌂</div>
+          <h3>Стабильность и территория</h3>
+          <p>
+            Материалы о стратегической стабильности,
+            территориальном суверенитете и единстве
+            пространства.
+          </p>
+        </div>
+
+
+        <div class="card" data-modal="languages">
+          <div class="icon" aria-hidden="true">АБ</div>
+          <h3>Языковое наследие</h3>
+          <p>
+            Интерактивное изучение языков, словари,
+            аудиоматериалы и истории языковых традиций.
+          </p>
+        </div>
+
+
+        <div class="card" data-modal="history">
+          <div class="icon" aria-hidden="true">⌛</div>
+          <h3>Центр живой истории</h3>
+          <p>
+            История через хроники, карты, предметы,
+            рассказы людей и интерактивные маршруты.
+          </p>
+        </div>
+
+
+        <div class="card" data-toast="Открываем ценностные ориентиры">
+          <div class="icon" aria-hidden="true">✦</div>
+          <h3>Ценностные ориентиры</h3>
+          <p>
+            Разговор о культурных смыслах, традициях,
+            общественных ценностях и наследии поколений.
+          </p>
+        </div>
+
+
+        <div class="card" data-toast="Открываем межконфессиональный диалог">
+          <div class="icon" aria-hidden="true">◉</div>
+          <h3>Межконфессиональный диалог</h3>
+          <p>
+            Знания о религиозных традициях России
+            и культурах взаимного уважения и диалога.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NEWS -->
+
+    <section class="section">
+
+      <div class="section-head">
+
+        <div>
+          <div class="eyebrow">Пульс портала</div>
+          <h2>Новости и события</h2>
+        </div>
+
+        <button
+          type="button"
+          class="btn"
+          data-toast="Показываем все новости"
+        >
+          Все новости →
+        </button>
+
+      </div>
+
+
+      <div class="news">
+
+        <div
+          class="card feature"
+          data-toast="Открываем материал Центра живой истории"
+        >
+
+          <span class="tag">Центр живой истории</span>
+
+          <h3 style="font-size:28px; margin-top:55px;">
+            Живая история: как говорить о прошлом
+            через людей, места и традиции
+          </h3>
+
+          <p>
+            Лонгриды, цифровые экспозиции
+            и новые образовательные маршруты.
+          </p>
+
+        </div>
+
+
+        <div class="smallnews">
+
+          <div class="card">
+            <div class="eyebrow">Языковое наследие · сегодня</div>
+            <h3>Новые уроки: язык как часть культурной памяти</h3>
+            <p>Подборка материалов для самостоятельного изучения.</p>
+          </div>
+
+
+          <div class="card">
+            <div class="eyebrow">Диалог · вчера</div>
+            <h3>Календарь культурных и памятных дат</h3>
+            <p>События народов России в одном месте.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+    <span>Многонациональная Россия — русская цивилизация</span>
+    <span>Концепция портала · ФАДН России</span>
+  </footer>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+  class="modal"
+  id="modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalTitle"
+  hidden
+>
+
+  <div class="dialog">
+
+    <button
+      type="button"
+      class="close"
+      data-close
+      aria-label="Закрыть"
+    >
+      ×
+    </button>
+
+    <div class="eyebrow">Многонациональная Россия</div>
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalText"></p>
+
+    <div class="dialog-actions" id="modalActions"></div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST STACK -->
+
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+
+<script>
+  (function () {
+    "use strict";
+
+    /* --------------------------------
+       ДАННЫЕ МОДАЛОК
+    -------------------------------- */
+
+    const MODAL_DATA = {
+      account: {
+        title: "Личный кабинет",
+        text: "Сохраняйте прогресс обучения, избранные материалы и личные маршруты изучения.",
+        actions: [
+          { label: "Войти", primary: true },
+          { label: "Регистрация" }
+        ]
+      },
+
+      learn: {
+        title: "Начать изучение",
+        text: "Выберите свой маршрут: язык, история, культура или ценностные ориентиры.",
+        actions: [
+          { label: "Продолжить", primary: true },
+          { label: "Позже" }
+        ]
+      },
+
+      languages: {
+        title: "Языковое наследие",
+        text: "Выберите язык и начните с короткого интерактивного урока.",
+        actions: [
+          { label: "Выбрать язык", primary: true },
+          { label: "Каталог языков" }
+        ]
+      },
+
+      history: {
+        title: "Центр живой истории",
+        text: "Путешествуйте по эпохам через хроники, карты, предметы и человеческие истории.",
+        actions: [
+          { label: "Открыть карту", primary: true },
+          { label: "Все материалы" }
+        ]
+      }
+    };
+
+
+    /* --------------------------------
+       ЭЛЕМЕНТЫ
+    -------------------------------- */
+
+    const modal      = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText  = document.getElementById("modalText");
+    const modalActs  = document.getElementById("modalActions");
+    const toastStack = document.getElementById("toastStack");
+
+    let lastFocused = null;
+
+    const FOCUSABLE =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+
+    /* --------------------------------
+       МОДАЛКА
+    -------------------------------- */
+
+    function openModal(type) {
+      const data = MODAL_DATA[type];
+      if (!data) return;
+
+      lastFocused = document.activeElement;
+
+      modalTitle.textContent = data.title;
+      modalText.textContent  = data.text;
+      modalActs.replaceChildren();
+
+      data.actions.forEach(action => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn" + (action.primary ? " primary" : "");
+        btn.textContent = action.label;
+
+        btn.addEventListener("click", () => {
+          toast(action.label);
+          closeModal();
+        });
+
+        modalActs.appendChild(btn);
+      });
+
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+
+      // фокус на первую фокусируемую кнопку внутри диалога
+      const first = modal.querySelector(FOCUSABLE);
+      if (first) first.focus();
+    }
+
+
+    function closeModal() {
+      if (!modal.classList.contains("open")) return;
+
+      modal.classList.remove("open");
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+
+    // Клик по подложке
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+
+    // Кнопка «закрыть» (data-close)
+    modal.addEventListener("click", event => {
+      if (event.target.closest("[data-close]")) closeModal();
+    });
+
+    // ESC + ловушка фокуса
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeModal();
+        return;
+      }
+
+      if (event.key === "Tab" && modal.classList.contains("open")) {
+        const items = modal.querySelectorAll(FOCUSABLE);
+        if (items.length === 0) return;
+
+        const first = items[0];
+        const last  = items[items.length - 1];
+
+        if (event.shiftKey && document.activeElement ===
