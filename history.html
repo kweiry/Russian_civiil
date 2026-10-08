@@ -8,7 +8,6 @@
   <style>
     :root {
       color-scheme: light dark;
-
       --bg: #f6f1e8;
       --surface: #fffaf2;
       --ink: #29231e;
@@ -33,7 +32,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -44,15 +42,11 @@
     }
 
     body.modal-open { overflow: hidden; }
-
     button { font: inherit; }
-
     a { color: inherit; text-decoration: none; }
-
     #app { min-height: 100vh; background: var(--bg); }
 
     /* HEADER */
-
     .top {
       max-width: 1240px;
       margin: auto;
@@ -109,7 +103,6 @@
     .back-link:hover { border-color: var(--gold); transform: translateY(-1px); }
 
     /* HERO */
-
     .hero-history {
       max-width: 1240px;
       margin: 0 auto;
@@ -158,7 +151,6 @@
     }
 
     /* SECTION */
-
     .section {
       max-width: 1240px;
       margin: auto;
@@ -186,7 +178,6 @@
     }
 
     /* TIMELINE */
-
     .timeline-tabs {
       display: flex;
       gap: 10px;
@@ -256,7 +247,14 @@
 
     .tl-art { display: grid; place-items: center; }
 
-    .tl-art svg { width: 100%; max-width: 280px; height: auto; }
+    .tl-art img {
+      width: 100%;
+      max-width: 280px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
 
     .tl-badge {
       display: inline-block;
@@ -270,7 +268,6 @@
     }
 
     /* ARTIFACTS GALLERY */
-
     .artifacts {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -295,29 +292,20 @@
     }
 
     .art-preview {
-      height: 160px;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 70%);
+      height: 180px;
+      overflow: hidden;
       position: relative;
+      background: var(--bg);
     }
 
-    .art-preview::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        color-mix(in srgb, var(--gold) 5%, transparent) 0 1px,
-        transparent 1px 14px
-      );
-      opacity: .5;
+    .art-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s;
     }
 
-    .art-preview svg { width: 120px; height: 120px; position: relative; z-index: 1; transition: transform .3s; }
-
-    .art-card:hover .art-preview svg { transform: scale(1.08); }
+    .art-card:hover .art-preview img { transform: scale(1.08); }
 
     .art-info { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
 
@@ -340,7 +328,6 @@
     .art-card:hover .art-more { gap: 10px; }
 
     /* MAP */
-
     .map-wrap {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -356,25 +343,13 @@
 
     .map-svg svg { width: 100%; height: auto; }
 
-    .map-point {
-      cursor: pointer;
-      transition: .2s;
-    }
+    .map-point { cursor: pointer; transition: .2s; }
 
-    .map-point circle {
-      transition: .2s;
-      transform-origin: center;
-    }
+    .map-point circle { transition: .2s; transform-origin: center; }
 
-    .map-point:hover circle.ring {
-      r: 14;
-      opacity: .35;
-    }
+    .map-point:hover circle.ring { r: 14; opacity: .35; }
 
-    .map-point:hover circle.core {
-      r: 7;
-      fill: var(--red);
-    }
+    .map-point:hover circle.core { r: 7; fill: var(--red); }
 
     .map-list { display: grid; gap: 10px; }
 
@@ -405,7 +380,6 @@
     .map-item p { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
 
     /* STORIES */
-
     .stories {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -428,14 +402,17 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      display: grid;
-      place-items: center;
+      overflow: hidden;
       margin-bottom: 14px;
-      background: color-mix(in srgb, var(--gold) 18%, transparent);
       border: 2px solid color-mix(in srgb, var(--gold) 40%, transparent);
+      flex-shrink: 0;
     }
 
-    .story-portrait svg { width: 44px; height: 44px; }
+    .story-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     .story-card blockquote {
       margin: 0 0 12px;
@@ -454,7 +431,6 @@
     }
 
     /* ACTIONS */
-
     .actions-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
     .btn {
@@ -476,7 +452,6 @@
     .btn.primary:hover { background: var(--red-light); }
 
     /* FOOTER */
-
     .footer {
       border-top: 1px solid var(--line);
       max-width: 1240px;
@@ -490,7 +465,6 @@
     }
 
     /* MODAL */
-
     .modal {
       position: fixed;
       inset: 0;
@@ -540,8 +514,22 @@
       margin: 10px 0 18px;
     }
 
-    /* TOAST */
+    .dialog .dialog-art img {
+      max-width: 100%;
+      max-height: 280px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
 
+    .dialog .attribution {
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      margin-top: 6px;
+    }
+
+    /* TOAST */
     .toast-stack {
       position: fixed;
       left: 50%;
@@ -571,20 +559,13 @@
     }
 
     /* MOBILE */
-
     @media (max-width: 800px) {
       .hero-history { grid-template-columns: 1fr; padding-top: 40px; gap: 30px; }
-
       .tl-content { grid-template-columns: 1fr; padding: 22px; }
-
       .map-wrap { grid-template-columns: 1fr; }
-
       .top, .hero-history, .section, .footer { padding-left: 18px; padding-right: 18px; }
-
       .footer { display: block; }
-
       .footer span { display: block; margin-bottom: 8px; }
-
       .hero-compass svg { width: 200px; height: 200px; }
     }
   </style>
@@ -594,10 +575,7 @@
 
 <div id="app">
 
-  <!-- HEADER -->
-
   <header class="top">
-
     <div class="brand">
       <div class="mark" aria-hidden="true"></div>
       <div>
@@ -605,33 +583,22 @@
         <b>Портал культурного и языкового наследия</b>
       </div>
     </div>
-
     <a href="index.html" class="back-link">← На главную</a>
-
   </header>
-
 
   <main>
 
     <!-- HERO -->
-
     <section class="hero-history">
-
       <div>
         <div class="eyebrow">Центр живой истории</div>
-
-        <h1>
-          Живая<br>
-          <span>история</span>
-        </h1>
-
+        <h1>Живая<br><span>история</span></h1>
         <p>
           История России — это не только даты и учебники, но и живые
           голоса людей, предметы, которые они держали в руках, и места,
           где вершились судьбы. Здесь прошлое становится ближе: через
           артефакты, маршруты и подлинные истории.
         </p>
-
         <div class="actions-row">
           <button type="button" class="btn primary" data-toast="Строим маршрут по эпохам...">
             Проложить маршрут
@@ -647,38 +614,30 @@
           <circle cx="100" cy="100" r="88" fill="none" stroke="#c59a4a" stroke-width="1" opacity="0.5"/>
           <circle cx="100" cy="100" r="72" fill="none" stroke="#c59a4a" stroke-width="1.5" opacity="0.7"/>
           <circle cx="100" cy="100" r="54" fill="none" stroke="#a42e2e" stroke-width="1" opacity="0.4"/>
-
           <g opacity="0.5" stroke="#8a5f3a" stroke-width="1.5">
             <line x1="100" y1="12" x2="100" y2="32"/>
             <line x1="100" y1="168" x2="100" y2="188"/>
             <line x1="12" y1="100" x2="32" y2="100"/>
             <line x1="168" y1="100" x2="188" y2="100"/>
           </g>
-
           <g stroke="#29231e" stroke-width="1.5" opacity="0.35">
             <line x1="34" y1="34" x2="46" y2="46"/>
             <line x1="154" y1="34" x2="166" y2="46"/>
             <line x1="34" y1="166" x2="46" y2="154"/>
             <line x1="154" y1="166" x2="166" y2="154"/>
           </g>
-
           <polygon points="100,28 112,88 100,78 88,88" fill="#a42e2e"/>
           <polygon points="100,172 88,112 100,122 112,112" fill="#8a5f3a"/>
           <polygon points="28,100 88,88 78,100 88,112" fill="#c59a4a"/>
           <polygon points="172,100 112,112 122,100 112,88" fill="#c59a4a"/>
-
           <circle cx="100" cy="100" r="10" fill="#29231e"/>
           <circle cx="100" cy="100" r="5" fill="#c59a4a"/>
         </svg>
       </div>
-
     </section>
 
-
     <!-- TIMELINE -->
-
     <section class="section" id="timeline">
-
       <div class="section-head">
         <div>
           <div class="eyebrow">Хроника</div>
@@ -715,7 +674,6 @@
       </div>
 
       <div class="tl-content" id="tlContent">
-
         <div>
           <span class="tl-badge" id="tlBadge">IX–XIII век</span>
           <h3 id="tlTitle">Древняя Русь</h3>
@@ -730,20 +688,12 @@
             всё это наследие той эпохи.
           </p>
         </div>
-
-        <div class="tl-art" id="tlArt">
-          <!-- SVG будет подставляться через JS -->
-        </div>
-
+        <div class="tl-art" id="tlArt"></div>
       </div>
-
     </section>
 
-
     <!-- ARTIFACTS -->
-
     <section class="section" id="artifacts">
-
       <div class="section-head">
         <div>
           <div class="eyebrow">Экспозиция</div>
@@ -751,18 +701,11 @@
           <p>Нажмите на карточку, чтобы узнать историю</p>
         </div>
       </div>
-
-      <div class="artifacts" id="artifactsGrid">
-        <!-- карточки генерируются через JS -->
-      </div>
-
+      <div class="artifacts" id="artifactsGrid"></div>
     </section>
 
-
     <!-- MAP -->
-
     <section class="section" id="map">
-
       <div class="section-head">
         <div>
           <div class="eyebrow">География</div>
@@ -772,91 +715,55 @@
       </div>
 
       <div class="map-wrap">
-
         <div class="map-svg">
           <svg viewBox="0 0 500 320" fill="none">
-
-            <!-- Стилизованный контур России -->
-            <path d="M40 180 
-                     Q60 120 110 100 
-                     Q170 75 230 80 
-                     Q290 85 340 70 
-                     Q390 58 430 80 
-                     Q465 100 460 140 
-                     Q455 180 420 210 
-                     Q380 240 330 250 
-                     Q270 262 210 255 
-                     Q150 248 100 230 
-                     Q60 215 40 180 Z"
+            <path d="M40 180 Q60 120 110 100 Q170 75 230 80 Q290 85 340 70 Q390 58 430 80 Q465 100 460 140 Q455 180 420 210 Q380 240 330 250 Q270 262 210 255 Q150 248 100 230 Q60 215 40 180 Z"
                   fill="color-mix(in srgb, var(--gold) 10%, transparent)"
                   stroke="color-mix(in srgb, var(--gold) 50%, transparent)"
                   stroke-width="2"/>
-
-            <!-- Реки (декор) -->
             <path d="M120 140 Q180 160 240 150 Q300 140 360 160" stroke="color-mix(in srgb, var(--blue) 40%, transparent)" stroke-width="1.5" fill="none"/>
             <path d="M200 100 Q220 160 260 200" stroke="color-mix(in srgb, var(--blue) 40%, transparent)" stroke-width="1.5" fill="none"/>
 
-            <!-- Точки городов -->
-            <!-- Новгород -->
             <g class="map-point" data-city="novgorod">
               <circle class="ring" cx="140" cy="130" r="10" fill="#a42e2e" opacity="0.25"/>
               <circle class="core" cx="140" cy="130" r="5" fill="#a42e2e"/>
             </g>
-
-            <!-- Псков -->
             <g class="map-point" data-city="pskov">
               <circle class="ring" cx="155" cy="150" r="8" fill="#a42e2e" opacity="0.25"/>
               <circle class="core" cx="155" cy="150" r="4" fill="#a42e2e"/>
             </g>
-
-            <!-- Москва -->
             <g class="map-point" data-city="moscow">
               <circle class="ring" cx="215" cy="165" r="12" fill="#a42e2e" opacity="0.3"/>
               <circle class="core" cx="215" cy="165" r="6" fill="#a42e2e"/>
             </g>
-
-            <!-- Владимир -->
             <g class="map-point" data-city="vladimir">
               <circle class="ring" cx="245" cy="155" r="8" fill="#a42e2e" opacity="0.25"/>
               <circle class="core" cx="245" cy="155" r="4" fill="#a42e2e"/>
             </g>
-
-            <!-- Ярославль -->
             <g class="map-point" data-city="yaroslavl">
               <circle class="ring" cx="260" cy="135" r="8" fill="#a42e2e" opacity="0.25"/>
               <circle class="core" cx="260" cy="135" r="4" fill="#a42e2e"/>
             </g>
-
-            <!-- Казань -->
             <g class="map-point" data-city="kazan">
               <circle class="ring" cx="310" cy="170" r="10" fill="#a42e2e" opacity="0.25"/>
               <circle class="core" cx="310" cy="170" r="5" fill="#a42e2e"/>
             </g>
 
-            <!-- Подписи -->
             <text x="120" y="120" font-size="10" fill="var(--muted)" font-family="Inter, sans-serif">Новгород</text>
             <text x="140" y="142" font-size="10" fill="var(--muted)" font-family="Inter, sans-serif">Псков</text>
             <text x="195" y="158" font-size="11" fill="var(--ink)" font-weight="700" font-family="Inter, sans-serif">Москва</text>
             <text x="228" y="148" font-size="10" fill="var(--muted)" font-family="Inter, sans-serif">Владимир</text>
             <text x="248" y="125" font-size="10" fill="var(--muted)" font-family="Inter, sans-serif">Ярославль</text>
             <text x="298" y="162" font-size="10" fill="var(--muted)" font-family="Inter, sans-serif">Казань</text>
-
           </svg>
         </div>
 
-        <div class="map-list" id="mapList">
-          <!-- элементы списка генерируются через JS -->
-        </div>
-
+        <div class="map-list" id="mapList"></div>
       </div>
-
     </section>
 
-
     <!-- STORIES -->
-
     <section class="section" id="stories">
-
       <div class="section-head">
         <div>
           <div class="eyebrow">Голоса</div>
@@ -864,17 +771,10 @@
           <p>Подлинные рассказы, которые хранит память</p>
         </div>
       </div>
-
-      <div class="stories" id="storiesGrid">
-        <!-- карточки генерируются через JS -->
-      </div>
-
+      <div class="stories" id="storiesGrid"></div>
     </section>
 
   </main>
-
-
-  <!-- FOOTER -->
 
   <footer class="footer">
     <span>Многонациональная Россия — русская цивилизация</span>
@@ -883,131 +783,79 @@
 
 </div>
 
-
 <!-- MODAL -->
-
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
-
   <div class="dialog">
     <button type="button" class="close" data-close aria-label="Закрыть">×</button>
-
     <div class="dialog-era" id="dialogEra"></div>
     <h2 id="modalTitle"></h2>
-
     <div class="dialog-art" id="dialogArt"></div>
-
     <p id="modalText"></p>
     <p id="modalExtra"></p>
+    <div class="attribution" id="dialogAttribution"></div>
   </div>
-
 </div>
 
-
 <!-- TOAST STACK -->
-
 <div class="toast-stack" id="toastStack" aria-live="polite"></div>
-
 
 <script>
   (function () {
     "use strict";
 
+    const IMG = "https://commons.wikimedia.org/wiki/Special:FilePath/";
+
     /* --------------------------------
        ЭПОХИ
     -------------------------------- */
-
     const ERAS = [
       {
         badge: "IX–XIII век",
         title: "Древняя Русь",
         text: "Время становления русской государственности, принятия христианства и расцвета городов. Новгород, Киев, Владимир — центры торговли, ремёсел и летописания. Именно тогда складывается тот культурный код, который определит развитие страны на века.",
         extra: "Берестяные грамоты, Софийские соборы, «Слово о полку Игореве» — всё это наследие той эпохи.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <rect x="30" y="40" width="140" height="80" rx="6" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M30 60 L100 30 L170 60" fill="none" stroke="#a42e2e" stroke-width="3" stroke-linejoin="round"/>
-          <rect x="55" y="70" width="18" height="50" fill="#c59a4a" opacity="0.7"/>
-          <rect x="91" y="70" width="18" height="50" fill="#c59a4a" opacity="0.7"/>
-          <rect x="127" y="70" width="18" height="50" fill="#c59a4a" opacity="0.7"/>
-          <line x1="100" y1="30" x2="100" y2="20" stroke="#a42e2e" stroke-width="2"/>
-          <circle cx="100" cy="18" r="3" fill="#a42e2e"/>
-          <path d="M60 120 L140 120" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Swords%20GIM%20RV.jpg",
+        alt: "Мечи из Государственного исторического музея"
       },
       {
         badge: "XIII–XV век",
         title: "Ордынский период",
         text: "Сложное время испытаний и одновременно — время собирания земель. Москва постепенно становится центром объединения русских княжеств. Куликовская битва 1380 года и стояние на Угре 1480 года — ключевые вехи освобождения.",
         extra: "В этот период формируется единое Русское государство с центром в Москве.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <path d="M50 110 L50 50 L100 30 L150 50 L150 110 Z" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M70 110 L70 70 L100 55 L130 70 L130 110" fill="none" stroke="#a42e2e" stroke-width="2"/>
-          <path d="M85 110 L85 85 L115 85 L115 110" fill="#c59a4a" opacity="0.7"/>
-          <circle cx="100" cy="40" r="6" fill="#c59a4a"/>
-          <line x1="100" y1="34" x2="100" y2="24" stroke="#a42e2e" stroke-width="2"/>
-          <path d="M40 115 L160 115" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Helmet%20AncRus%20GIM.jpg",
+        alt: "Шлем древнерусского воина"
       },
       {
         badge: "XVI–XVII век",
         title: "Московское царство",
         text: "Правление Ивана Грозного, Смутное время, первые Романовы. Расширение границ на восток, освоение Сибири, строительство новых городов. XVII век — время церковного раскола и одновременно расцвета русской культуры.",
         extra: "Собор Василия Блаженного, «Домострой», первые печатные книги — символы этой эпохи.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <path d="M60 110 L60 60 L100 40 L140 60 L140 110 Z" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M80 110 L80 80 L100 65 L120 80 L120 110" fill="none" stroke="#a42e2e" stroke-width="2"/>
-          <path d="M95 110 L95 90 L105 90 L105 110" fill="#c59a4a"/>
-          <circle cx="100" cy="30" r="8" fill="#c59a4a" opacity="0.8"/>
-          <line x1="100" y1="22" x2="100" y2="12" stroke="#a42e2e" stroke-width="2"/>
-          <line x1="94" y1="17" x2="106" y2="17" stroke="#a42e2e" stroke-width="2"/>
-          <path d="M45 115 L155 115" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Kopek%20Ivan%20IV.jpg",
+        alt: "Копейка Ивана Грозного"
       },
       {
         badge: "XVIII век",
         title: "Империя Петра",
         text: "Эпоха петровских реформ, основание Санкт-Петербурга, победа в Северной войне. Россия становится империей и выходит на европейскую арену. Открываются академии, музеи, строятся новые города.",
         extra: "Кунсткамера, Академия наук, «Табель о рангах» — наследие петровских преобразований.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <path d="M40 110 L40 70 L70 50 L100 70 L100 110" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M100 110 L100 70 L130 50 L160 70 L160 110" fill="none" stroke="#a42e2e" stroke-width="2"/>
-          <rect x="55" y="80" width="12" height="30" fill="#c59a4a" opacity="0.7"/>
-          <rect x="78" y="80" width="12" height="30" fill="#c59a4a" opacity="0.7"/>
-          <rect x="115" y="80" width="12" height="30" fill="#c59a4a" opacity="0.7"/>
-          <rect x="138" y="80" width="12" height="30" fill="#c59a4a" opacity="0.7"/>
-          <line x1="100" y1="70" x2="100" y2="30" stroke="#a42e2e" stroke-width="2"/>
-          <path d="M100 30 L110 40 L100 50 L90 40 Z" fill="#c59a4a"/>
-          <path d="M30 115 L170 115" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Moscow%20Kremlin%20from%20the%20river.jpg",
+        alt: "Московский Кремль"
       },
       {
         badge: "XIX век",
         title: "Золотой век",
         text: "Время расцвета русской литературы, музыки и живописи. Пушкин, Толстой, Достоевский, Чайковский, Репин. Отмена крепостного права, великие реформы, промышленный подъём.",
         extra: "Эрмитаж, Третьяковская галерея, «Война и мир» — символы этой эпохи.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <rect x="40" y="60" width="120" height="60" rx="4" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M40 60 L100 30 L160 60" fill="none" stroke="#a42e2e" stroke-width="3"/>
-          <rect x="60" y="75" width="20" height="45" fill="#c59a4a" opacity="0.6"/>
-          <rect x="90" y="75" width="20" height="45" fill="#c59a4a" opacity="0.6"/>
-          <rect x="120" y="75" width="20" height="45" fill="#c59a4a" opacity="0.6"/>
-          <circle cx="100" cy="50" r="10" fill="none" stroke="#c59a4a" stroke-width="2"/>
-          <path d="M35 122 L165 122" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Ushakov%20Nerukotvorniy.jpg",
+        alt: "Икона «Спас Нерукотворный» Симона Ушакова"
       },
       {
         badge: "XX век",
         title: "Новейшая история",
         text: "Век потрясений и великих свершений. Революция, индустриализация, Великая Отечественная война, космос. Россия стала одной из ведущих мировых держав, а её культура — частью мирового наследия.",
         extra: "Первый спутник, первый человек в космосе, победа над фашизмом — вехи XX века.",
-        svg: `<svg viewBox="0 0 200 140" fill="none">
-          <path d="M50 110 L50 60 L100 30 L150 60 L150 110" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M70 110 L70 80 L100 65 L130 80 L130 110" fill="none" stroke="#a42e2e" stroke-width="2"/>
-          <rect x="85" y="90" width="30" height="20" fill="#c59a4a" opacity="0.8"/>
-          <line x1="100" y1="65" x2="100" y2="40" stroke="#a42e2e" stroke-width="2"/>
-          <circle cx="100" cy="38" r="5" fill="#c59a4a"/>
-          <path d="M40 115 L160 115" stroke="#8a5f3a" stroke-width="3" stroke-linecap="round"/>
-          <path d="M100 25 L105 32 L115 33 L108 39 L110 49 L100 44 L90 49 L92 39 L85 33 L95 32 Z" fill="#c59a4a"/>
-        </svg>`
+        image: IMG + "Kazan%20Kremlin%20from%20drone.jpg",
+        alt: "Казанский Кремль"
       }
     ];
 
@@ -1026,7 +874,7 @@
       tlTitle.textContent = era.title;
       tlText.textContent = era.text;
       tlExtra.textContent = era.extra;
-      tlArt.innerHTML = era.svg;
+      tlArt.innerHTML = '<img src="' + era.image + '" alt="' + era.alt + '" loading="lazy">';
 
       tlTabs.forEach((tab, i) => tab.classList.toggle("active", i === index));
     }
@@ -1035,14 +883,11 @@
       tab.addEventListener("click", () => showEra(i));
     });
 
-    // стартовая эпоха
     showEra(0);
-
 
     /* --------------------------------
        АРТЕФАКТЫ
     -------------------------------- */
-
     const ARTIFACTS = [
       {
         id: "sword",
@@ -1051,13 +896,9 @@
         short: "Клинок, найденный при раскопках в Новгороде.",
         full: "Стальной меч с обоюдоострым клинком и перекрестием. Такие мечи были распространены в Древней Руси и служили не только оружием, но и символом статуса. Найден в слоях XII века при археологических раскопках в Великом Новгороде.",
         extra: "Длина клинка — около 90 см, вес — около 1,5 кг. Рукоять украшена орнаментом.",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <rect x="56" y="20" width="8" height="70" rx="2" fill="#8a5f3a"/>
-          <rect x="52" y="15" width="16" height="8" rx="2" fill="#c59a4a"/>
-          <rect x="48" y="10" width="24" height="6" rx="2" fill="#c59a4a"/>
-          <rect x="40" y="88" width="40" height="8" rx="3" fill="#a42e2e"/>
-          <circle cx="60" cy="92" r="3" fill="#c59a4a"/>
-        </svg>`
+        image: IMG + "Swords%20GIM%20RV.jpg",
+        alt: "Мечи из собрания Государственного исторического музея",
+        attribution: "Фото: Wikimedia Commons, CC BY-SA"
       },
       {
         id: "gramota",
@@ -1066,14 +907,9 @@
         short: "Письмо на коре берёзы — уникальный источник.",
         full: "Берестяные грамоты — это записи на коре берёзы, которые использовались для повседневной переписки, долговых записей, любовных посланий и даже детских рисунков. Более 1200 грамот найдено в Новгороде, что дало бесценные сведения о жизни древних новгородцев.",
         extra: "Большинство грамот написано на древнерусском языке с помощью специальных палочек — «писал».",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <rect x="20" y="30" width="80" height="60" rx="4" fill="#e8d5a8" stroke="#8a5f3a" stroke-width="2"/>
-          <line x1="30" y1="45" x2="90" y2="45" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <line x1="30" y1="55" x2="80" y2="55" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <line x1="30" y1="65" x2="85" y2="65" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <line x1="30" y1="75" x2="70" y2="75" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <path d="M15 25 L105 25" stroke="#a42e2e" stroke-width="2" stroke-linecap="round"/>
-        </svg>`
+        image: IMG + "Beresta.jpg",
+        alt: "Новгородская берестяная грамота",
+        attribution: "Фото: Wikimedia Commons, Public Domain"
       },
       {
         id: "coin",
@@ -1082,13 +918,9 @@
         short: "Копейка эпохи Ивана Грозного.",
         full: "Серебряная копейка — одна из самых распространённых монет Московского царства. На аверсе изображён всадник с копьём, на реверсе — надпись с именем царя. Такие монеты чеканились из привозного серебра и были основой денежной системы.",
         extra: "Вес копейки — около 0,68 грамма. Название происходит от изображения всадника с копьём.",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <circle cx="60" cy="60" r="40" fill="#c59a4a" stroke="#8a5f3a" stroke-width="2"/>
-          <circle cx="60" cy="60" r="32" fill="none" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <path d="M50 50 L70 50 L60 80 Z" fill="#8a5f3a" opacity="0.7"/>
-          <line x1="60" y1="45" x2="60" y2="35" stroke="#8a5f3a" stroke-width="2"/>
-          <circle cx="60" cy="60" r="6" fill="#8a5f3a" opacity="0.5"/>
-        </svg>`
+        image: IMG + "Kopek%20Ivan%20IV.jpg",
+        alt: "Копейка Ивана Грозного",
+        attribution: "Фото: Wikimedia Commons, CC BY-SA"
       },
       {
         id: "helmet",
@@ -1097,12 +929,9 @@
         short: "Шлем русского дружинника.",
         full: "Клёпаный шлем с бармицей — защитой для шеи. Такие шлемы носили русские воины в период борьбы с ордынским игом. Найден при раскопках на месте Куликовской битвы. Шлем украшен простым орнаментом и имеет следы ремонта, что говорит о его долгом использовании.",
         extra: "Высота шлема — около 25 см, вес — около 2 кг.",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <path d="M40 70 C40 40 80 40 80 70 L80 85 L40 85 Z" fill="#8a5f3a" stroke="#5a3f2a" stroke-width="2"/>
-          <path d="M40 70 C40 55 80 55 80 70" fill="none" stroke="#c59a4a" stroke-width="1.5"/>
-          <circle cx="60" cy="62" r="8" fill="#c59a4a" opacity="0.6"/>
-          <path d="M45 85 L45 95 L75 95 L75 85" fill="#8a5f3a" opacity="0.7"/>
-        </svg>`
+        image: IMG + "Helmet%20AncRus%20GIM.jpg",
+        alt: "Шлем древнерусского воина из Гнездово",
+        attribution: "Фото: Wikimedia Commons, CC BY-SA"
       },
       {
         id: "ceramics",
@@ -1111,13 +940,9 @@
         short: "Керамика для хранения зерна и воды.",
         full: "Глиняный сосуд, найденный в одном из курганов. Такая керамика использовалась для хранения зерна, воды и других припасов. Орнамент наносился деревянной палочкой до обжига. Сосуды часто украшались символами, связанными с языческими верованиями.",
         extra: "Высота сосуда — около 20 см, диаметр — 15 см.",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <path d="M45 45 L45 90 Q45 100 60 100 Q75 100 75 90 L75 45 Q75 40 60 40 Q45 40 45 45 Z" fill="#c59a4a" stroke="#8a5f3a" stroke-width="2"/>
-          <ellipse cx="60" cy="45" rx="15" ry="6" fill="#e8d5a8" stroke="#8a5f3a" stroke-width="1.5"/>
-          <path d="M50 60 L70 60" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <path d="M50 70 L70 70" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-          <path d="M50 80 L70 80" stroke="#8a5f3a" stroke-width="1.5" opacity="0.6"/>
-        </svg>`
+        image: IMG + "Кринка1.jpg",
+        alt: "Глиняный сосуд (кринка)",
+        attribution: "Фото: Wikimedia Commons, CC BY-SA"
       },
       {
         id: "icon",
@@ -1126,15 +951,9 @@
         short: "Образ, почитаемый на Руси с древности.",
         full: "Икона «Спас Нерукотворный» — один из самых почитаемых образов в русской православной традиции. Такие иконы писались на деревянных досках темперными красками. Образ символизирует божественный свет и присутствие Христа. Найдена в частном собрании, передана в музей в 1920-е годы.",
         extra: "Размер иконы — 30×25 см. Написана на липовой доске с ковчегом.",
-        svg: `<svg viewBox="0 0 120 120" fill="none">
-          <rect x="25" y="20" width="70" height="80" rx="4" fill="#c59a4a" stroke="#8a5f3a" stroke-width="2"/>
-          <circle cx="60" cy="50" r="18" fill="none" stroke="#8a5f3a" stroke-width="2"/>
-          <path d="M52 48 L56 52 L52 56" stroke="#8a5f3a" stroke-width="1.5" fill="none"/>
-          <path d="M68 48 L64 52 L68 56" stroke="#8a5f3a" stroke-width="1.5" fill="none"/>
-          <path d="M54 62 Q60 66 66 62" stroke="#8a5f3a" stroke-width="1.5" fill="none"/>
-          <line x1="60" y1="32" x2="60" y2="25" stroke="#8a5f3a" stroke-width="1.5"/>
-          <circle cx="60" cy="22" r="2" fill="#8a5f3a"/>
-        </svg>`
+        image: IMG + "Ushakov%20Nerukotvorniy.jpg",
+        alt: "Икона «Спас Нерукотворный» Симона Ушакова",
+        attribution: "Фото: Wikimedia Commons, Public Domain"
       }
     ];
 
@@ -1146,7 +965,7 @@
       card.dataset.artifact = art.id;
 
       card.innerHTML = `
-        <div class="art-preview">${art.svg}</div>
+        <div class="art-preview"><img src="${art.image}" alt="${art.alt}" loading="lazy"></div>
         <div class="art-info">
           <div class="art-era">${art.era}</div>
           <h3>${art.title}</h3>
@@ -1159,18 +978,52 @@
       artifactsGrid.appendChild(card);
     });
 
-
     /* --------------------------------
        КАРТА
     -------------------------------- */
-
     const CITIES = [
-      { id: "novgorod", name: "Великий Новгород", desc: "Колыбель русской демократии, центр торговли и летописания" },
-      { id: "pskov", name: "Псков", desc: "Город-крепость, защищавший северо-западные рубежи" },
-      { id: "moscow", name: "Москва", desc: "Собирательница русских земель, столица государства" },
-      { id: "vladimir", name: "Владимир", desc: "Древняя столица Северо-Восточной Руси" },
-      { id: "yaroslavl", name: "Ярославль", desc: "Первый русский город на Волге, центр торговли" },
-      { id: "kazan", name: "Казань", desc: "Столица Казанского ханства, затем — Российского государства" }
+      {
+        id: "novgorod",
+        name: "Великий Новгород",
+        desc: "Колыбель русской демократии, центр торговли и летописания",
+        image: IMG + "Velikiy%20Novgorod%20Detinets%2008.jpg",
+        alt: "Новгородский кремль"
+      },
+      {
+        id: "pskov",
+        name: "Псков",
+        desc: "Город-крепость, защищавший северо-западные рубежи",
+        image: IMG + "Pskov%20Kremlin%20Cathedral1.JPG",
+        alt: "Псковский кремль"
+      },
+      {
+        id: "moscow",
+        name: "Москва",
+        desc: "Собирательница русских земель, столица государства",
+        image: IMG + "Moscow%20Kremlin%20from%20the%20river.jpg",
+        alt: "Московский Кремль"
+      },
+      {
+        id: "vladimir",
+        name: "Владимир",
+        desc: "Древняя столица Северо-Восточной Руси",
+        image: IMG + "Golden%20Gate%20in%20Vladimir%2003.jpg",
+        alt: "Золотые ворота во Владимире"
+      },
+      {
+        id: "yaroslavl",
+        name: "Ярославль",
+        desc: "Первый русский город на Волге, центр торговли",
+        image: IMG + "08-09-16%20Jaroslawl%20Kreml.JPG",
+        alt: "Ярославский кремль"
+      },
+      {
+        id: "kazan",
+        name: "Казань",
+        desc: "Столица Казанского ханства, затем — Российского государства",
+        image: IMG + "Kazan%20Kremlin%20from%20drone.jpg",
+        alt: "Казанский Кремль"
+      }
     ];
 
     const mapList = document.getElementById("mapList");
@@ -1186,49 +1039,38 @@
           <p>${city.desc}</p>
         </div>
       `;
-      item.addEventListener("click", () => {
-        toast(city.name + " — " + city.desc);
-      });
+      item.addEventListener("click", () => openCityModal(city));
       mapList.appendChild(item);
     });
 
-    // клики по точкам на карте
     document.querySelectorAll(".map-point").forEach(point => {
       point.addEventListener("click", () => {
         const city = CITIES.find(c => c.id === point.dataset.city);
-        if (city) toast(city.name + " — " + city.desc);
+        if (city) openCityModal(city);
       });
     });
-
 
     /* --------------------------------
        УСТНЫЕ ИСТОРИИ
     -------------------------------- */
-
     const STORIES = [
       {
         quote: "Бабушка рассказывала, как в войну они прятали хлеб в подполе, чтобы дожить до весны. Этот хлеб был дороже золота.",
         author: "Анна Петровна, 87 лет, Вологодская область",
-        portrait: `<svg viewBox="0 0 44 44" fill="none">
-          <circle cx="22" cy="16" r="8" fill="#c59a4a" opacity="0.6"/>
-          <path d="M8 40 C8 30 36 30 36 40" fill="#c59a4a" opacity="0.4"/>
-        </svg>`
+        image: IMG + "Prokudin-Gorsky%20-%20Peasant%20girls.jpg",
+        alt: "Крестьянские девушки, фото Прокудина-Горского"
       },
       {
         quote: "Мой дед был кузнецом. Он говорил: «Железо чувствует руку. Если боишься — оно не послушается».",
         author: "Сергей Иванович, 72 года, Тула",
-        portrait: `<svg viewBox="0 0 44 44" fill="none">
-          <circle cx="22" cy="16" r="8" fill="#8a5f3a" opacity="0.6"/>
-          <path d="M8 40 C8 30 36 30 36 40" fill="#8a5f3a" opacity="0.4"/>
-        </svg>`
+        image: IMG + "Prokudin-Gorsky%20-%20Blacksmith.jpg",
+        alt: "Кузнец за работой, фото Прокудина-Горского"
       },
       {
         quote: "Мама пела нам старинные песни, которые слышала от своей бабушки. Теперь я пою их своим внукам.",
         author: "Мария Фёдоровна, 68 лет, Архангельская область",
-        portrait: `<svg viewBox="0 0 44 44" fill="none">
-          <circle cx="22" cy="16" r="8" fill="#a42e2e" opacity="0.5"/>
-          <path d="M8 40 C8 30 36 30 36 40" fill="#a42e2e" opacity="0.3"/>
-        </svg>`
+        image: IMG + "Prokudin-Gorsky%20-%20Peasant%20women.jpg",
+        alt: "Крестьянки, фото Прокудина-Горского"
       }
     ];
 
@@ -1238,24 +1080,23 @@
       const card = document.createElement("div");
       card.className = "story-card";
       card.innerHTML = `
-        <div class="story-portrait">${story.portrait}</div>
+        <div class="story-portrait"><img src="${story.image}" alt="${story.alt}" loading="lazy"></div>
         <blockquote>«${story.quote}»</blockquote>
         <cite>${story.author}</cite>
       `;
       storiesGrid.appendChild(card);
     });
 
-
     /* --------------------------------
        МОДАЛКА
     -------------------------------- */
-
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modalTitle");
     const modalText = document.getElementById("modalText");
     const modalExtra = document.getElementById("modalExtra");
     const dialogEra = document.getElementById("dialogEra");
     const dialogArt = document.getElementById("dialogArt");
+    const dialogAttribution = document.getElementById("dialogAttribution");
     const toastStack = document.getElementById("toastStack");
 
     let lastFocused = null;
@@ -1267,7 +1108,25 @@
       dialogEra.textContent = art.era;
       modalText.textContent = art.full;
       modalExtra.textContent = art.extra;
-      dialogArt.innerHTML = art.svg;
+      dialogArt.innerHTML = '<img src="' + art.image + '" alt="' + art.alt + '" loading="lazy">';
+      dialogAttribution.textContent = art.attribution || "";
+
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+
+      modal.querySelector(".close").focus();
+    }
+
+    function openCityModal(city) {
+      lastFocused = document.activeElement;
+
+      modalTitle.textContent = city.name;
+      dialogEra.textContent = "Историческое место";
+      modalText.textContent = city.desc;
+      modalExtra.textContent = "";
+      dialogArt.innerHTML = '<img src="' + city.image + '" alt="' + city.alt + '" loading="lazy">';
+      dialogAttribution.textContent = "Фото: Wikimedia Commons";
 
       modal.hidden = false;
       modal.classList.add("open");
@@ -1294,11 +1153,9 @@
       if (e.key === "Escape") closeModal();
     });
 
-
     /* --------------------------------
        ТОСТЫ
     -------------------------------- */
-
     function toast(message) {
       const el = document.createElement("div");
       el.className = "toast";
@@ -1307,11 +1164,9 @@
       setTimeout(() => el.remove(), 1800);
     }
 
-
     /* --------------------------------
        ДЕЛЕГИРОВАНИЕ КЛИКОВ
     -------------------------------- */
-
     document.addEventListener("click", (event) => {
       const toastTrigger = event.target.closest("[data-toast]");
       if (toastTrigger) {
