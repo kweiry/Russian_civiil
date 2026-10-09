@@ -156,37 +156,52 @@
 
     .btn.primary:hover { background: var(--red-light); }
 
-    /* MATRYOSHKA */
+    /* MAP VISUAL */
 
-    .visual { min-height: 390px; position: relative; display: grid; place-items: center; }
+    .visual { min-height: 420px; position: relative; display: grid; place-items: center; }
 
     .halo {
       position: absolute;
-      width: 350px;
-      height: 350px;
+      width: min(620px, 95vw);
+      height: min(300px, 48vw);
       border-radius: 50%;
-      border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
-      box-shadow:
-        0 0 0 22px color-mix(in srgb, var(--gold) 7%, transparent),
-        0 0 0 62px color-mix(in srgb, var(--red) 4%, transparent);
+      background: radial-gradient(
+        ellipse at center,
+        color-mix(in srgb, var(--gold) 22%, transparent) 0%,
+        transparent 65%
+      );
+      filter: blur(15px);
+      animation: glowPulse 6s ease-in-out infinite;
     }
 
-    .doll {
-  width: 230px;
-  height: 320px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  filter: drop-shadow(0 20px 45px rgba(78, 40, 19, 0.28));
-}
+    @keyframes glowPulse {
+      0%, 100% { opacity: .65; }
+      50%      { opacity: 1; }
+    }
 
-.doll svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+    .russia-map {
+      position: relative;
+      width: min(620px, 95vw);
+      aspect-ratio: 5 / 2;
+      display: grid;
+      place-items: center;
+      animation: mapBreathe 8s ease-in-out infinite;
+    }
 
-    .orn { position: absolute; font-family: Georgia, serif; color: var(--gold); font-size: 42px; }
+    .russia-map svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes mapBreathe {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.015); }
+    }
+
+    .orn { position: absolute; font-family: Georgia, serif; color: var(--gold); font-size: 42px; z-index: 3; }
     .o1 { top: 5%; left: 4%; }
     .o2 { right: 4%; bottom: 12%; }
     .o3 { right: 11%; top: 10%; font-size: 26px; }
@@ -626,112 +641,92 @@
         <div class="orn o1">❧</div>
         <div class="orn o2">❧</div>
         <div class="orn o3">✦</div>
-          <div class="doll">
-    <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Русская матрёшка">
-      <defs>
-        <radialGradient id="mtBody" cx="38%" cy="28%" r="80%">
-          <stop offset="0%" stop-color="#d45848"/>
-          <stop offset="50%" stop-color="#a8312c"/>
-          <stop offset="100%" stop-color="#6a1a20"/>
-        </radialGradient>
-        <radialGradient id="mtFace" cx="45%" cy="35%" r="70%">
-          <stop offset="0%" stop-color="#fbe9cc"/>
-          <stop offset="100%" stop-color="#e0b58a"/>
-        </radialGradient>
-        <linearGradient id="mtGold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#f0d078"/>
-          <stop offset="100%" stop-color="#b08234"/>
-        </linearGradient>
-        <linearGradient id="mtScarf" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#d9a44a"/>
-          <stop offset="100%" stop-color="#9a6a24"/>
-        </linearGradient>
-      </defs>
 
-      <ellipse cx="100" cy="272" rx="58" ry="6" fill="#3a1810" opacity="0.22"/>
+        <div class="russia-map">
+          <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Карта России">
+            <defs>
+              <linearGradient id="mapFill" x1="0" y1="0" x2="0.2" y2="1">
+                <stop offset="0%" stop-color="#d45848"/>
+                <stop offset="55%" stop-color="#a8312c"/>
+                <stop offset="100%" stop-color="#6a1a20"/>
+              </linearGradient>
+              <linearGradient id="mapStroke" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0d078"/>
+                <stop offset="100%" stop-color="#b08234"/>
+              </linearGradient>
+              <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="130%">
+                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#3a1810" flood-opacity="0.4"/>
+                <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#c59a4a" flood-opacity="0.25"/>
+              </filter>
+            </defs>
 
-      <path d="M100 30 C125 30 138 45 142 75 C146 105 150 140 150 180 C150 215 148 240 140 252 C130 264 115 268 100 268 C85 268 70 264 60 252 C52 240 50 215 50 180 C50 140 54 105 58 75 C62 45 75 30 100 30 Z" fill="url(#mtBody)"/>
+            <g filter="url(#mapShadow)">
+              <!-- Основной контур России -->
+              <path d="M 130 175
+                       C 120 155, 130 135, 160 125
+                       C 195 115, 230 105, 280 95
+                       C 340 85, 410 78, 480 75
+                       C 560 72, 640 74, 710 82
+                       C 770 90, 820 102, 860 122
+                       C 895 140, 920 162, 935 185
+                       C 945 202, 940 220, 925 232
+                       C 908 242, 885 245, 870 240
+                       C 862 258, 856 285, 850 308
+                       C 844 325, 830 330, 818 320
+                       C 810 305, 806 278, 802 252
+                       C 796 235, 780 228, 760 228
+                       C 730 228, 700 235, 668 245
+                       C 632 255, 595 262, 560 258
+                       C 528 255, 500 250, 475 252
+                       C 450 255, 425 265, 405 275
+                       C 388 282, 372 285, 358 280
+                       C 344 275, 332 265, 320 258
+                       C 305 250, 290 245, 275 238
+                       C 255 228, 235 218, 215 210
+                       C 195 202, 175 198, 155 195
+                       C 138 192, 132 185, 130 175 Z"
+                    fill="url(#mapFill)"
+                    stroke="url(#mapStroke)"
+                    stroke-width="2.5"
+                    stroke-linejoin="round"/>
 
-      <path d="M70 100 C68 150 65 200 72 235 C68 235 62 230 58 210 C52 175 55 130 62 90 Z" fill="#e9755c" opacity="0.25"/>
+              <!-- Калининградская область -->
+              <path d="M 100 175
+                       C 98 168, 105 162, 115 162
+                       C 124 163, 128 170, 126 178
+                       C 124 186, 116 188, 108 185
+                       C 102 182, 100 179, 100 175 Z"
+                    fill="url(#mapFill)"
+                    stroke="url(#mapStroke)"
+                    stroke-width="2"/>
 
-      <path d="M100 26 C130 26 145 48 148 90 L142 90 C140 56 124 42 100 42 C76 42 60 56 58 90 L52 90 C55 48 70 26 100 26 Z" fill="url(#mtScarf)"/>
+              <!-- Крым и новые территории -->
+              <path d="M 320 258
+                       C 326 266, 340 274, 354 274
+                       C 362 271, 364 262, 356 258
+                       C 348 254, 334 254, 320 258 Z"
+                    fill="url(#mapFill)"
+                    stroke="url(#mapStroke)"
+                    stroke-width="2"/>
+            </g>
 
-      <path d="M54 92 C54 60 72 42 100 42 C128 42 146 60 146 92 C146 92 140 74 124 64 C114 58 108 60 100 62 C92 60 86 58 76 64 C60 74 54 92 54 92 Z" fill="url(#mtGold)"/>
-
-      <path d="M54 92 C54 60 72 42 100 42 C128 42 146 60 146 92" fill="none" stroke="#f0d078" stroke-width="1" opacity="0.5"/>
-
-      <circle cx="100" cy="38" r="7" fill="#b93d31"/>
-      <circle cx="100" cy="38" r="4" fill="#f0d078"/>
-      <circle cx="100" cy="38" r="1.8" fill="#b93d31"/>
-
-      <ellipse cx="100" cy="100" rx="28" ry="33" fill="url(#mtFace)"/>
-
-      <path d="M72 88 C74 74 86 68 100 68 C114 68 126 74 128 88 C126 82 116 76 100 76 C84 76 74 82 72 88 Z" fill="#c99274" opacity="0.35"/>
-
-      <path d="M73 96 Q71 108 74 120 Q76 108 78 100 Z" fill="#7a3f22"/>
-      <path d="M127 96 Q129 108 126 120 Q124 108 122 100 Z" fill="#7a3f22"/>
-
-      <path d="M85 90 Q90 86 95 89" stroke="#7a3f22" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      <path d="M105 89 Q110 86 115 90" stroke="#7a3f22" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-
-      <ellipse cx="89" cy="99" rx="2.6" ry="3.2" fill="#2a1a10"/>
-      <ellipse cx="111" cy="99" rx="2.6" ry="3.2" fill="#2a1a10"/>
-      <circle cx="89.7" cy="98" r="0.9" fill="#fff"/>
-      <circle cx="111.7" cy="98" r="0.9" fill="#fff"/>
-
-      <circle cx="80" cy="110" r="5.5" fill="#e88a7a" opacity="0.55"/>
-      <circle cx="120" cy="110" r="5.5" fill="#e88a7a" opacity="0.55"/>
-
-      <path d="M100 106 Q99 112 100 114 Q101 112 100 106 Z" fill="#c07a52" opacity="0.5"/>
-
-      <path d="M92 119 Q100 125 108 119" stroke="#a42e2e" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-
-      <path d="M70 148 C70 148 80 142 100 142 C120 142 130 148 130 148 L130 210 C130 230 118 244 100 244 C82 244 70 230 70 210 Z" fill="#7a1f24" stroke="url(#mtGold)" stroke-width="1.8"/>
-
-      <path d="M76 156 C76 156 84 152 100 152 C116 152 124 156 124 156 L124 208 C124 224 114 236 100 236 C86 236 76 224 76 208 Z" fill="none" stroke="#f0d078" stroke-width="0.8" opacity="0.65"/>
-
-      <g transform="translate(100 190)">
-        <ellipse cx="0" cy="-15" rx="7" ry="10" fill="#e9c56d"/>
-        <ellipse cx="0" cy="15" rx="7" ry="10" fill="#e9c56d"/>
-        <ellipse cx="-15" cy="0" rx="10" ry="7" fill="#e9c56d"/>
-        <ellipse cx="15" cy="0" rx="10" ry="7" fill="#e9c56d"/>
-        <ellipse cx="-10.5" cy="-10.5" rx="8" ry="8" fill="#f0d078"/>
-        <ellipse cx="10.5" cy="-10.5" rx="8" ry="8" fill="#f0d078"/>
-        <ellipse cx="-10.5" cy="10.5" rx="8" ry="8" fill="#f0d078"/>
-        <ellipse cx="10.5" cy="10.5" rx="8" ry="8" fill="#f0d078"/>
-        <circle cx="0" cy="0" r="7.5" fill="#b93d31"/>
-        <circle cx="0" cy="0" r="4" fill="#f0d078"/>
-        <circle cx="0" cy="0" r="1.5" fill="#b93d31"/>
-      </g>
-
-      <g>
-        <circle cx="82" cy="168" r="3" fill="#f0d078"/>
-        <circle cx="82" cy="168" r="1.2" fill="#a42e2e"/>
-        <circle cx="118" cy="168" r="3" fill="#f0d078"/>
-        <circle cx="118" cy="168" r="1.2" fill="#a42e2e"/>
-        <circle cx="82" cy="222" r="3" fill="#f0d078"/>
-        <circle cx="82" cy="222" r="1.2" fill="#a42e2e"/>
-        <circle cx="118" cy="222" r="3" fill="#f0d078"/>
-        <circle cx="118" cy="222" r="1.2" fill="#a42e2e"/>
-      </g>
-
-      <path d="M55 236 Q100 250 145 236" stroke="url(#mtGold)" stroke-width="2.5" fill="none" opacity="0.85"/>
-      <path d="M58 244 Q100 256 142 244" stroke="#f0d078" stroke-width="1.2" fill="none" opacity="0.6"/>
-
-      <g fill="#f0d078" opacity="0.7">
-        <circle cx="63" cy="125" r="1.6"/>
-        <circle cx="60" cy="140" r="1.6"/>
-        <circle cx="58" cy="155" r="1.6"/>
-        <circle cx="58" cy="170" r="1.6"/>
-        <circle cx="60" cy="185" r="1.6"/>
-        <circle cx="137" cy="125" r="1.6"/>
-        <circle cx="140" cy="140" r="1.6"/>
-        <circle cx="142" cy="155" r="1.6"/>
-        <circle cx="142" cy="170" r="1.6"/>
-        <circle cx="140" cy="185" r="1.6"/>
-      </g>
-    </svg>
-  </div>
+            <!-- Декоративные звёздочки внутри контура -->
+            <g fill="#f0d078" opacity="0.75">
+              <circle cx="260" cy="150" r="2.4"/>
+              <circle cx="360" cy="130" r="1.8"/>
+              <circle cx="460" cy="120" r="2.4"/>
+              <circle cx="560" cy="115" r="1.8"/>
+              <circle cx="660" cy="125" r="2.4"/>
+              <circle cx="750" cy="145" r="1.8"/>
+              <circle cx="820" cy="170" r="2.2"/>
+              <circle cx="310" cy="180" r="1.8"/>
+              <circle cx="510" cy="170" r="2.2"/>
+              <circle cx="700" cy="180" r="1.8"/>
+              <circle cx="410" cy="200" r="1.6"/>
+              <circle cx="600" cy="200" r="2"/>
+            </g>
+          </svg>
+        </div>
       </div>
 
     </section>
