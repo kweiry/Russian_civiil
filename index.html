@@ -112,7 +112,7 @@
       margin: 0 auto;
       padding: 72px 28px 54px;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.05fr .95fr;
       align-items: center;
       gap: 50px;
     }
@@ -158,47 +158,57 @@
 
     /* MAP VISUAL */
 
-    .visual { min-height: 420px; position: relative; display: grid; place-items: center; }
+    .visual {
+      min-height: 420px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
 
     .halo {
       position: absolute;
-      width: min(620px, 95vw);
-      height: min(300px, 48vw);
+      width: min(700px, 100vw);
+      height: min(380px, 55vw);
       border-radius: 50%;
       background: radial-gradient(
         ellipse at center,
-        color-mix(in srgb, var(--gold) 22%, transparent) 0%,
+        color-mix(in srgb, var(--gold) 20%, transparent) 0%,
         transparent 65%
       );
-      filter: blur(15px);
+      filter: blur(18px);
       animation: glowPulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
 
     @keyframes glowPulse {
-      0%, 100% { opacity: .65; }
+      0%, 100% { opacity: .55; }
       50%      { opacity: 1; }
     }
 
     .russia-map {
       position: relative;
-      width: min(620px, 95vw);
-      aspect-ratio: 5 / 2;
+      width: min(700px, 100%);
+      aspect-ratio: 2 / 1;
       display: grid;
       place-items: center;
-      animation: mapBreathe 8s ease-in-out infinite;
+      animation: mapBreathe 9s ease-in-out infinite;
     }
 
-    .russia-map svg {
+    .russia-map img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
       display: block;
       position: relative;
       z-index: 2;
+      filter:
+        drop-shadow(0 20px 30px rgba(78, 40, 19, 0.28))
+        drop-shadow(0 0 24px rgba(197, 154, 74, 0.3));
     }
 
     @keyframes mapBreathe {
       0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.015); }
+      50%      { transform: scale(1.012); }
     }
 
     .orn { position: absolute; font-family: Georgia, serif; color: var(--gold); font-size: 42px; z-index: 3; }
@@ -563,7 +573,7 @@
 
     @media (max-width: 800px) {
       .hero { grid-template-columns: 1fr; padding-top: 45px; }
-      .visual { min-height: 300px; }
+      .visual { min-height: 280px; }
       .news { grid-template-columns: 1fr; }
       .top, .hero, .section, .footer { padding-left: 18px; padding-right: 18px; }
       .footer { display: block; }
@@ -643,89 +653,11 @@
         <div class="orn o3">✦</div>
 
         <div class="russia-map">
-          <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Карта России">
-            <defs>
-              <linearGradient id="mapFill" x1="0" y1="0" x2="0.2" y2="1">
-                <stop offset="0%" stop-color="#d45848"/>
-                <stop offset="55%" stop-color="#a8312c"/>
-                <stop offset="100%" stop-color="#6a1a20"/>
-              </linearGradient>
-              <linearGradient id="mapStroke" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#f0d078"/>
-                <stop offset="100%" stop-color="#b08234"/>
-              </linearGradient>
-              <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="130%">
-                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#3a1810" flood-opacity="0.4"/>
-                <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#c59a4a" flood-opacity="0.25"/>
-              </filter>
-            </defs>
-
-            <g filter="url(#mapShadow)">
-              <!-- Основной контур России -->
-              <path d="M 130 175
-                       C 120 155, 130 135, 160 125
-                       C 195 115, 230 105, 280 95
-                       C 340 85, 410 78, 480 75
-                       C 560 72, 640 74, 710 82
-                       C 770 90, 820 102, 860 122
-                       C 895 140, 920 162, 935 185
-                       C 945 202, 940 220, 925 232
-                       C 908 242, 885 245, 870 240
-                       C 862 258, 856 285, 850 308
-                       C 844 325, 830 330, 818 320
-                       C 810 305, 806 278, 802 252
-                       C 796 235, 780 228, 760 228
-                       C 730 228, 700 235, 668 245
-                       C 632 255, 595 262, 560 258
-                       C 528 255, 500 250, 475 252
-                       C 450 255, 425 265, 405 275
-                       C 388 282, 372 285, 358 280
-                       C 344 275, 332 265, 320 258
-                       C 305 250, 290 245, 275 238
-                       C 255 228, 235 218, 215 210
-                       C 195 202, 175 198, 155 195
-                       C 138 192, 132 185, 130 175 Z"
-                    fill="url(#mapFill)"
-                    stroke="url(#mapStroke)"
-                    stroke-width="2.5"
-                    stroke-linejoin="round"/>
-
-              <!-- Калининградская область -->
-              <path d="M 100 175
-                       C 98 168, 105 162, 115 162
-                       C 124 163, 128 170, 126 178
-                       C 124 186, 116 188, 108 185
-                       C 102 182, 100 179, 100 175 Z"
-                    fill="url(#mapFill)"
-                    stroke="url(#mapStroke)"
-                    stroke-width="2"/>
-
-              <!-- Крым и новые территории -->
-              <path d="M 320 258
-                       C 326 266, 340 274, 354 274
-                       C 362 271, 364 262, 356 258
-                       C 348 254, 334 254, 320 258 Z"
-                    fill="url(#mapFill)"
-                    stroke="url(#mapStroke)"
-                    stroke-width="2"/>
-            </g>
-
-            <!-- Декоративные звёздочки внутри контура -->
-            <g fill="#f0d078" opacity="0.75">
-              <circle cx="260" cy="150" r="2.4"/>
-              <circle cx="360" cy="130" r="1.8"/>
-              <circle cx="460" cy="120" r="2.4"/>
-              <circle cx="560" cy="115" r="1.8"/>
-              <circle cx="660" cy="125" r="2.4"/>
-              <circle cx="750" cy="145" r="1.8"/>
-              <circle cx="820" cy="170" r="2.2"/>
-              <circle cx="310" cy="180" r="1.8"/>
-              <circle cx="510" cy="170" r="2.2"/>
-              <circle cx="700" cy="180" r="1.8"/>
-              <circle cx="410" cy="200" r="1.6"/>
-              <circle cx="600" cy="200" r="2"/>
-            </g>
-          </svg>
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Map%20of%20federal%20subjects%20of%20Russia%20(2022).svg"
+            alt="Карта России с субъектами федерации"
+            loading="eager"
+          >
         </div>
       </div>
 
@@ -805,7 +737,7 @@
             </div>
           </a>
 
-          <!-- 3. Языковое наследие — ведёт на languages.html -->
+          <!-- 3. Языковое наследие -->
           <a class="dir-card" href="languages.html" style="--accent:#3a5f8a">
             <div class="dir-art" aria-hidden="true">
               <svg viewBox="0 0 200 140" fill="none" style="color: var(--accent)">
@@ -1106,7 +1038,6 @@
     -------------------------------- */
 
     document.addEventListener("click", event => {
-      // карточки "скоро появится"
       const soonCard = event.target.closest("[data-soon]");
       if (soonCard) {
         event.preventDefault();
@@ -1114,21 +1045,18 @@
         return;
       }
 
-      // модалки
       const modalTrigger = event.target.closest("[data-modal]");
       if (modalTrigger) {
         openModal(modalTrigger.dataset.modal);
         return;
       }
 
-      // тосты
       const toastTrigger = event.target.closest("[data-toast]");
       if (toastTrigger) {
         toast(toastTrigger.dataset.toast);
         return;
       }
 
-      // скролл к секции
       const scrollTrigger = event.target.closest("[data-scroll]");
       if (scrollTrigger) {
         const target = document.querySelector(scrollTrigger.dataset.scroll);
@@ -1147,7 +1075,6 @@
     const nextBtn  = document.querySelector('[data-dir="1"]');
     const cards    = Array.from(carousel.querySelectorAll(".dir-card"));
 
-    // создаём точки
     cards.forEach((card, i) => {
       const dot = document.createElement("button");
       dot.type = "button";
@@ -1179,7 +1106,6 @@
     nextBtn.addEventListener("click", () => scrollByCard(1));
 
     function updateCarouselState() {
-      // активная точка
       const carRect = carousel.getBoundingClientRect();
       let activeIndex = 0;
       let minDist = Infinity;
@@ -1195,7 +1121,6 @@
 
       dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
 
-      // кнопки вкл/выкл
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       prevBtn.disabled = carousel.scrollLeft <= 4;
       nextBtn.disabled = carousel.scrollLeft >= maxScroll - 4;
@@ -1204,7 +1129,6 @@
     carousel.addEventListener("scroll", updateCarouselState, { passive: true });
     window.addEventListener("resize", updateCarouselState);
 
-    // начальное состояние
     updateCarouselState();
 
   })();
