@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Политические инициативы — Многонациональная Россия</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f1e8;
+      --surface: #fffaf2;
+      --ink: #29231e;
+      --muted: #75695e;
+      --red: #a42e2e;
+      --red-light: #c65342;
+      --gold: #c59a4a;
+      --line: #dfd2c1;
+      --blue: #3a5f8a;
+      --green: #3f7a5c;
+      --purple: #6b4f8a;
+      --brown: #8a5f3a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171513;
+        --surface: #211e1a;
+        --ink: #f4eadc;
+        --muted: #b9aa99;
+        --line: #40382f;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body.modal-open { overflow: hidden; }
+    button { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    #app { min-height: 100vh; background: var(--bg); }
+
+    /* HEADER */
+    .top {
+      max-width: 1240px;
+      margin: auto;
+      padding: 20px 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand { display: flex; gap: 14px; align-items: center; }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #e9c56d 0 12%, #b4372f 13% 48%, #7d2224 49%);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 25%, transparent);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .mark::after {
+      content: "✦";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff7df;
+      font-size: 21px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand b { font-size: 15px; }
+
+    .back-link {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--ink);
+      font-weight: 650;
+      cursor: pointer;
+      transition: .2s;
+      display: inline-block;
+    }
+
+    .back-link:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero-politics {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 28px 50px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-politics h1 {
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(38px, 5.5vw, 72px);
+      line-height: .96;
+      margin: 12px 0 22px;
+      letter-spacing: -.035em;
+    }
+
+    .hero-politics h1 span { color: var(--red); }
+
+    .hero-politics p {
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .hero-quote {
+      border-left: 3px solid var(--gold);
+      padding: 4px 0 4px 20px;
+      margin: 24px 0;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .hero-quote cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .hero-symbol {
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+    }
+
+    .hero-symbol svg {
+      width: 240px;
+      height: 240px;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,.12));
+    }
+
+    /* STATS */
+    .stats {
+      max-width: 1240px;
+      margin: auto;
+      padding: 10px 28px 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      transition: .2s;
+    }
+
+    .stat-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .stat-card .num {
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .num .asterisk {
+      font-size: 20px;
+      color: var(--gold);
+      vertical-align: super;
+      margin-left: 2px;
+      font-weight: 700;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .stats-source {
+      max-width: 1240px;
+      margin: 0 auto 40px;
+      padding: 0 28px;
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1240px;
+      margin: auto;
+      padding: 10px 28px 60px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 22px;
+      gap: 20px;
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 0;
+    }
+
+    /* PRIORITY CARDS */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: .25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 36px rgba(0,0,0,.1);
+    }
+
+    .pillar-art {
+      height: 150px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%);
+      position: relative;
+    }
+
+    .pillar-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--accent) 5%, transparent) 0 1px,
+        transparent 1px 14px
+      );
+      opacity: .5;
+    }
+
+    .pillar-art svg {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      z-index: 1;
+      transition: transform .3s;
+    }
+
+    .pillar-card:hover .pillar-art svg { transform: scale(1.08); }
+
+    .pillar-info { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .pillar-info h3 { margin: 0 0 8px; font-size: 18px; }
+
+    .pillar-info p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; flex: 1; }
+
+    .pillar-more {
+      margin-top: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      gap: 6px;
+      transition: gap .2s;
+    }
+
+    .pillar-card:hover .pillar-more { gap: 10px; }
+
+    /* LEGAL TIMELINE */
+    .legal-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .legal-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+      padding: 20px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .legal-item:hover { transform: translateX(4px); border-color: var(--accent); }
+
+    .legal-item .legal-year {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .legal-item h4 { margin: 0 0 6px; font-size: 16px; }
+
+    .legal-item p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* TARGETS */
+    .targets {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .target-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: .2s;
+    }
+
+    .target-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .target-card .t-num {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .target-card .t-label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* PROJECTS LIST */
+    .projects-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .project-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .project-item:hover { border-color: var(--gold); transform: translateX(4px); }
+
+    .project-item .p-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent, var(--red)) 12%, transparent);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .project-item .p-body h4 { margin: 0 0 4px; font-size: 16px; }
+
+    .project-item .p-body p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    .project-item .p-meta {
+      font-size: 12px;
+      color: var(--accent, var(--red));
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* QUOTE BOX */
+    .quote-box {
+      background: linear-gradient(135deg, #6d2226, #a83b32);
+      border-radius: 22px;
+      padding: 34px;
+      color: white;
+    }
+
+    .quote-box .eyebrow { color: #f5ddd2; }
+
+    .quote-box h3 {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      margin: 8px 0 16px;
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-style: italic;
+      line-height: 1.6;
+      color: #f5ddd2;
+      font-size: 15px;
+    }
+
+    .quote-box cite {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 13px;
+      color: #f5ddd2;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--line);
+      max-width: 1240px;
+      margin: auto;
+      padding: 24px 28px 45px;
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #0008;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal.open { display: flex; }
+
+    .dialog {
+      max-width: 560px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 30px 80px #0005;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .dialog h2 { margin: 0 0 6px; font-family: Georgia, serif; font-size: 24px; }
+
+    .dialog .dialog-sub { font-size: 12px; color: var(--red); font-weight: 700; margin-bottom: 14px; }
+
+    .dialog p { color: var(--muted); line-height: 1.65; margin: 0 0 12px; }
+
+    .dialog .close {
+      display: block;
+      margin-left: auto;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 25px;
+      line-height: 1;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+
+    .dialog .dialog-art {
+      display: grid;
+      place-items: center;
+      margin: 10px 0 18px;
+    }
+
+    /* TOAST */
+    .toast-stack {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #2a2520;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px #0004;
+      animation: toastIn .2s ease-out;
+      max-width: 90vw;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .hero-politics { grid-template-columns: 1fr; padding-top: 40px; gap: 30px; }
+      .top, .hero-politics, .section, .footer, .stats, .stats-source { padding-left: 18px; padding-right: 18px; }
+      .footer { display: block; }
+      .footer span { display: block; margin-bottom: 8px; }
+      .hero-symbol svg { width: 180px; height: 180px; }
+      .project-item { grid-template-columns: auto 1fr; }
+      .project-item .p-meta { grid-column: 2; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <div class="eyebrow">ФАДН России</div>
+        <b>Портал культурного и языкового наследия</b>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← На главную</a>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero-politics">
+      <div>
+        <div class="eyebrow">Политические инициативы</div>
+        <h1>Единство<br><span>в многообразии</span></h1>
+        <p>
+          Государственная национальная политика России направлена на
+          укрепление единства многонационального народа, сохранение
+          этнокультурного и языкового многообразия, обеспечение
+          межнационального и межрелигиозного согласия.
+        </p>
+
+        <div class="hero-quote">
+          «Укрепление единства многонационального народа Российской
+          Федерации и общероссийской гражданской идентичности при
+          сохранении этнокультурного и языкового многообразия для
+          обеспечения развития страны, её государственной и
+          территориальной целостности»
+          <cite>Стратегия государственной национальной политики РФ до 2036 года (Указ № 858)</cite>
+        </div>
+      </div>
+
+      <div class="hero-symbol" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="88" fill="none" stroke="#c59a4a" stroke-width="1" opacity="0.5"/>
+          <circle cx="100" cy="100" r="72" fill="none" stroke="#c59a4a" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="100" cy="100" r="54" fill="none" stroke="#a42e2e" stroke-width="1" opacity="0.4"/>
+
+          <!-- Здание с колоннами -->
+          <path d="M60 120 L60 80 L100 60 L140 80 L140 120 Z"
+                fill="#a42e2e" opacity="0.15" stroke="#a42e2e" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="60" y1="80" x2="140" y2="80" stroke="#a42e2e" stroke-width="3"/>
+          <rect x="72" y="90" width="8" height="30" fill="#a42e2e" opacity="0.5"/>
+          <rect x="96" y="90" width="8" height="30" fill="#a42e2e" opacity="0.5"/>
+          <rect x="120" y="90" width="8" height="30" fill="#a42e2e" opacity="0.5"/>
+          <rect x="50" y="120" width="100" height="6" fill="#a42e2e"/>
+
+          <!-- Флаг -->
+          <line x1="100" y1="60" x2="100" y2="40" stroke="#a42e2e" stroke-width="2"/>
+          <path d="M100 40 L120 45 L100 50 Z" fill="#c59a4a"/>
+
+          <circle cx="100" cy="100" r="6" fill="#29231e"/>
+          <circle cx="100" cy="100" r="3" fill="#c59a4a"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat-card">
+        <div class="num">172<span class="asterisk">*</span></div>
+        <div class="label">мероприятия в плане на 2026–2028 годы</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">93,9%<span class="asterisk">*</span></div>
+        <div class="label">уровень общероссийской гражданской идентичности</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">89<span class="asterisk">*</span></div>
+        <div class="label">субъектов Российской Федерации</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">190+<span class="asterisk">*</span></div>
+        <div class="label">народов, объединённых общими целями</div>
+      </div>
+    </section>
+    <p class="stats-source">
+      * По данным Распоряжения Правительства РФ № 720-р от 02.04.2026,
+      Стратегии государственной национальной политики до 2036 года (Указ № 858)
+      и ФАДН России.
+    </p>
+
+    <!-- PRIORITIES -->
+    <section class="section" id="pillars">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Основы</div>
+          <h2>Четыре приоритета политики</h2>
+          <p>Нажмите на карточку, чтобы узнать больше</p>
+        </div>
+      </div>
+
+      <div class="pillars">
+
+        <div class="pillar-card" data-pillar="identity" style="--accent:#a42e2e">
+          <div class="pillar-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <circle cx="50" cy="40" r="20" fill="currentColor" opacity="0.15"/>
+              <path d="M50 22 L54 32 L64 32 L56 40 L60 50 L50 44 L40 50 L44 40 L36 32 L46 32 Z" fill="currentColor" opacity="0.85"/>
+              <path d="M30 62 L50 54 L70 62 L70 78 L30 78 Z" fill="currentColor" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="pillar-info">
+            <h3>Гражданская идентичность</h3>
+            <p>Формирование общероссийского гражданского самосознания на основе традиционных ценностей.</p>
+            <span class="pillar-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-pillar="languages" style="--accent:#3a5f8a">
+          <div class="pillar-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <rect x="20" y="25" width="60" height="50" rx="4" fill="currentColor" opacity="0.12" stroke="currentColor" stroke-width="2.5"/>
+              <text x="32" y="58" font-family="Georgia, serif" font-size="24" font-weight="700" fill="currentColor">Аа</text>
+              <text x="58" y="58" font-family="Georgia, serif" font-size="24" font-weight="700" fill="currentColor" opacity="0.6">Ӧӧ</text>
+            </svg>
+          </div>
+          <div class="pillar-info">
+            <h3>Языковое многообразие</h3>
+            <p>Поддержка русского языка и языков народов России, создание условий для их изучения.</p>
+            <span class="pillar-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-pillar="harmony" style="--accent:#3f7a5c">
+          <div class="pillar-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <circle cx="35" cy="40" r="12" fill="currentColor" opacity="0.6"/>
+              <circle cx="65" cy="40" r="12" fill="currentColor" opacity="0.6"/>
+              <path d="M15 80 C15 65 25 58 35 58 C45 58 55 65 55 80" fill="currentColor" opacity="0.4"/>
+              <path d="M45 80 C45 65 55 58 65 58 C75 58 85 65 85 80" fill="currentColor" opacity="0.4"/>
+              <path d="M45 68 L50 63 L55 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="pillar-info">
+            <h3>Межнациональное согласие</h3>
+            <p>Гармонизация межэтнических и межрелигиозных отношений, профилактика экстремизма.</p>
+            <span class="pillar-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="pillar-card" data-pillar="history" style="--accent:#6b4f8a">
+          <div class="pillar-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <rect x="25" y="18" width="50" height="64" rx="4" fill="currentColor" opacity="0.12" stroke="currentColor" stroke-width="2.5"/>
+              <line x1="35" y1="32" x2="65" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="44" x2="58" y2="44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="56" x2="62" y2="56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="72" cy="68" r="12" fill="currentColor" opacity="0.6"/>
+              <path d="M67 68 L71 72 L77 65" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="pillar-info">
+            <h3>Защита исторической правды</h3>
+            <p>Противодействие фальсификации истории и сохранение памяти о подвиге народа.</p>
+            <span class="pillar-more">Подробнее →</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LEGAL BASE -->
+    <section class="section" id="legal">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Документы</div>
+          <h2>Правовая основа</h2>
+          <p>Ключевые документы государственной политики</p>
+        </div>
+      </div>
+
+      <div class="legal-list">
+
+        <div class="legal-item" data-legal="post1532" style="--accent:#8a5f3a">
+          <div class="legal-year">2016</div>
+          <h4>Постановление Правительства РФ № 1532</h4>
+          <p>Утверждена государственная программа «Реализация государственной национальной политики».</p>
+        </div>
+
+        <div class="legal-item" data-legal="post387" style="--accent:#c59a4a">
+          <div class="legal-year">2020</div>
+          <h4>Постановление Правительства РФ № 387-21</h4>
+          <p>Внесены изменения в госпрограмму: уточнены цели, задачи и показатели до 2025 года.</p>
+        </div>
+
+        <div class="legal-item" data-legal="decree809" style="--accent:#a42e2e">
+          <div class="legal-year">2022</div>
+          <h4>Указ Президента РФ № 809</h4>
+          <p>Закреплены традиционные российские духовно-нравственные ценности как основа общества.</p>
+        </div>
+
+        <div class="legal-item" data-legal="strategy858" style="--accent:#3a5f8a">
+          <div class="legal-year">2025</div>
+          <h4>Указ Президента РФ № 858</h4>
+          <p>Утверждена Стратегия государственной национальной политики РФ на период до 2036 года.</p>
+        </div>
+
+        <div class="legal-item" data-legal="plan720" style="--accent:#3f7a5c">
+          <div class="legal-year">2026</div>
+          <h4>Распоряжение Правительства РФ № 720-р</h4>
+          <p>Утверждён трёхлетний план мероприятий (172 мероприятия) по реализации Стратегии до 2036 года.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TARGETS -->
+    <section class="section" id="targets">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Ориентиры</div>
+          <h2>Цели и показатели к 2036 году</h2>
+          <p>Целевые значения из Стратегии государственной национальной политики</p>
+        </div>
+      </div>
+
+      <div class="targets">
+        <div class="target-card">
+          <div class="t-num">95%</div>
+          <div class="t-label">уровень общероссийской гражданской идентичности</div>
+        </div>
+        <div class="target-card">
+          <div class="t-num">90%</div>
+          <div class="t-label">отсутствие дискриминации по национальному и языковому признаку</div>
+        </div>
+        <div class="target-card">
+          <div class="t-num">50%+</div>
+          <div class="t-label">мероприятий по популяризации русской культуры от всех этнокультурных</div>
+        </div>
+        <div class="target-card">
+          <div class="t-num">2036</div>
+          <div class="t-label">год завершения реализации Стратегии</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLAGSHIP PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Флагманские проекты</div>
+          <h2>Мероприятия 2026–2028</h2>
+          <p>Ключевые инициативы из плана реализации Стратегии</p>
+        </div>
+      </div>
+
+      <div class="projects-list" id="projectsList"></div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="section">
+      <div class="quote-box">
+        <div class="eyebrow">Стратегия государственной национальной политики до 2036 года</div>
+        <h3>Единая цель</h3>
+        <blockquote>
+          «Укрепление единства многонационального народа Российской
+          Федерации (российской нации) и общероссийской гражданской
+          идентичности (гражданского самосознания) при сохранении
+          этнокультурного и языкового многообразия для обеспечения
+          развития страны, её государственной и территориальной
+          целостности, внутренней политической и социальной стабильности».
+        </blockquote>
+        <cite>Указ Президента РФ № 858 от 25.11.2025</cite>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>Многонациональная Россия — русская цивилизация</span>
+    <span>Раздел «Политические инициативы» · ФАДН России</span>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="dialog">
+    <button type="button" class="close" data-close aria-label="Закрыть">×</button>
+    <div class="dialog-sub" id="dialogSub"></div>
+    <h2 id="modalTitle"></h2>
+    <div class="dialog-art" id="dialogArt"></div>
+    <p id="modalText"></p>
+    <p id="modalExtra"></p>
+  </div>
+</div>
+
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* --------------------------------
+       ДАННЫЕ
+    -------------------------------- */
+
+    const PILLARS = {
+      identity: {
+        title: "Гражданская идентичность",
+        sub: "Общероссийское гражданское самосознание",
+        text: "Формирование общероссийской гражданской идентичности — ключевая цель государственной национальной политики. Она основана на традиционных российских духовно-нравственных ценностях, общем историческом прошлом и культуре всех народов России.",
+        extra: "По данным ФАДН России, уровень общероссийской гражданской идентичности на конец 2025 года составил 93,9%.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="40" r="20" fill="#a42e2e" opacity="0.15"/><path d="M50 22 L54 32 L64 32 L56 40 L60 50 L50 44 L40 50 L44 40 L36 32 L46 32 Z" fill="#a42e2e" opacity="0.85"/></svg>'
+      },
+      languages: {
+        title: "Языковое многообразие",
+        sub: "Русский язык и языки народов России",
+        text: "Сохранение и поддержка языкового многообразия — одно из важнейших направлений политики. Русский язык является государственным языком и языком межнационального общения. Языки народов России получают поддержку в образовании, культуре и цифровой среде.",
+        extra: "В рамках плана запланировано создание центров этнокультурного и языкового образования, издание учебников и разработка нейросетевых моделей для языков коренных народов.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><rect x="20" y="25" width="60" height="50" rx="4" fill="#3a5f8a" opacity="0.12" stroke="#3a5f8a" stroke-width="2.5"/><text x="32" y="58" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#3a5f8a">Аа</text><text x="58" y="58" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#3a5f8a" opacity="0.6">Ӧӧ</text></svg>'
+      },
+      harmony: {
+        title: "Межнациональное согласие",
+        sub: "Гармонизация отношений",
+        text: "Обеспечение межнационального и межрелигиозного мира и согласия — основа стабильности общества. Государство ведёт мониторинг информационного пространства для противодействия экстремизму и предотвращения конфликтов.",
+        extra: "План включает проведение тематических форумов, экспедиционных и научных исследований межнациональных отношений в регионах.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="35" cy="40" r="12" fill="#3f7a5c" opacity="0.6"/><circle cx="65" cy="40" r="12" fill="#3f7a5c" opacity="0.6"/><path d="M15 80 C15 65 25 58 35 58 C45 58 55 65 55 80" fill="#3f7a5c" opacity="0.4"/><path d="M45 80 C45 65 55 58 65 58 C75 58 85 65 85 80" fill="#3f7a5c" opacity="0.4"/></svg>'
+      },
+      history: {
+        title: "Защита исторической правды",
+        sub: "Память и преемственность",
+        text: "Сохранение исторической памяти и противодействие фальсификации истории — приоритет государственной политики. В рамках плана предусмотрена оцифровка архивных документов, создание памятных мест и развитие исторических парков.",
+        extra: "Реализуются федеральные исторические интернет-проекты на основе архивных документов, создаются виртуальные читальные залы.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><rect x="25" y="18" width="50" height="64" rx="4" fill="#6b4f8a" opacity="0.12" stroke="#6b4f8a" stroke-width="2.5"/><line x1="35" y1="32" x2="65" y2="32" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="44" x2="58" y2="44" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="56" x2="62" y2="56" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><circle cx="72" cy="68" r="12" fill="#6b4f8a" opacity="0.6"/><path d="M67 68 L71 72 L77 65" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      }
+    };
+
+    const LEGAL = {
+      post1532: {
+        title: "Постановление Правительства РФ № 1532",
+        sub: "29 декабря 2016 года",
+        text: "Утверждена государственная программа Российской Федерации «Реализация государственной национальной политики». Программа стала основным инструментом реализации Стратегии государственной национальной политики на период до 2025 года.",
+        extra: "Программа включала 8 подпрограмм, охватывающих все ключевые направления: от государственно-общественного партнёрства до профилактики экстремизма.",
+        svg: ''
+      },
+      post387: {
+        title: "Постановление Правительства РФ № 387-21",
+        sub: "31 марта 2020 года",
+        text: "Внесены изменения в государственную программу «Реализация государственной национальной политики». Уточнены цели, задачи, целевые показатели и объёмы финансирования на период до 2025 года.",
+        extra: "Общий объём бюджетных ассигнований программы составил более 22 млрд рублей. Программа включала 8 подпрограмм.",
+        svg: ''
+      },
+      decree809: {
+        title: "Указ Президента РФ № 809",
+        sub: "9 ноября 2022 года",
+        text: "Утверждены «Основы государственной политики по сохранению и укреплению традиционных российских духовно-нравственных ценностей». Документ закрепляет 17 традиционных ценностей как основу российского общества.",
+        extra: "К традиционным ценностям отнесены жизнь, достоинство, патриотизм, крепкая семья, созидательный труд, гуманизм, милосердие, справедливость и другие.",
+        svg: ''
+      },
+      strategy858: {
+        title: "Указ Президента РФ № 858",
+        sub: "25 ноября 2025 года",
+        text: "Утверждена Стратегия государственной национальной политики Российской Федерации на период до 2036 года. Документ определяет единую цель, приоритетные направления и задачи государственной политики на 11 лет.",
+        extra: "Стратегия вступила в силу с 1 января 2026 года. Она включает 12 разделов и 61 пункт.",
+        svg: ''
+      },
+      plan720: {
+        title: "Распоряжение Правительства РФ № 720-р",
+        sub: "2 апреля 2026 года",
+        text: "Утверждён план мероприятий по реализации Стратегии государственной национальной политики в 2026–2028 годах. План содержит 172 мероприятия, распределённые по 12 разделам.",
+        extra: "К реализации плана привлечены 23 федеральных органа и 31 организация, включая Росархив, Росстат, Росгвардию, Русское географическое общество и другие.",
+        svg: ''
+      }
+    };
+
+    const PROJECTS = [
+      {
+        id: "smirtvorets",
+        icon: "📰",
+        title: "Конкурс «СМИротворец»",
+        desc: "Всероссийский конкурс для журналистов, освещающих межнациональные темы.",
+        date: "Ежегодно",
+        accent: "#a42e2e",
+        full: "«СМИротворец» — главный конкурс для журналистов, пишущих на межнациональные темы. Проводится Гильдией межэтнической журналистики при поддержке ФАДН России. В 2026 году конкурс вошёл в план Года единства народов России.",
+        extra: "Победители получают профессиональное признание и возможность публикации в ведущих СМИ. В 2025 году призёрами стали журналисты из Самары и других регионов."
+      },
+      {
+        id: "deti-rossii",
+        icon: "📸",
+        title: "Фотоконкурс «Дети России»",
+        desc: "Фотоконкурс в национальных костюмах. Приём работ — до 10 мая 2026.",
+        date: "До 10 мая 2026",
+        accent: "#c59a4a",
+        full: "Фотоконкурс «Дети России» — проект Дома дружбы народов, направленный на сохранение и популяризацию традиций народов России. Участники представляют фотографии детей в национальных костюмах.",
+        extra: "Лучшие работы войдут в передвижную выставку, которая будет показана в разных регионах страны."
+      },
+      {
+        id: "shkola-zhurnalistiki",
+        icon: "🎓",
+        title: "Школа межэтнической журналистики",
+        desc: "Обучение для молодых журналистов, блогеров и этноактивистов 18–30 лет.",
+        date: "2026",
+        accent: "#3a5f8a",
+        full: "«Школа межэтнической журналистики» — образовательный проект Гильдии межэтнической журналистики. Участники получают грантовую и методическую поддержку от федеральных экспертов.",
+        extra: "Программа включает лекции, мастер-классы и практическую работу в регионах. Лучшие выпускники получают поддержку для реализации собственных медиапроектов."
+      },
+      {
+        id: "zvuk-evrazii",
+        icon: "🎵",
+        title: "Проект «Звук Евразии»",
+        desc: "Творческая лаборатория для исполнителей в жанре «современная этника».",
+        date: "Очный этап — июнь 2026",
+        accent: "#6b4f8a",
+        full: "Всероссийский музыкальный проект «Звук Евразии» — творческая лаборатория для музыкантов, работающих в жанре современной этники. Проект организован Гильдией межэтнической журналистики при поддержке Президентского фонда культурных инициатив.",
+        extra: "Финалисты получают профессиональную поддержку, участвуют в фотосессиях, записи альбома и выступают перед 20 000 зрителей в разных городах России. В 2026 году проект входит в перечень мероприятий Года единства народов России."
+      },
+      {
+        id: "etnodiktant",
+        icon: "🌍",
+        title: "Большой этнографический диктант",
+        desc: "Международная просветительская акция, проверяющая знания о народах России.",
+        date: "Ежегодно",
+        accent: "#3f7a5c",
+        full: "«Большой этнографический диктант» — международная просветительская акция, которая позволяет проверить знания о культуре и традициях народов России. Участие бесплатное и доступно онлайн.",
+        extra: "Акция проводится с 2016 года. В 2025 году в ней приняли участие более 3 миллионов человек из России и зарубежных стран."
+      },
+      {
+        id: "virtual-tour",
+        icon: "🏛️",
+        title: "Конкурс «Виртуальный тур по многонациональной России»",
+        desc: "V Всероссийский конкурс этнокультурных выставочных проектов.",
+        date: "Приём заявок — 2026",
+        accent: "#8a5f3a",
+        full: "Конкурс «Виртуальный тур по многонациональной России» — проект Ресурсного центра в сфере национальных отношений при поддержке ФАДН России и Президентского фонда культурных инициатив.",
+        extra: "В 2026 году учреждена специальная номинация «Единство народов России». Участники представляют видеотуры по этнокультурным экспозициям."
+      },
+      {
+        id: "mashuk",
+        icon: "🏕️",
+        title: "Форум «Машук»",
+        desc: "Всероссийский молодёжный форум. Смены «Взросление» и «Единство».",
+        date: "8–22 августа 2026",
+        accent: "#a42e2e",
+        full: "Всероссийский молодёжный форум «Машук» — крупнейшая площадка для молодых педагогов, воспитателей и наставников. В 2026 году форум объединил более 2 200 участников.",
+        extra: "Ключевая тема 2026 года — «Педагог — защитник будущего Отечества». Программа включает смены «Взросление» и «Единство»."
+      },
+      {
+        id: "ekaterininsky",
+        icon: "🌐",
+        title: "Международный Екатерининский форум",
+        desc: "Общественно-государственная площадка для обсуждения цивилизационного развития России.",
+        date: "13 октября 2026",
+        accent: "#3a5f8a",
+        full: "Третий Международный Екатерининский форум — крупная общественно-государственная и международная площадка, посвящённая вопросам цивилизационного развития России. Пройдёт 13 октября 2026 года в Национальном центре «Россия» в Москве.",
+        extra: "Главная тема форума в 2026 году — привлекательность России для иностранцев, рассматривающих её как место для постоянного проживания, работы и воспитания детей."
+      },
+      {
+        id: "premiya",
+        icon: "🏆",
+        title: "Премия Президента за укрепление единства российской нации",
+        desc: "Приём документов с 16 марта по 10 июля 2026 года.",
+        date: "Приём заявок — до 10 июля 2026",
+        accent: "#c59a4a",
+        full: "Премия Президента Российской Федерации за вклад в укрепление единства российской нации учреждена Указом № 200 от 26 апреля 2016 года. Присуждается за значительный вклад в укрепление единства нации.",
+        extra: "Размер денежного вознаграждения составляет 5 млн рублей. Лауреату вручаются диплом, почётный знак и удостоверение."
+      },
+      {
+        id: "russkie-chteniya",
+        icon: "📖",
+        title: "Проект «Русские чтения»",
+        desc: "Литературно-патриотический проект, посвящённый русской литературе и истории.",
+        date: "2026–2028",
+        accent: "#6b4f8a",
+        full: "Литературно-патриотический проект «Русские чтения» направлен на популяризацию русской литературы и исторического наследия. В рамках проекта проводятся чтения, встречи с писателями и образовательные мероприятия.",
+        extra: "Проект включён в план мероприятий по реализации Стратегии государственной национальной политики на 2026–2028 годы."
+      },
+      {
+        id: "antologii",
+        icon: "📚",
+        title: "Антологии литератур народов России",
+        desc: "Подготовка и выпуск серии Антологий литератур народов России.",
+        date: "2026–2028",
+        accent: "#8a5f3a",
+        full: "В рамках плана предусмотрена подготовка и выпуск серии Антологий литератур народов России. Это масштабный издательский проект, направленный на популяризацию литературного наследия всех народов страны.",
+        extra: "Проект реализуется при поддержке Министерства цифрового развития, связи и массовых коммуникаций РФ."
+      },
+      {
+        id: "virtual-libraries",
+        icon: "💻",
+        title: "Виртуальные читальные залы за рубежом",
+        desc: "Создание виртуальных читальных залов на русском языке и электронных мобильных библиотек.",
+        date: "2026–2028",
+        accent: "#3f7a5c",
+        full: "План предусматривает создание виртуальных читальных залов на русском языке и электронных мобильных библиотек в зарубежных странах. Это направлено на поддержку русского языка и культуры за рубежом.",
+        extra: "Проект реализуется в рамках раздела «Укрепление общероссийской гражданской идентичности»."
+      }
+    ];
+
+    /* --------------------------------
+       ЭЛЕМЕНТЫ
+    -------------------------------- */
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const modalExtra = document.getElementById("modalExtra");
+    const dialogSub = document.getElementById("dialogSub");
+    const dialogArt = document.getElementById("dialogArt");
+    const toastStack = document.getElementById("toastStack");
+    const projectsList = document.getElementById("projectsList");
+
+    let lastFocused = null;
+
+    /* --------------------------------
+       РЕНДЕР СПИСКА ПРОЕКТОВ
+    -------------------------------- */
+
+    PROJECTS.forEach(function (project) {
+      var item = document.createElement("div");
+      item.className = "project-item";
+      item.dataset.project = project.id;
+      item.style.setProperty("--accent", project.accent);
+      item.innerHTML =
+        '<div class="p-icon">' + project.icon + '</div>' +
+        '<div class="p-body">' +
+          '<h4>' + project.title + '</h4>' +
+          '<p>' + project.desc + '</p>' +
+        '</div>' +
+        '<div class="p-meta">' + project.date + '</div>';
+      item.addEventListener("click", function () {
+        openProjectModal(project);
+      });
+      projectsList.appendChild(item);
+    });
+
+    /* --------------------------------
+       МОДАЛКА
+    -------------------------------- */
+
+    function openModal(data) {
+      lastFocused = document.activeElement;
+
+      modalTitle.textContent = data.title;
+      dialogSub.textContent = data.sub || "";
+      modalText.textContent = data.text;
+      modalExtra.textContent = data.extra || "";
+      dialogArt.innerHTML = data.svg || "";
+
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+
+      modal.querySelector(".close").focus();
+    }
+
+    function openProjectModal(project) {
+      lastFocused = document.activeElement;
+
+      modalTitle.textContent = project.title;
+      dialogSub.textContent = project.date;
+      modalText.textContent = project.full;
+      modalExtra.textContent = project.extra || "";
+      dialogArt.innerHTML = '<div style="font-size:48px;text-align:center;">' + project.icon + '</div>';
+
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+
+      modal.querySelector(".close").focus();
+    }
+
+    function closeModal() {
+      if (!modal.classList.contains("open")) return;
+
+      modal.classList.remove("open");
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal || e.target.closest("[data-close]")) closeModal();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeModal();
+    });
+
+    /* --------------------------------
+       ТОСТЫ
+    -------------------------------- */
+
+    function toast(message) {
+      var el = document.createElement("div");
+      el.className = "toast";
+      el.textContent = message;
+      toastStack.appendChild(el);
+      setTimeout(function () { el.remove(); }, 1800);
+    }
+
+    /* --------------------------------
+       ДЕЛЕГИРОВАНИЕ КЛИКОВ
+    -------------------------------- */
+
+    document.addEventListener("click", function (event) {
+      var pillarCard = event.target.closest("[data-pillar]");
+      if (pillarCard) {
+        var data = PILLARS[pillarCard.dataset.pillar];
+        if (data) openModal(data);
+        return;
+      }
+
+      var legalItem = event.target.closest("[data-legal]");
+      if (legalItem) {
+        var data2 = LEGAL[legalItem.dataset.legal];
+        if (data2) openModal(data2);
+        return;
+      }
+    });
+
+  })();
+</script>
+
+</body>
+</html>
