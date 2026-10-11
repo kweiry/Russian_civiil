@@ -162,20 +162,31 @@
     .hero-symbol svg {
       width: 260px;
       height: 260px;
-      animation: slowSpin 80s linear infinite;
       filter: drop-shadow(0 20px 40px rgba(0,0,0,.12));
     }
 
-    @keyframes slowSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    /* Плавное покачивание символов вверх-вниз */
+    .symbol-float {
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      animation: symbolFloat 5s ease-in-out infinite;
+    }
+
+    .symbol-float.a { animation-delay: 0s; }
+    .symbol-float.b { animation-delay: 1.25s; }
+    .symbol-float.c { animation-delay: 2.5s; }
+    .symbol-float.d { animation-delay: 3.75s; }
+
+    @keyframes symbolFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
 
     /* STATS */
     .stats {
       max-width: 1240px;
       margin: auto;
-      padding: 10px 28px 40px;
+      padding: 10px 28px 12px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
@@ -200,10 +211,28 @@
       margin-bottom: 6px;
     }
 
+    .stat-card .num .asterisk {
+      font-size: 20px;
+      color: var(--gold);
+      vertical-align: super;
+      margin-left: 2px;
+      font-weight: 700;
+    }
+
     .stat-card .label {
       font-size: 13px;
       color: var(--muted);
       line-height: 1.4;
+    }
+
+    .stats-source {
+      max-width: 1240px;
+      margin: 0 auto 40px;
+      padding: 0 28px;
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.5;
     }
 
     /* SECTION */
@@ -499,7 +528,7 @@
     /* MOBILE */
     @media (max-width: 800px) {
       .hero-religion { grid-template-columns: 1fr; padding-top: 40px; gap: 30px; }
-      .top, .hero-religion, .section, .footer, .stats { padding-left: 18px; padding-right: 18px; }
+      .top, .hero-religion, .section, .footer, .stats, .stats-source { padding-left: 18px; padding-right: 18px; }
       .footer { display: block; }
       .footer span { display: block; margin-bottom: 8px; }
       .hero-symbol svg { width: 180px; height: 180px; }
@@ -546,30 +575,47 @@
 
       <div class="hero-symbol" aria-hidden="true">
         <svg viewBox="0 0 200 200" fill="none">
+          <!-- Концентрические круги (статичные) -->
           <circle cx="100" cy="100" r="88" fill="none" stroke="#c59a4a" stroke-width="1" opacity="0.5"/>
           <circle cx="100" cy="100" r="72" fill="none" stroke="#c59a4a" stroke-width="1.5" opacity="0.7"/>
           <circle cx="100" cy="100" r="54" fill="none" stroke="#a42e2e" stroke-width="1" opacity="0.4"/>
 
-          <!-- Крест -->
-          <line x1="100" y1="40" x2="100" y2="80" stroke="#a42e2e" stroke-width="4" stroke-linecap="round"/>
-          <line x1="85" y1="58" x2="115" y2="58" stroke="#a42e2e" stroke-width="4" stroke-linecap="round"/>
-
-          <!-- Полумесяц -->
-          <path d="M145 95 A 18 18 0 1 0 145 125 A 14 14 0 1 1 145 95 Z" fill="#c59a4a"/>
-
-          <!-- Колесо Дхармы -->
-          <circle cx="100" cy="140" r="14" fill="none" stroke="#3f7a5c" stroke-width="2.5"/>
-          <circle cx="100" cy="140" r="4" fill="#3f7a5c"/>
-          <g stroke="#3f7a5c" stroke-width="1.5">
-            <line x1="100" y1="126" x2="100" y2="154"/>
-            <line x1="86" y1="140" x2="114" y2="140"/>
-            <line x1="90" y1="130" x2="110" y2="150"/>
-            <line x1="110" y1="130" x2="90" y2="150"/>
+          <!-- Православный крест (сверху) -->
+          <g transform="translate(80 22)">
+            <g class="symbol-float a">
+              <line x1="20" y1="0" x2="20" y2="40" stroke="#a42e2e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="8" x2="28" y2="8" stroke="#a42e2e" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="4" y1="19" x2="36" y2="19" stroke="#a42e2e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="7" y1="34" x2="33" y2="30" stroke="#a42e2e" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
           </g>
 
-          <!-- Звезда Давида -->
-          <path d="M55 95 L68 115 L42 115 Z" fill="none" stroke="#3a5f8a" stroke-width="2"/>
-          <path d="M55 118 L68 98 L42 98 Z" fill="none" stroke="#3a5f8a" stroke-width="2"/>
+          <!-- Полумесяц ислама (справа) -->
+          <g transform="translate(140 80)">
+            <g class="symbol-float b">
+              <path d="M 32 2 Q 6 4 6 20 Q 6 36 32 38 Q 14 30 14 20 Q 14 10 32 2 Z" fill="#3f7a5c"/>
+            </g>
+          </g>
+
+          <!-- Звезда Давида (снизу) -->
+          <g transform="translate(80 142)">
+            <g class="symbol-float c">
+              <polygon points="20,2 34,26 6,26" fill="none" stroke="#3a5f8a" stroke-width="2.5" stroke-linejoin="round"/>
+              <polygon points="20,38 34,14 6,14" fill="none" stroke="#3a5f8a" stroke-width="2.5" stroke-linejoin="round"/>
+            </g>
+          </g>
+
+          <!-- Колесо Дхармы (слева) -->
+          <g transform="translate(20 80)">
+            <g class="symbol-float d">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#6b4f8a" stroke-width="2.5"/>
+              <circle cx="20" cy="20" r="4" fill="#6b4f8a"/>
+              <line x1="20" y1="4" x2="20" y2="36" stroke="#6b4f8a" stroke-width="2"/>
+              <line x1="4" y1="20" x2="36" y2="20" stroke="#6b4f8a" stroke-width="2"/>
+              <line x1="9" y1="9" x2="31" y2="31" stroke="#6b4f8a" stroke-width="2"/>
+              <line x1="31" y1="9" x2="9" y2="31" stroke="#6b4f8a" stroke-width="2"/>
+            </g>
+          </g>
 
           <circle cx="100" cy="100" r="10" fill="#29231e"/>
           <circle cx="100" cy="100" r="5" fill="#c59a4a"/>
@@ -580,22 +626,26 @@
     <!-- STATS -->
     <section class="stats">
       <div class="stat-card">
-        <div class="num">34 223</div>
+        <div class="num">34 223<span class="asterisk">*</span></div>
         <div class="label">зарегистрированные религиозные организации</div>
       </div>
       <div class="stat-card">
-        <div class="num">66%</div>
+        <div class="num">66%<span class="asterisk">*</span></div>
         <div class="label">россиян относят себя к верующим</div>
       </div>
       <div class="stat-card">
-        <div class="num">4</div>
+        <div class="num">4<span class="asterisk">*</span></div>
         <div class="label">традиционные конфессии России</div>
       </div>
       <div class="stat-card">
-        <div class="num">60+</div>
+        <div class="num">60+<span class="asterisk">*</span></div>
         <div class="label">религиозных течений в стране</div>
       </div>
     </section>
+    <p class="stats-source">
+      * По данным Министерства юстиции РФ и ВЦИОМ на 1 января 2024 года.
+      Точные цифры могут меняться в зависимости от методики подсчёта.
+    </p>
 
     <!-- TRADITIONAL RELIGIONS -->
     <section class="section" id="religions">
@@ -611,11 +661,11 @@
 
         <div class="rel-card" data-religion="orthodox" style="--accent:#a42e2e">
           <div class="rel-art">
-            <svg viewBox="0 0 100 100" fill="none">
-              <line x1="50" y1="15" x2="50" y2="75" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-              <line x1="35" y1="35" x2="65" y2="35" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-              <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="50" cy="80" r="4" fill="currentColor" opacity="0.5"/>
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+              <line x1="38" y1="22" x2="62" y2="22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <line x1="28" y1="44" x2="72" y2="44" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+              <line x1="32" y1="78" x2="68" y2="70" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="rel-info">
@@ -628,9 +678,8 @@
 
         <div class="rel-card" data-religion="islam" style="--accent:#3f7a5c">
           <div class="rel-art">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M60 20 A 30 30 0 1 0 60 80 A 24 24 0 1 1 60 20 Z" fill="currentColor"/>
-              <circle cx="72" cy="28" r="5" fill="currentColor" opacity="0.7"/>
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <path d="M 70 14 Q 22 20 22 50 Q 22 80 70 86 Q 40 74 40 50 Q 40 26 70 14 Z" fill="currentColor"/>
             </svg>
           </div>
           <div class="rel-info">
@@ -643,7 +692,7 @@
 
         <div class="rel-card" data-religion="buddhism" style="--accent:#6b4f8a">
           <div class="rel-art">
-            <svg viewBox="0 0 100 100" fill="none">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
               <circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
               <circle cx="50" cy="50" r="8" fill="currentColor"/>
               <g stroke="currentColor" stroke-width="2.5">
@@ -664,9 +713,9 @@
 
         <div class="rel-card" data-religion="judaism" style="--accent:#3a5f8a">
           <div class="rel-art">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M50 15 L70 55 L30 55 Z" fill="none" stroke="currentColor" stroke-width="3"/>
-              <path d="M50 85 L30 45 L70 45 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <polygon points="50,14 80,70 20,70" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+              <polygon points="50,86 80,30 20,30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="rel-info">
@@ -823,23 +872,20 @@
   (function () {
     "use strict";
 
-    /* --------------------------------
-       ДАННЫЕ О РЕЛИГИЯХ
-    -------------------------------- */
     const RELIGIONS = {
       orthodox: {
         title: "Православие",
         sub: "Традиционная конфессия · ~66% верующих",
         text: "Православие — крупнейшая конфессия России. Русская православная церковь объединяет около 20 950 зарегистрированных организаций. Православными себя называют большинство верующих русских, а также украинцы, белорусы, чуваши, марийцы, мордва, осетины и другие народы.",
         extra: "Православные храмы и монастыри есть во всех регионах страны. Особое значение имеют древние обители — Троице-Сергиева лавра, Соловецкий монастырь, Валаам.",
-        svg: '<svg viewBox="0 0 100 100" fill="none"><line x1="50" y1="15" x2="50" y2="75" stroke="#a42e2e" stroke-width="5" stroke-linecap="round"/><line x1="35" y1="35" x2="65" y2="35" stroke="#a42e2e" stroke-width="5" stroke-linecap="round"/><line x1="30" y1="55" x2="70" y2="55" stroke="#a42e2e" stroke-width="4" stroke-linecap="round"/></svg>'
+        svg: '<svg viewBox="0 0 100 100" fill="none"><line x1="50" y1="8" x2="50" y2="92" stroke="#a42e2e" stroke-width="5" stroke-linecap="round"/><line x1="38" y1="22" x2="62" y2="22" stroke="#a42e2e" stroke-width="4" stroke-linecap="round"/><line x1="28" y1="44" x2="72" y2="44" stroke="#a42e2e" stroke-width="5" stroke-linecap="round"/><line x1="32" y1="78" x2="68" y2="70" stroke="#a42e2e" stroke-width="4" stroke-linecap="round"/></svg>'
       },
       islam: {
         title: "Ислам",
         sub: "Традиционная конфессия · ~6% верующих",
         text: "Ислам — вторая по численности конфессия России. По разным оценкам, в стране проживает от 14 до 20 миллионов мусульман. Более 7 000 зарегистрированных организаций. Ислам исповедуют татары, башкиры, чеченцы, аварцы, кумыки, даргинцы, лезгины и другие народы.",
         extra: "Крупнейшие мусульманские центры — Казань, Уфа, Грозный, Махачкала. Мечети есть во многих городах России.",
-        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M60 20 A 30 30 0 1 0 60 80 A 24 24 0 1 1 60 20 Z" fill="#3f7a5c"/><circle cx="72" cy="28" r="5" fill="#3f7a5c" opacity="0.7"/></svg>'
+        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M 70 14 Q 22 20 22 50 Q 22 80 70 86 Q 40 74 40 50 Q 40 26 70 14 Z" fill="#3f7a5c"/></svg>'
       },
       buddhism: {
         title: "Буддизм",
@@ -853,7 +899,7 @@
         sub: "Традиционная конфессия · ~1% верующих",
         text: "Иудаизм — одна из древнейших религий, представленных в России. Более 270 зарегистрированных организаций. Еврейские общины есть в Москве, Санкт-Петербурге, Екатеринбурге, Новосибирске и других городах.",
         extra: "В России действуют синагоги, еврейские культурные центры, школы и благотворительные организации.",
-        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M50 15 L70 55 L30 55 Z" fill="none" stroke="#3a5f8a" stroke-width="3"/><path d="M50 85 L30 45 L70 45 Z" fill="none" stroke="#3a5f8a" stroke-width="3"/></svg>'
+        svg: '<svg viewBox="0 0 100 100" fill="none"><polygon points="50,14 80,70 20,70" fill="none" stroke="#3a5f8a" stroke-width="3" stroke-linejoin="round"/><polygon points="50,86 80,30 20,30" fill="none" stroke="#3a5f8a" stroke-width="3" stroke-linejoin="round"/></svg>'
       },
       shamanism: {
         title: "Шаманизм",
@@ -899,9 +945,6 @@
       }
     };
 
-    /* --------------------------------
-       ЭЛЕМЕНТЫ
-    -------------------------------- */
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modalTitle");
     const modalText = document.getElementById("modalText");
@@ -912,9 +955,6 @@
 
     let lastFocused = null;
 
-    /* --------------------------------
-       МОДАЛКА
-    -------------------------------- */
     function openReligionModal(key) {
       const data = RELIGIONS[key];
       if (!data) return;
@@ -952,9 +992,6 @@
       if (e.key === "Escape") closeModal();
     });
 
-    /* --------------------------------
-       ТОСТЫ
-    -------------------------------- */
     function toast(message) {
       const el = document.createElement("div");
       el.className = "toast";
@@ -963,18 +1000,13 @@
       setTimeout(() => el.remove(), 1800);
     }
 
-    /* --------------------------------
-       ДЕЛЕГИРОВАНИЕ КЛИКОВ
-    -------------------------------- */
     document.addEventListener("click", (event) => {
-      // карточки религий
       const relCard = event.target.closest("[data-religion]");
       if (relCard) {
         openReligionModal(relCard.dataset.religion);
         return;
       }
 
-      // тосты
       const toastTrigger = event.target.closest("[data-toast]");
       if (toastTrigger) {
         toast(toastTrigger.dataset.toast);
