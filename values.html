@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ценностные ориентиры — Многонациональная Россия</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f1e8;
+      --surface: #fffaf2;
+      --ink: #29231e;
+      --muted: #75695e;
+      --red: #a42e2e;
+      --red-light: #c65342;
+      --gold: #c59a4a;
+      --line: #dfd2c1;
+      --blue: #3a5f8a;
+      --green: #3f7a5c;
+      --purple: #6b4f8a;
+      --brown: #8a5f3a;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171513;
+        --surface: #211e1a;
+        --ink: #f4eadc;
+        --muted: #b9aa99;
+        --line: #40382f;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body.modal-open { overflow: hidden; }
+    button { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    #app { min-height: 100vh; background: var(--bg); }
+
+    /* HEADER */
+    .top {
+      max-width: 1240px;
+      margin: auto;
+      padding: 20px 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand { display: flex; gap: 14px; align-items: center; }
+
+    .mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #e9c56d 0 12%, #b4372f 13% 48%, #7d2224 49%);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 25%, transparent);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .mark::after {
+      content: "✦";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff7df;
+      font-size: 21px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand b { font-size: 15px; }
+
+    .back-link {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--ink);
+      font-weight: 650;
+      cursor: pointer;
+      transition: .2s;
+      display: inline-block;
+    }
+
+    .back-link:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero-values {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 28px 50px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-values h1 {
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 78px);
+      line-height: .95;
+      margin: 12px 0 22px;
+      letter-spacing: -.035em;
+    }
+
+    .hero-values h1 span { color: var(--red); }
+
+    .hero-values p {
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .hero-quote {
+      border-left: 3px solid var(--gold);
+      padding: 4px 0 4px 20px;
+      margin: 24px 0;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .hero-quote cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .hero-symbol {
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+    }
+
+    .hero-symbol svg {
+      width: 240px;
+      height: 240px;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,.12));
+    }
+
+    /* STATS */
+    .stats {
+      max-width: 1240px;
+      margin: auto;
+      padding: 10px 28px 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      transition: .2s;
+    }
+
+    .stat-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .stat-card .num {
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .num .asterisk {
+      font-size: 20px;
+      color: var(--gold);
+      vertical-align: super;
+      margin-left: 2px;
+      font-weight: 700;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .stats-source {
+      max-width: 1240px;
+      margin: 0 auto 40px;
+      padding: 0 28px;
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1240px;
+      margin: auto;
+      padding: 10px 28px 60px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 22px;
+      gap: 20px;
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 0;
+    }
+
+    /* MAIN VALUES */
+    .main-values {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .mv-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: .25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mv-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 36px rgba(0,0,0,.1);
+    }
+
+    .mv-art {
+      height: 150px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%);
+      position: relative;
+    }
+
+    .mv-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--accent) 5%, transparent) 0 1px,
+        transparent 1px 14px
+      );
+      opacity: .5;
+    }
+
+    .mv-art svg {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      z-index: 1;
+      transition: transform .3s;
+    }
+
+    .mv-card:hover .mv-art svg { transform: scale(1.08); }
+
+    .mv-info { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .mv-info h3 { margin: 0 0 8px; font-size: 18px; }
+
+    .mv-info p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; flex: 1; }
+
+    .mv-more {
+      margin-top: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      gap: 6px;
+      transition: gap .2s;
+    }
+
+    .mv-card:hover .mv-more { gap: 10px; }
+
+    /* FULL LIST */
+    .full-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .value-tag {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      transition: .2s;
+      cursor: default;
+    }
+
+    .value-tag:hover {
+      border-color: var(--gold);
+      background: color-mix(in srgb, var(--gold) 8%, var(--surface));
+      transform: translateY(-2px);
+    }
+
+    .value-tag .v-num {
+      color: var(--gold);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+      padding: 20px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .cat-card:hover { transform: translateX(4px); border-color: var(--accent); }
+
+    .cat-card .cat-icon { font-size: 24px; margin-bottom: 10px; }
+
+    .cat-card h4 { margin: 0 0 8px; font-size: 16px; }
+
+    .cat-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* MEASURES */
+    .measures {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .measure-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      transition: .2s;
+      cursor: pointer;
+    }
+
+    .measure-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+
+    .measure-card .m-icon { font-size: 24px; margin-bottom: 10px; }
+
+    .measure-card h4 { margin: 0 0 6px; font-size: 15px; }
+
+    .measure-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* QUOTE BOX */
+    .quote-box {
+      background: linear-gradient(135deg, #6d2226, #a83b32);
+      border-radius: 22px;
+      padding: 34px;
+      color: white;
+    }
+
+    .quote-box .eyebrow { color: #f5ddd2; }
+
+    .quote-box h3 {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      margin: 8px 0 16px;
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-style: italic;
+      line-height: 1.6;
+      color: #f5ddd2;
+      font-size: 15px;
+    }
+
+    .quote-box cite {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 13px;
+      color: #f5ddd2;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--line);
+      max-width: 1240px;
+      margin: auto;
+      padding: 24px 28px 45px;
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #0008;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal.open { display: flex; }
+
+    .dialog {
+      max-width: 560px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 30px 80px #0005;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .dialog h2 { margin: 0 0 6px; font-family: Georgia, serif; font-size: 24px; }
+
+    .dialog .dialog-sub { font-size: 12px; color: var(--red); font-weight: 700; margin-bottom: 14px; }
+
+    .dialog p { color: var(--muted); line-height: 1.65; margin: 0 0 12px; }
+
+    .dialog .close {
+      display: block;
+      margin-left: auto;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 25px;
+      line-height: 1;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+
+    .dialog .dialog-art {
+      display: grid;
+      place-items: center;
+      margin: 10px 0 18px;
+    }
+
+    /* TOAST */
+    .toast-stack {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #2a2520;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px #0004;
+      animation: toastIn .2s ease-out;
+      max-width: 90vw;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .hero-values { grid-template-columns: 1fr; padding-top: 40px; gap: 30px; }
+      .top, .hero-values, .section, .footer, .stats, .stats-source { padding-left: 18px; padding-right: 18px; }
+      .footer { display: block; }
+      .footer span { display: block; margin-bottom: 8px; }
+      .hero-symbol svg { width: 180px; height: 180px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <div class="eyebrow">ФАДН России</div>
+        <b>Портал культурного и языкового наследия</b>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← На главную</a>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero-values">
+      <div>
+        <div class="eyebrow">Ценностные ориентиры</div>
+        <h1>Духовные<br><span>опоры России</span></h1>
+        <p>
+          Традиционные российские духовно-нравственные ценности — это
+          нравственные ориентиры, которые формируют мировоззрение граждан
+          России, передаются от поколения к поколению и лежат в основе
+          общероссийской гражданской идентичности.
+        </p>
+
+        <div class="hero-quote">
+          «Традиционные ценности — это нравственные ориентиры, формирующие
+          мировоззрение граждан России, передаваемые от поколения к поколению,
+          лежащие в основе общероссийской гражданской идентичности и единого
+          культурного пространства страны»
+          <cite>Указ Президента РФ № 809 от 09.11.2022</cite>
+        </div>
+      </div>
+
+      <div class="hero-symbol" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="88" fill="none" stroke="#c59a4a" stroke-width="1" opacity="0.5"/>
+          <circle cx="100" cy="100" r="72" fill="none" stroke="#c59a4a" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="100" cy="100" r="54" fill="none" stroke="#a42e2e" stroke-width="1" opacity="0.4"/>
+
+          <!-- Звезда -->
+          <path d="M100 30 L112 75 L160 75 L122 103 L138 150 L100 122 L62 150 L78 103 L40 75 L88 75 Z"
+                fill="#a42e2e" opacity="0.15" stroke="#a42e2e" stroke-width="2.5" stroke-linejoin="round"/>
+
+          <!-- Внутренние ценности -->
+          <circle cx="100" cy="100" r="20" fill="#c59a4a" opacity="0.25"/>
+          <circle cx="100" cy="100" r="12" fill="#c59a4a" opacity="0.5"/>
+          <circle cx="100" cy="100" r="5" fill="#29231e"/>
+
+          <!-- Лучи -->
+          <g stroke="#c59a4a" stroke-width="1.5" opacity="0.6">
+            <line x1="100" y1="50" x2="100" y2="65"/>
+            <line x1="100" y1="135" x2="100" y2="150"/>
+            <line x1="50" y1="100" x2="65" y2="100"/>
+            <line x1="135" y1="100" x2="150" y2="100"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat-card">
+        <div class="num">17<span class="asterisk">*</span></div>
+        <div class="label">традиционных ценностей закреплено в Указе № 809</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">4<span class="asterisk">*</span></div>
+        <div class="label">ключевых документа государственной политики</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">89<span class="asterisk">*</span></div>
+        <div class="label">субъектов Российской Федерации</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">190+<span class="asterisk">*</span></div>
+        <div class="label">народов, объединённых общими ценностями</div>
+      </div>
+    </section>
+    <p class="stats-source">
+      * По данным Указа Президента РФ № 809 от 09.11.2022 (ред. от 04.03.2026),
+      Конституции РФ и Стратегии государственной национальной политики до 2036 года.
+    </p>
+
+    <!-- MAIN VALUES -->
+    <section class="section" id="main-values">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Главные ценности</div>
+          <h2>Четыре опоры духовной жизни</h2>
+          <p>Нажмите на карточку, чтобы узнать больше</p>
+        </div>
+      </div>
+
+      <div class="main-values">
+
+        <div class="mv-card" data-value="patriotism" style="--accent:#a42e2e">
+          <div class="mv-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <circle cx="50" cy="40" r="22" fill="currentColor" opacity="0.15"/>
+              <path d="M50 20 L54 32 L66 32 L56 40 L60 52 L50 44 L40 52 L44 40 L34 32 L46 32 Z" fill="currentColor" opacity="0.85"/>
+              <path d="M30 65 L50 55 L70 65 L70 80 L30 80 Z" fill="currentColor" opacity="0.4"/>
+              <line x1="50" y1="65" x2="50" y2="80" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="mv-info">
+            <h3>Патриотизм</h3>
+            <p>Любовь к Родине, преданность Отечеству, готовность служить его интересам и защищать его.</p>
+            <span class="mv-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="mv-card" data-value="family" style="--accent:#c59a4a">
+          <div class="mv-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <circle cx="35" cy="35" r="10" fill="currentColor" opacity="0.7"/>
+              <circle cx="65" cy="35" r="10" fill="currentColor" opacity="0.7"/>
+              <circle cx="50" cy="50" r="8" fill="currentColor" opacity="0.5"/>
+              <path d="M15 80 C15 62 25 55 35 55 C45 55 50 62 50 80" fill="currentColor" opacity="0.4"/>
+              <path d="M50 80 C50 62 55 55 65 55 C75 55 85 62 85 80" fill="currentColor" opacity="0.4"/>
+              <circle cx="50" cy="80" r="6" fill="currentColor" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="mv-info">
+            <h3>Крепкая семья</h3>
+            <p>Семья как основа общества, любовь к детям, забота о старших, преемственность поколений.</p>
+            <span class="mv-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="mv-card" data-value="mercy" style="--accent:#3f7a5c">
+          <div class="mv-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <path d="M50 75 C30 60 15 45 15 32 C15 20 25 12 35 12 C42 12 48 16 50 22 C52 16 58 12 65 12 C75 12 85 20 85 32 C85 45 70 60 50 75 Z" fill="currentColor" opacity="0.75"/>
+              <path d="M50 55 L45 45 L55 45 Z" fill="var(--surface)" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="mv-info">
+            <h3>Милосердие</h3>
+            <p>Сострадание, готовность помочь нуждающимся, забота о ближнем и гуманизм.</p>
+            <span class="mv-more">Подробнее →</span>
+          </div>
+        </div>
+
+        <div class="mv-card" data-value="memory" style="--accent:#6b4f8a">
+          <div class="mv-art">
+            <svg viewBox="0 0 100 100" fill="none" style="color: var(--accent)">
+              <rect x="25" y="20" width="50" height="60" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="2"/>
+              <line x1="35" y1="35" x2="65" y2="35" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="47" x2="58" y2="47" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="59" x2="62" y2="59" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="72" cy="72" r="12" fill="currentColor" opacity="0.6"/>
+              <path d="M67 72 L71 76 L77 69" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="mv-info">
+            <h3>Историческая память</h3>
+            <p>Сохранение памяти о прошлом, уважение к подвигам предков, преемственность поколений.</p>
+            <span class="mv-more">Подробнее →</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FULL LIST -->
+    <section class="section" id="full-list">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Указ Президента РФ № 809</div>
+          <h2>Все традиционные ценности</h2>
+          <p>Полный перечень из документа</p>
+        </div>
+      </div>
+
+      <div class="full-list">
+        <span class="value-tag"><span class="v-num">1</span>Жизнь</span>
+        <span class="value-tag"><span class="v-num">2</span>Достоинство</span>
+        <span class="value-tag"><span class="v-num">3</span>Права и свободы человека</span>
+        <span class="value-tag"><span class="v-num">4</span>Патриотизм</span>
+        <span class="value-tag"><span class="v-num">5</span>Гражданственность</span>
+        <span class="value-tag"><span class="v-num">6</span>Служение Отечеству</span>
+        <span class="value-tag"><span class="v-num">7</span>Ответственность за судьбу Отечества</span>
+        <span class="value-tag"><span class="v-num">8</span>Высокие нравственные идеалы</span>
+        <span class="value-tag"><span class="v-num">9</span>Крепкая семья</span>
+        <span class="value-tag"><span class="v-num">10</span>Созидательный труд</span>
+        <span class="value-tag"><span class="v-num">11</span>Приоритет духовного над материальным</span>
+        <span class="value-tag"><span class="v-num">12</span>Гуманизм</span>
+        <span class="value-tag"><span class="v-num">13</span>Милосердие</span>
+        <span class="value-tag"><span class="v-num">14</span>Справедливость</span>
+        <span class="value-tag"><span class="v-num">15</span>Коллективизм</span>
+        <span class="value-tag"><span class="v-num">16</span>Взаимопомощь и взаимоуважение</span>
+        <span class="value-tag"><span class="v-num">17</span>Историческая память и преемственность поколений</span>
+        <span class="value-tag"><span class="v-num">18</span>Единство народов России</span>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section" id="categories">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Направления</div>
+          <h2>Ценности по сферам жизни</h2>
+          <p>Как традиционные ценности проявляются в разных областях</p>
+        </div>
+      </div>
+
+      <div class="categories">
+
+        <div class="cat-card" data-cat="family" style="--accent:#c59a4a">
+          <div class="cat-icon">👨‍👩‍👧‍👦</div>
+          <h4>Семья и дети</h4>
+          <p>Крепкая семья, любовь к детям, забота о старших, преемственность поколений.</p>
+        </div>
+
+        <div class="cat-card" data-cat="labour" style="--accent:#3f7a5c">
+          <div class="cat-icon">⚒️</div>
+          <h4>Труд и созидание</h4>
+          <p>Созидательный труд, приоритет духовного над материальным, высокие нравственные идеалы.</p>
+        </div>
+
+        <div class="cat-card" data-cat="society" style="--accent:#6b4f8a">
+          <div class="cat-icon">🤝</div>
+          <h4>Общество и взаимопомощь</h4>
+          <p>Коллективизм, взаимопомощь, взаимоуважение, справедливость, милосердие, гуманизм.</p>
+        </div>
+
+        <div class="cat-card" data-cat="culture" style="--accent:#a42e2e">
+          <div class="cat-icon">📚</div>
+          <h4>Культура и память</h4>
+          <p>Историческая память, преемственность поколений, сохранение культурного наследия.</p>
+        </div>
+
+        <div class="cat-card" data-cat="state" style="--accent:#3a5f8a">
+          <div class="cat-icon">🏛️</div>
+          <h4>Государство и Отечество</h4>
+          <p>Патриотизм, гражданственность, служение Отечеству, ответственность за его судьбу.</p>
+        </div>
+
+        <div class="cat-card" data-cat="human" style="--accent:#8a5f3a">
+          <div class="cat-icon">🕊️</div>
+          <h4>Человек и его права</h4>
+          <p>Жизнь, достоинство, права и свободы человека, высокие нравственные идеалы.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MEASURES -->
+    <section class="section" id="measures">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Государственная политика</div>
+          <h2>Меры по сохранению ценностей</h2>
+          <p>Что делает государство для укрепления традиционных ценностей</p>
+        </div>
+      </div>
+
+      <div class="measures">
+
+        <div class="measure-card" data-measure="Воспитание молодёжи на традиционных ценностях">
+          <div class="m-icon">🎓</div>
+          <h4>Воспитание молодёжи</h4>
+          <p>Развитие ценностных ориентиров, гражданственности и патриотизма в молодёжной среде.</p>
+        </div>
+
+        <div class="measure-card" data-measure="Поддержка семьи и защита детей">
+          <div class="m-icon">👶</div>
+          <h4>Поддержка семьи</h4>
+          <p>Укрепление института семьи, защита детей, противодействие пропаганде чайлдфри.</p>
+        </div>
+
+        <div class="measure-card" data-measure="Защита исторической памяти">
+          <div class="m-icon">📜</div>
+          <h4>Защита исторической памяти</h4>
+          <p>Противодействие фальсификации истории, сохранение памяти о подвиге народа.</p>
+        </div>
+
+        <div class="measure-card" data-measure="Противодействие деструктивной идеологии">
+          <div class="m-icon">🛡️</div>
+          <h4>Противодействие деструктивной идеологии</h4>
+          <p>Ограничение вредного и девиантного онлайн-контента, защита от деструктивных влияний.</p>
+        </div>
+
+        <div class="measure-card" data-measure="Популяризация русского языка и культур">
+          <div class="m-icon">📖</div>
+          <h4>Популяризация русского языка</h4>
+          <p>Использование литературного русского языка как языка межнационального общения.</p>
+        </div>
+
+        <div class="measure-card" data-measure="Наставничество и передача опыта">
+          <div class="m-icon">🌟</div>
+          <h4>Наставничество</h4>
+          <p>Привлечение ветеранов, участников СВО и заслуженных людей к работе с молодёжью.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="section">
+      <div class="quote-box">
+        <div class="eyebrow">Президент Российской Федерации</div>
+        <h3>Ценности, определяющие для нас</h3>
+        <blockquote>
+          «Такие ценности, определяющие для нас, – это единство народов России,
+          приверженность правде и справедливости, милосердие и гуманизм,
+          крепкая семья и любовь к детям. Это взаимопомощь и стремление
+          добиваться не только личного благополучия, а успеха всей страны.
+          И конечно, это патриотизм, преданность Родине».
+        </blockquote>
+        <cite>В.В. Путин, заседание Совета Безопасности, 10 июня 2025 года</cite>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>Многонациональная Россия — русская цивилизация</span>
+    <span>Раздел «Ценностные ориентиры» · ФАДН России</span>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="dialog">
+    <button type="button" class="close" data-close aria-label="Закрыть">×</button>
+    <div class="dialog-sub" id="dialogSub"></div>
+    <h2 id="modalTitle"></h2>
+    <div class="dialog-art" id="dialogArt"></div>
+    <p id="modalText"></p>
+    <p id="modalExtra"></p>
+  </div>
+</div>
+
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<script>
+  (function () {
+    "use strict";
+
+    const VALUES = {
+      patriotism: {
+        title: "Патриотизм",
+        sub: "Любовь к Родине и служение Отечеству",
+        text: "Патриотизм — одна из ключевых традиционных ценностей России. Это любовь к Родине, преданность своему Отечеству, стремление служить его интересам и готовность к его защите. Патриотизм тесно связан с гражданственностью и ответственностью за судьбу страны.",
+        extra: "В Указе № 809 патриотизм стоит в ряду главных ценностей. Президент России неоднократно подчёркивал, что патриотизм и преданность Родине являются основополагающими для российского общества.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="40" r="22" fill="#a42e2e" opacity="0.15"/><path d="M50 20 L54 32 L66 32 L56 40 L60 52 L50 44 L40 52 L44 40 L34 32 L46 32 Z" fill="#a42e2e" opacity="0.85"/><path d="M30 65 L50 55 L70 65 L70 80 L30 80 Z" fill="#a42e2e" opacity="0.4"/></svg>'
+      },
+      family: {
+        title: "Крепкая семья",
+        sub: "Основа общества и преемственность поколений",
+        text: "Крепкая семья — фундамент российского общества. Это любовь к детям, забота о старших, уважение к родителям и сохранение семейных традиций. Семья обеспечивает передачу ценностей от поколения к поколению и формирует личность человека.",
+        extra: "Государство поддерживает семьи с детьми, защищает институт семьи и противодействует пропаганде, разрушающей семейные ценности.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="35" cy="35" r="10" fill="#c59a4a" opacity="0.7"/><circle cx="65" cy="35" r="10" fill="#c59a4a" opacity="0.7"/><circle cx="50" cy="50" r="8" fill="#c59a4a" opacity="0.5"/><path d="M15 80 C15 62 25 55 35 55 C45 55 50 62 50 80" fill="#c59a4a" opacity="0.4"/><path d="M50 80 C50 62 55 55 65 55 C75 55 85 62 85 80" fill="#c59a4a" opacity="0.4"/><circle cx="50" cy="80" r="6" fill="#c59a4a" opacity="0.6"/></svg>'
+      },
+      mercy: {
+        title: "Милосердие",
+        sub: "Сострадание и готовность помочь",
+        text: "Милосердие — это сострадание, готовность помочь нуждающимся, забота о ближнем и гуманизм. Милосердие проявляется в благотворительности, социальном служении и помощи тем, кто оказался в трудной ситуации.",
+        extra: "В традиционных религиях России милосердие занимает центральное место. Государство поддерживает социальное служение и благотворительные инициативы.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M50 75 C30 60 15 45 15 32 C15 20 25 12 35 12 C42 12 48 16 50 22 C52 16 58 12 65 12 C75 12 85 20 85 32 C85 45 70 60 50 75 Z" fill="#3f7a5c" opacity="0.75"/></svg>'
+      },
+      memory: {
+        title: "Историческая память",
+        sub: "Уважение к прошлому и преемственность поколений",
+        text: "Историческая память — это сохранение памяти о прошлом, уважение к подвигам предков, преемственность поколений и защита исторической правды. Это одна из ключевых ценностей, обеспечивающих единство народа.",
+        extra: "Государство противодействует фальсификации истории и поддерживает проекты, направленные на сохранение исторической памяти.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><rect x="25" y="20" width="50" height="60" rx="4" fill="#6b4f8a" opacity="0.15" stroke="#6b4f8a" stroke-width="2"/><line x1="35" y1="35" x2="65" y2="35" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="47" x2="58" y2="47" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="59" x2="62" y2="59" stroke="#6b4f8a" stroke-width="2.5" stroke-linecap="round"/><circle cx="72" cy="72" r="12" fill="#6b4f8a" opacity="0.6"/><path d="M67 72 L71 76 L77 69" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      }
+    };
+
+    const CATEGORIES = {
+      family: {
+        title: "Семья и дети",
+        sub: "Семейные ценности",
+        text: "Крепкая семья, любовь к детям, забота о старших, преемственность поколений — эти ценности лежат в основе российского общества. Семья является главной опорой для человека и основой демографического развития страны.",
+        extra: "В Указе № 809 крепкая семья отнесена к числу главных традиционных ценностей. Государство поддерживает многодетные семьи и защищает детей.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="35" cy="35" r="10" fill="#c59a4a" opacity="0.7"/><circle cx="65" cy="35" r="10" fill="#c59a4a" opacity="0.7"/><circle cx="50" cy="50" r="8" fill="#c59a4a" opacity="0.5"/><path d="M15 80 C15 62 25 55 35 55 C45 55 50 62 50 80" fill="#c59a4a" opacity="0.4"/><path d="M50 80 C50 62 55 55 65 55 C75 55 85 62 85 80" fill="#c59a4a" opacity="0.4"/></svg>'
+      },
+      labour: {
+        title: "Труд и созидание",
+        sub: "Созидательный труд",
+        text: "Созидательный труд, приоритет духовного над материальным, высокие нравственные идеалы — эти ценности формируют отношение человека к работе и обществу. Труд рассматривается не только как способ заработка, но и как служение.",
+        extra: "Приоритет духовного над материальным означает, что в основе жизни должны лежать нравственные ориентиры, а не погоня за материальными благами.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M30 70 L70 30 L80 40 L40 80 Z" fill="#3f7a5c" opacity="0.6"/><rect x="25" y="75" width="50" height="8" rx="2" fill="#3f7a5c" opacity="0.4"/><circle cx="75" cy="35" r="6" fill="#c59a4a" opacity="0.7"/></svg>'
+      },
+      society: {
+        title: "Общество и взаимопомощь",
+        sub: "Коллективизм и справедливость",
+        text: "Коллективизм, взаимопомощь, взаимоуважение, справедливость, милосердие, гуманизм — эти ценности определяют отношения между людьми в обществе. Они основаны на уважении к каждому человеку и готовности прийти на помощь.",
+        extra: "Взаимопомощь и взаимоуважение — важнейшие ценности для многонационального народа России.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="30" cy="40" r="12" fill="#6b4f8a" opacity="0.6"/><circle cx="70" cy="40" r="12" fill="#6b4f8a" opacity="0.6"/><path d="M12 80 C12 65 22 58 30 58 C38 58 48 65 48 80" fill="#6b4f8a" opacity="0.4"/><path d="M52 80 C52 65 62 58 70 58 C78 58 88 65 88 80" fill="#6b4f8a" opacity="0.4"/><path d="M45 70 L50 65 L55 70" stroke="#c59a4a" stroke-width="3" stroke-linecap="round" fill="none"/></svg>'
+      },
+      culture: {
+        title: "Культура и память",
+        sub: "Историческая память и преемственность",
+        text: "Историческая память, преемственность поколений, сохранение культурного наследия — эти ценности обеспечивают связь времён и единство народа. Культура России многообразна и включает наследие всех народов страны.",
+        extra: "Сохранение культурного наследия — одна из ключевых задач государственной политики.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><rect x="20" y="30" width="60" height="50" rx="4" fill="#a42e2e" opacity="0.15" stroke="#a42e2e" stroke-width="2"/><path d="M20 30 L50 10 L80 30" fill="none" stroke="#a42e2e" stroke-width="2.5"/><rect x="35" y="45" width="10" height="35" fill="#a42e2e" opacity="0.5"/><rect x="55" y="45" width="10" height="35" fill="#a42e2e" opacity="0.5"/></svg>'
+      },
+      state: {
+        title: "Государство и Отечество",
+        sub: "Патриотизм и гражданственность",
+        text: "Патриотизм, гражданственность, служение Отечеству, ответственность за его судьбу — эти ценности определяют отношение человека к своей стране. Гражданственность предполагает активное участие в жизни общества.",
+        extra: "Служение Отечеству — это не только воинский долг, но и добросовестный труд на благо страны.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><path d="M50 15 L80 30 L80 65 C80 82 65 92 50 98 C35 92 20 82 20 65 L20 30 Z" fill="#3a5f8a" opacity="0.15" stroke="#3a5f8a" stroke-width="3" stroke-linejoin="round"/><path d="M40 50 L50 40 L60 50 L60 70 L40 70 Z" fill="#3a5f8a" opacity="0.5"/></svg>'
+      },
+      human: {
+        title: "Человек и его права",
+        sub: "Жизнь и достоинство",
+        text: "Жизнь, достоинство, права и свободы человека, высокие нравственные идеалы — эти ценности стоят в начале перечня Указа № 809. Они утверждают ценность каждой человеческой жизни и уважение к личности.",
+        extra: "Достоинство человека неотъемлемо и не зависит от его социального положения или национальности.",
+        svg: '<svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="30" r="15" fill="#8a5f3a" opacity="0.6"/><path d="M25 90 C25 65 38 55 50 55 C62 55 75 65 75 90" fill="#8a5f3a" opacity="0.4"/><circle cx="50" cy="55" r="5" fill="#c59a4a" opacity="0.7"/></svg>'
+      }
+    };
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const modalExtra = document.getElementById("modalExtra");
+    const dialogSub = document.getElementById("dialogSub");
+    const dialogArt = document.getElementById("dialogArt");
+    const toastStack = document.getElementById("toastStack");
+
+    let lastFocused = null;
+
+    function openModal(data) {
+      lastFocused = document.activeElement;
+
+      modalTitle.textContent = data.title;
+      dialogSub.textContent = data.sub;
+      modalText.textContent = data.text;
+      modalExtra.textContent = data.extra;
+      dialogArt.innerHTML = data.svg || "";
+
+      modal.hidden = false;
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+
+      modal.querySelector(".close").focus();
+    }
+
+    function closeModal() {
+      if (!modal.classList.contains("open")) return;
+
+      modal.classList.remove("open");
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal || e.target.closest("[data-close]")) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    function toast(message) {
+      const el = document.createElement("div");
+      el.className = "toast";
+      el.textContent = message;
+      toastStack.appendChild(el);
+      setTimeout(() => el.remove(), 1800);
+    }
+
+    document.addEventListener("click", (event) => {
+      const valueCard = event.target.closest("[data-value]");
+      if (valueCard) {
+        const data = VALUES[valueCard.dataset.value];
+        if (data) openModal(data);
+        return;
+      }
+
+      const catCard = event.target.closest("[data-cat]");
+      if (catCard) {
+        const data = CATEGORIES[catCard.dataset.cat];
+        if (data) openModal(data);
+        return;
+      }
+
+      const measureCard = event.target.closest("[data-measure]");
+      if (measureCard) {
+        toast(measureCard.dataset.measure);
+        return;
+      }
+    });
+
+  })();
+</script>
+
+</body>
+</html>
